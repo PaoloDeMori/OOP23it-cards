@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.itcards.model.baseelements.cards.Card;
-import it.unibo.itcards.model.baseelements.cards.Suit;
+
 /**
  * Test the deck creation using the factory that shuffle its cards.
  */
-public class ShuffledDeckFactoryTest {
+class ShuffledDeckFactoryTest {
     private DeckFactory factory;
 
     /**
      * Init the factory.
      */
-    public void init() {
+    private void init() {
         factory = new ShuffledDeckFactoryImpl();
     }
 
@@ -24,38 +24,38 @@ public class ShuffledDeckFactoryTest {
      * Test if the factory initialize a deck of 40 cards.
      */
     @Test
-    public void testInit() {
+    void testInit() {
         init();
         assertDoesNotThrow(() -> {
-            Deck deck = factory.buildDeck();
+            final Deck deck = factory.buildDeck();
             assertEquals(Deck.MAX_NUMBER_OF_CARDS, deck.numberOfCards());
         });
     }
 
     /**
-     * Test if the factory initialize a deck of the correct 40 cards. 
+     * Test if the factory initialize a deck of the correct 40 cards.
      * Test the method drawCard
      */
     @Test
-    public void testDeck() throws EmptyDeckException {
+    void testDeck() throws EmptyDeckException {
         init();
         assertDoesNotThrow(() -> {
-            Deck deck = factory.buildDeck();
+            final Deck deck = factory.buildDeck();
             int bastoni = 0, coppe = 0, denari = 0, spade = 0;
             assertEquals(Deck.MAX_NUMBER_OF_CARDS, deck.numberOfCards());
             for (int i = 0; i < Deck.MAX_NUMBER_OF_CARDS; i++) {
-                Card card = deck.drawCard();
+                final Card card = deck.drawCard();
                 switch (card.getSuit()) {
-                    case Suit.Bastoni:
+                    case BASTONI:
                         bastoni++;
                         break;
-                    case Suit.Spade:
+                    case SPADE:
                         spade++;
                         break;
-                    case Suit.Denari:
+                    case DENARI:
                         denari++;
                         break;
-                    case Suit.Coppe:
+                    case COPPE:
                         coppe++;
                         break;
 

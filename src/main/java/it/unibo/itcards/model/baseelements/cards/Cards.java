@@ -21,10 +21,7 @@ public final class Cards {
      * @return true if c1 has a greater numerical value and the same suit as c2
      */
     public static boolean isGreater(final Card c1, final Card c2) {
-        if ((c1.getValue() > c2.getValue()) && (c1.getSuit().equals(c2.getSuit()))) {
-            return true;
-        }
-        return false;
+        return c1.getValue() > c2.getValue() && c1.getSuit().equals(c2.getSuit());
     }
 
     /**
@@ -36,9 +33,6 @@ public final class Cards {
      * @return true if c1 has a smaller numerical value and the same suit of c2
      */
     public static boolean isSmaller(final Card c1, final Card c2) {
-        if ((c1.getValue() < c2.getValue()) && (c1.getSuit().equals(c2.getSuit()))) {
-            return true;
-        }
-        return false;
+        return c1.getValue() < c2.getValue() && c1.getSuit().equals(c2.getSuit());
     }
 }

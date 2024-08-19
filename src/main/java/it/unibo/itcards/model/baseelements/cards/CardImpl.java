@@ -1,26 +1,27 @@
 package it.unibo.itcards.model.baseelements.cards;
 
-import java.security.InvalidParameterException;
-
 /**
- * Implementation of the abstract class Card using a record class.
+ * Implementation of the abstract class Card.
  * 
  */
 class CardImpl extends Card {
     private final Suit suit;
     private final int value;
-    /** 
+
+    /**
      * The constructor of the class.
-     * @param suit represent the suit of the card
-     * @param value represent the numerical value of the card 
-    */
-    protected CardImpl(final Suit suit, final int value) throws InvalidParameterException {
+     * 
+     * @param suit  represent the suit of the card
+     * @param value represent the numerical value of the card
+     */
+    protected CardImpl(final Suit suit, final int value) {
         this.suit = suit;
         this.value = value;
     }
- 
+
     /**
      * Return the numerical value of the card.
+     * 
      * @return the value of the card
      */
     @Override
@@ -30,6 +31,7 @@ class CardImpl extends Card {
 
     /**
      * Return the suit of the card.
+     * 
      * @return the suit of the card
      */
     @Override

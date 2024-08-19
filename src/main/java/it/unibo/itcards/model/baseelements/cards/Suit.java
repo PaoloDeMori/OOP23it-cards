@@ -6,19 +6,19 @@ package it.unibo.itcards.model.baseelements.cards;
  */
 public enum Suit {
     /**
-     * Represents the suit of Bastoni.
+     * Represents the suit of BASTONI.
      */
-    Bastoni,
+    BASTONI,
     /**
-     * Represents the suit of Coppe.
+     * Represents the suit of COPPE.
      */
-    Coppe,
+    COPPE,
     /**
-     * Represents the suit of Spade.
+     * Represents the suit of SPADE.
      */
-    Spade,
+    SPADE,
     /**
-     * Represents the suit of Denari.
+     * Represents the suit of DENARI.
      */
-    Denari
+    DENARI
 }

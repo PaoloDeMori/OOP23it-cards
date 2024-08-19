@@ -26,8 +26,8 @@ public class DeckImpl implements Deck {
      */
     @Override
     public void init() {
-        CardFactory factory = new CardFactoryImpl();
-        for (Suit suit : Suit.values()) {
+        final CardFactory factory = new CardFactoryImpl();
+        for (final Suit suit : Suit.values()) {
             for (int i = 1; i <= Card.MAX_NUMERICAL_VALUE; i++) {
                 deckList.add(factory.buildCard(suit, i));
             }
@@ -77,9 +77,9 @@ public class DeckImpl implements Deck {
      */
     @Override
     public String toString() {
-        String numberOfCards = "This deck has " + Integer.toString(this.numberOfCards()) + " cards: \n";
+        final String numberOfCards = "This deck has " + Integer.toString(this.numberOfCards()) + " cards: \n";
         String cards = "";
-        for (Card card: deckList) {
+        for (final Card card: deckList) {
             cards = cards.concat(card.toString().concat(" "));
         }
         return numberOfCards + cards;
