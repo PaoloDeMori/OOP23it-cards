@@ -11,23 +11,13 @@ import it.unibo.itcards.model.baseelements.cards.Card;
  * Test the deck creation using the factory that shuffle its cards.
  */
 class ShuffledDeckFactoryTest {
-    private DeckFactory factory;
-
-    /**
-     * Init the factory.
-     */
-    private void init() {
-        factory = new ShuffledDeckFactoryImpl();
-    }
-
     /**
      * Test if the factory initialize a deck of 40 cards.
      */
     @Test
     void testInit() {
-        init();
         assertDoesNotThrow(() -> {
-            final Deck deck = factory.buildDeck();
+            final Deck deck = ShuffledDeckFactoryImpl.buildDeck();
             assertEquals(Deck.MAX_NUMBER_OF_CARDS, deck.numberOfCards());
         });
     }
@@ -37,14 +27,13 @@ class ShuffledDeckFactoryTest {
      * Test the method drawCard
      */
     @Test
-    void testDeck() throws EmptyDeckException {
-        init();
+    void testDeck() {
         assertDoesNotThrow(() -> {
-            final Deck deck = factory.buildDeck();
+            final Deck deck = ShuffledDeckFactoryImpl.buildDeck();
             int bastoni = 0, coppe = 0, denari = 0, spade = 0;
             assertEquals(Deck.MAX_NUMBER_OF_CARDS, deck.numberOfCards());
             for (int i = 0; i < Deck.MAX_NUMBER_OF_CARDS; i++) {
-                final Card card = deck.drawCard();
+                final Card card = deck.drawCard().get();
                 switch (card.getSuit()) {
                     case BASTONI:
                         bastoni++;

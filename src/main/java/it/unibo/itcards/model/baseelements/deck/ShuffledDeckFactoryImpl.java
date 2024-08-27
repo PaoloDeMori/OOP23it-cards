@@ -1,18 +1,15 @@
 package it.unibo.itcards.model.baseelements.deck;
 
 /**
- * Implementation of the DeckFactory interface, that creates a shuffled
- * initialized deck.
+ * A static factory for the creation of a shuffled initialized deck.
  */
-public class ShuffledDeckFactoryImpl implements DeckFactory {
-    private final Deck deck;
+public final class ShuffledDeckFactoryImpl {
 
     /**
-     * Constructor.
+     * Private constructor.
      */
-    public ShuffledDeckFactoryImpl() {
-        deck = new DeckImpl();
-    }
+    private ShuffledDeckFactoryImpl() { 
+     }
 
     /**
      * Creates and returns a shuffled initialized deck.
@@ -20,8 +17,8 @@ public class ShuffledDeckFactoryImpl implements DeckFactory {
      * @return New istance of the deck class, after the init and shuffle method are
      *         called.
      */
-    @Override
-    public Deck buildDeck() {
+    public static Deck buildDeck() {
+        final Deck deck = new DeckImpl();
         deck.init();
         deck.shuffle();
         return deck;

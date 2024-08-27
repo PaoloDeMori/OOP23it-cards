@@ -1,7 +1,9 @@
 package it.unibo.itcards.model.baseelements.deck;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.cards.CardFactory;
@@ -9,7 +11,8 @@ import it.unibo.itcards.model.baseelements.cards.CardFactoryImpl;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 
 /**
- * Implements the  Deck interface, representing a deck of 40 traditional Italian playing cards.
+ * Implements the Deck interface, representing a deck of 40 traditional Italian
+ * playing cards.
  */
 public class DeckImpl implements Deck {
     private final List<Card> deckList;
@@ -41,21 +44,23 @@ public class DeckImpl implements Deck {
     public void shuffle() {
         Collections.shuffle(deckList);
     }
+
     /**
      * Returns the card on top of the deck and removes it.
-     * @throws EmptyDeckException if the deck is empty
+     * 
      * @return the first card of the deck
      */
     @Override
-    public Card drawCard() throws EmptyDeckException {
+    public Optional<Card> drawCard() {
         if (!this.isVoid()) {
-            return deckList.remove(0);
+            return Optional.of(deckList.remove(0));
         }
-        throw new EmptyDeckException("The Deck is Empty");
+        return Optional.empty();
     }
 
     /**
      * Checks if the deck ended.
+     * 
      * @return true if the deck is empty, false if it is not
      */
     @Override
@@ -65,21 +70,24 @@ public class DeckImpl implements Deck {
 
     /**
      * Counts the number of cards in the deck.
+     * 
      * @return the number of cards in the deck
      */
     @Override
     public int numberOfCards() {
         return this.deckList.size();
     }
+
     /**
      * Return a string representation of the deck.
+     * 
      * @return a string representation of the deck
      */
     @Override
     public String toString() {
         final String numberOfCards = "This deck has " + Integer.toString(this.numberOfCards()) + " cards: \n";
         String cards = "";
-        for (final Card card: deckList) {
+        for (final Card card : deckList) {
             cards = cards.concat(card.toString().concat(" "));
         }
         return numberOfCards + cards;

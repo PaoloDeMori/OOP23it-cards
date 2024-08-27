@@ -1,5 +1,7 @@
 package it.unibo.itcards.model.baseelements.deck;
+
 import it.unibo.itcards.model.baseelements.cards.Card;
+import java.util.Optional;
 
 /**
  * Represents a deck of 40 traditional italian playing cards.
@@ -9,6 +11,7 @@ public interface Deck {
      * The number of cards in a complete deck.
      */
     int MAX_NUMBER_OF_CARDS = 40;
+
     /**
      * Initializes the deck as an ordered full deck.
      */
@@ -21,10 +24,10 @@ public interface Deck {
 
     /**
      * Returns the card on top of the deck and removes it.
-     * @throws EmptyDeckException if the deck does not contain cards.
+     * 
      * @return the card on top of the deck
      */
-    Card drawCard() throws EmptyDeckException;
+    Optional<Card> drawCard();
 
     /**
      * Checks if the deck ended.
@@ -35,6 +38,7 @@ public interface Deck {
 
     /**
      * A method that calculates the number of the remaining cards in the deck.
+     * 
      * @return the number of the remaining cards in the deck.
      */
     int numberOfCards();

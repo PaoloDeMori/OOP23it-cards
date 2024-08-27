@@ -9,8 +9,10 @@ public abstract class Card {
      * The higher numerical value that a card can have.
      */
     public static final int MAX_NUMERICAL_VALUE = 10;
+
     /**
      * Return a string representation of an Italian playing card.
+     * 
      * @return the string representation of the instance
      */
     @Override
