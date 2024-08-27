@@ -1,11 +1,9 @@
 package it.unibo.itcards.view.baseelements.cardview;
 
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import java.awt.Dimension;
 import it.unibo.itcards.model.baseelements.cards.Card;
 
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.FlowLayout;
