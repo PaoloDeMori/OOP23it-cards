@@ -92,4 +92,9 @@ public class DeckImpl implements Deck {
         }
         return numberOfCards + cards;
     }
+
+    @Override
+    public List<Card> listOf() {
+        return Collections.unmodifiableList(deckList);
+    }
 }

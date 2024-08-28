@@ -2,6 +2,7 @@ package it.unibo.itcards.model.baseelements.deck;
 
 import it.unibo.itcards.model.baseelements.cards.Card;
 import java.util.Optional;
+import java.util.List;
 
 /**
  * Represents a deck of 40 traditional italian playing cards.
@@ -45,4 +46,6 @@ public interface Deck {
 
     @Override
     String toString();
+
+    List<Card> listOf();
 }

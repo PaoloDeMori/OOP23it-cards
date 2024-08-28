@@ -53,6 +53,11 @@ public abstract class Game implements Model {
     }
 
     @Override
+    public Deck getDeck(){
+        return this.deck;
+    }
+
+    @Override
     public boolean giveCards() {
         if (deck.numberOfCards() >= players.size()) {
             for (Player player : players) {
