@@ -1,5 +1,6 @@
 package it.unibo.itcards.model.baseelements.player;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
@@ -17,6 +18,7 @@ public class PlayerImpl implements Player {
     private final Set<Card> wonCards;
     private final Hand cards;
     private final int maxNumberOfCards;
+    private final List<Card> playedCards;
 
     /**
      * Constructor of this class that sets the name and the maximum number of
@@ -30,6 +32,7 @@ public class PlayerImpl implements Player {
         wonCards = new HashSet<>();
         this.maxNumberOfCards = maxNumberOfCards;
         cards = new Hand(this.maxNumberOfCards);
+        this.playedCards = new ArrayList<>();
     }
 
     /**
@@ -134,6 +137,26 @@ public class PlayerImpl implements Player {
     @Override
     public int getNumberOfCards() {
         return this.cards.size();
+    }
+
+    /**
+     * Returns the list of cards played by the player.
+     * 
+     * @return the list of cards played by the player
+     */
+    @Override
+    public List<Card> getPlayedCards() {
+       return this.playedCards;
+    }
+
+    /**
+     * Adds a card to the list of cards played by the player.
+     * 
+     * @param card the card to add
+     */
+    @Override
+    public void addPlayedCard(Card card) {
+        this.playedCards.add(card);
     }
 
 }

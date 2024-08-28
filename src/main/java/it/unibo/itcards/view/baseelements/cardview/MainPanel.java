@@ -18,7 +18,7 @@ public class MainPanel extends JPanel{
         this.setLayout(new BorderLayout());
         this.handPanelDimension = new Dimension(this.getWidth(), this.getHeight() / 4);
         this.lateralPanelDimension = new Dimension(this.getWidth() / 13, this.getHeight());
-        this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ 13);
+        this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ 4);
         this.handpanel=new HandPanel(handPanelDimension);
         this.add(handpanel,BorderLayout.SOUTH);
         this.opponentPanel=new OpponentPanel(upPanelDimension);

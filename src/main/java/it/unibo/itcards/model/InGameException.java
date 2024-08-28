@@ -1,4 +1,4 @@
-package it.unibo.itcards.model.baseelements;
+package it.unibo.itcards.model;
 
 public class InGameException extends RuntimeException{
     private static final long serialVersionUID = 3L;

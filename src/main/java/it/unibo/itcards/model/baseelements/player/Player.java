@@ -78,4 +78,18 @@ public interface Player {
      * @return the number of cards in the hand of the player.
      */
     int getNumberOfCards();
+
+    /**
+     * Returns the list of cards played by the player in the current game.
+     * 
+     * @return the list of cards played by the player
+     */
+    List<Card> getPlayedCards();
+
+    /**
+     * Adds a card to the list of cards played by the player.
+     * 
+     * @param card the card to add
+     */
+    void addPlayedCard(Card card);
 }

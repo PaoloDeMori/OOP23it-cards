@@ -1,6 +1,6 @@
 package it.unibo.itcards.controller;
 
-import it.unibo.itcards.model.baseelements.Model;
+import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 
