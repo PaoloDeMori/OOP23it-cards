@@ -8,6 +8,12 @@ public final class BriscolaHelper {
     private BriscolaHelper() {
     }
 
+    /**
+     * Determines the value of the specified card.
+     * 
+     * @param card
+     * @return
+     */
     public static int getCardValue(final Card card) {
         switch (card.getValue()) {
             case 1:
@@ -25,6 +31,13 @@ public final class BriscolaHelper {
         }
     }
 
+    /**
+     * Determines if the specified card1 is the winner.
+     * 
+     * @param card1
+     * @param card2
+     * @param briscola
+     */
     public static boolean isWinner(final Card card1, final Card card2, final Card briscola) {
         if (card1.getSuit().equals(briscola.getSuit()) && !(card2.getSuit().equals(briscola.getSuit()))) {
             return true;

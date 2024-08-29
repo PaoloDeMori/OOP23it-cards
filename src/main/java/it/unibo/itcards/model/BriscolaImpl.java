@@ -18,11 +18,21 @@ public class BriscolaImpl extends Model {
     private Card briscola;
     private List<Card> playedCards;
 
+    /**
+     * Constructor which initializes the BriscolaImpl object
+     * with an empty ArrayList of playedCards.
+     */
     public BriscolaImpl() {
         super();
         this.playedCards = new ArrayList<>();
     }
 
+    /**
+     * Returns the list of cards currently on the table.
+     * This includes the Briscola card followed by the cards played by the players.
+     * 
+     * @return a list of cards on the table.
+     */
     @Override
     public List<Card> getCardsOnTable() {
         final List<Card> cardsOnTable = new ArrayList<>();
@@ -43,6 +53,12 @@ public class BriscolaImpl extends Model {
 
     }
 
+    /**
+     * Calculates the total points for the specified player.
+     * 
+     * @param player the player whose points are to be calculated.
+     * @return the total points of the player.
+     */
     @Override
     public int points(Player player) {
         Set<Card> cards = player.getWonCards();
@@ -53,6 +69,11 @@ public class BriscolaImpl extends Model {
         return points;
     }
 
+    /**
+     * Starts the game by drawing the first card from the deck and setting it as the
+     * Briscola.
+     * Throws an exception if the deck is empty.
+     */
     @Override
     public void start() {
         Optional<Card> card = this.deck.drawCard();
@@ -64,6 +85,13 @@ public class BriscolaImpl extends Model {
 
     }
 
+    /**
+     * Determines the winner of the current hand based on the cards played and the
+     * Briscola.
+     * 
+     * @return the player who won the hand.
+     * @throws InGameException if no winner can be determined.
+     */
     @Override
     public Player winner() {
         if (BriscolaHelper.isWinner(playedCards.get(0), playedCards.get(1), briscola)) {
@@ -82,6 +110,14 @@ public class BriscolaImpl extends Model {
         throw new InGameException("No winner");
     }
 
+    /**
+     * Deals cards to the players. If the deck is empty or there are not enough
+     * cards, returns false.
+     * 
+     * @return true if cards were successfully dealt, false otherwise.
+     * @throws InGameException if an invalid card is drawn or if there are not
+     *                         enough cards to deal.
+     */
     @Override
     public boolean giveCards() {
 
@@ -112,6 +148,11 @@ public class BriscolaImpl extends Model {
         return true;
     }
 
+    /**
+     * Sets the Briscola card for the game.
+     * 
+     * @param briscolaCard the card to be set as the Briscola.
+     */
     private void setBriscola(Card briscolCard) {
         this.briscola = briscolCard;
     }
