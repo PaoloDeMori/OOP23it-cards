@@ -5,6 +5,7 @@ import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
+import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.baseelements.cards.CardFactory;
@@ -20,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Optional;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +50,7 @@ public class BriscolaImplTest {
         player2 = new PlayerImpl("player2", DEFAULT_MAX_NUMBER_OF_CARDS);
         cards=new HashSet<>();
         cardFactory = new CardFactoryImpl();
+        briscolaGame.start();
     }
 
     /**
@@ -76,4 +80,22 @@ public class BriscolaImplTest {
 
     }
 
+    /**
+     * Tests the correct implementation of the method that gives the cards to
+     * the players.
+     * @throws InvalidOperationException
+     */
+    @Test
+    void testGiveCards() throws InvalidOperationException {
+        List<Player> players = briscolaGame.getPlayers();
+        for(Player p: players) {
+            Card card = p.getCard(0).get();
+            p.playCard(card);
+        }
+        briscolaGame.giveCards();
+        for(Player p: players) {
+            assertEquals(3, p.getCards().size());
+        }
+    
+    }
 }

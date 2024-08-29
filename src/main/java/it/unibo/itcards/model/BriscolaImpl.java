@@ -135,7 +135,7 @@ public class BriscolaImpl extends Model {
             players.get(1).drawCard(briscola);
             return true;
         }
-        if (this.deck.numberOfCards() + 1 % NUMBER_OF_PLAYERS != 0) {
+        if ((this.deck.numberOfCards() + 1) % NUMBER_OF_PLAYERS != 0) {
             throw new InGameException("Not enough cards to give");
         }
         for (var player : players) {
