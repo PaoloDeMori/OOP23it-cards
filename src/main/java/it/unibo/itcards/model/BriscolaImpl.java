@@ -1,7 +1,10 @@
 package it.unibo.itcards.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,6 +20,7 @@ public class BriscolaImpl extends Model {
     private static final int NUMBER_OF_PLAYERS = 2;
     private Card briscola;
     private List<Card> playedCards;
+    private PlayerIterator iterator;
 
     /**
      * Constructor which initializes the BriscolaImpl object
@@ -25,6 +29,7 @@ public class BriscolaImpl extends Model {
     public BriscolaImpl() {
         super();
         this.playedCards = new ArrayList<>();
+        this.iterator = new PlayerIterator(players);
     }
 
     /**
@@ -43,13 +48,32 @@ public class BriscolaImpl extends Model {
 
     @Override
     public boolean isGameOver() {
-        // TODO Auto-generated method stub
-        return false;
+        boolean haveCards = false;
+        for(var player: players){
+            if(player.getCards().size() > 0){
+                haveCards = true;
+            }
+        }
+        return haveCards;
     }
 
     @Override
     public void playTurn(Card card, Player player) {
-        // TODO Auto-generated method stub
+        if (playedCards.size() < 1) {
+            playedCards.add(card);
+            currentPlayer = iterator.next();
+            player.addPlayedCard(card);
+        } else {
+            playedCards.add(card);
+            player.addPlayedCard(card);
+            Player wonPlayer = winner();
+            wonPlayer.addWonCards(new HashSet<Card>(playedCards));
+            currentPlayer = wonPlayer;
+            iterator.setWinnerPlayer(wonPlayer);
+            playedCards.clear();
+            this.giveCards();
+        }
+        this.notifyObserver();
 
     }
 
@@ -81,6 +105,12 @@ public class BriscolaImpl extends Model {
             setBriscola(card.get());
         } else {
             throw new InGameException("Deck is empty");
+        }
+        for(var player: players){
+            for (int i = 0; i < 3; i++) {
+                this.giveCards();
+                
+            }
         }
 
     }
