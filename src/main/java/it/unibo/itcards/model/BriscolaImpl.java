@@ -153,8 +153,15 @@ public class BriscolaImpl extends Model {
      * 
      * @param briscolaCard the card to be set as the Briscola.
      */
-    private void setBriscola(Card briscolCard) {
+    public void setBriscola(Card briscolCard) {
         this.briscola = briscolCard;
+    }
+
+    /**
+     * Returns the Briscola card of the game.
+     */
+    public Card getBriscola() {
+        return briscola;
     }
 
 }
