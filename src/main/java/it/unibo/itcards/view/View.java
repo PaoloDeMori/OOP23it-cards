@@ -4,11 +4,12 @@ import javax.swing.JPanel;
 
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.deck.Deck;
+import it.unibo.itcards.observerpattern.Observer;
 
 import java.util.List;
 
 
-public interface View {
+public interface View extends Observer{
 
     void setHand(List<Card> hand);
 

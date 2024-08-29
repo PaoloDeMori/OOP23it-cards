@@ -1,40 +1,38 @@
 package it.unibo.itcards.view.baseelements.cardview;
 
 import java.io.IOException;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
 import java.awt.Dimension;
 import javax.swing.*;
 
-public class BackCardFactory {
+public class CardFactory {
     private Image resizedImg;
     private Dimension d;
 
-    public BackCardFactory(Dimension d) {
+    public CardFactory(Dimension d,String name) {
         this.d = d;
-        String path = "/CardsImages/retro.jpeg";
         try {
-            BufferedImage image = ImageIO.read(getClass().getResource(path));
+            BufferedImage image =ImagesHelper.loadImage(name);
             if (image == null) {
-                throw new IOException("Immagine non trovata nel percorso: " + path);
+                throw new IOException("Image not found");
             }
             int height = (int) d.getHeight();
-            int width = (int) ((double) height * image.getWidth() / image.getHeight());
-            resizedImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            int width = (int) (height * (double) image.getWidth() / image.getHeight());
+            resizedImg = ImagesHelper.resizeCardShapedImage(image, height);
             this.d = new Dimension(width, height);
         } catch (IOException e) {
-            System.err.println("Errore durante il caricamento dell'immagine: " + e.getMessage());
+            System.err.println("Error while loading the image" + e.getMessage());
             resizedImg = null;
         } catch (Exception e) {
-            System.err.println("Errore sconosciuto: " + e.getMessage());
+            System.err.println("Uknown error" + e.getMessage());
             resizedImg = null;
         }
     }
 
     public JPanel build() {
         if (resizedImg != null) {
-            return new BackCardPanel(resizedImg, d);
+            return new CardPanel(resizedImg, d);
         } else {
             JPanel p = new JPanel();
             p.add(new JLabel("Opponent Card"));

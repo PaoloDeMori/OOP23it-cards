@@ -7,52 +7,80 @@ import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.view.View;
-import it.unibo.itcards.view.baseelements.cardview.CardPanel;
+import it.unibo.itcards.view.baseelements.cardview.CardButton;
+import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
 import it.unibo.itcards.view.baseelements.cardview.MainPanel;
-
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.event.*;
 import java.util.*;
 
-public class MainFrame extends JFrame implements View{
+public class MainFrame extends JFrame implements View {
 
     private MainPanel mainpanel;
+    public Map<Card, BufferedImage> imagesCache;
     private Controller controller;
 
-    public MainFrame(Dim d) {
+    public MainFrame(Dim d, Controller controller) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setPreferredSize(d.getDimension());
         this.setSize(d.getDimension());
+        this.imagesCache = new HashMap<>();
         this.mainpanel = new MainPanel(d.getDimension());
         this.add(mainpanel);
-        this.controller=new Controller();
+        this.controller = controller;
     }
 
     @Override
     public void setHand(List<Card> cards) {
-        List<CardPanel> panels = new ArrayList<>();
-        CardPanel cp; 
-        for(Card card:cards){
-            cp =new CardPanel(card, (int) mainpanel.getHandPanelDimension().getHeight());
-            ActionListener al = e ->{
-                //controller.playturn(card);
+        CardButton cp;
+
+        List<CardButton> panels = new ArrayList<>();
+        for (Card card : cards) {
+            ActionListener al = e -> {
+                // controller.playturn(card);
                 System.out.println(card.toString());
             };
-            cp.addActionListener(al) ;
+            cp = this.createCardButton(card, al);
             panels.add(cp);
         }
         mainpanel.setHand(panels);
     }
 
+    private void setOpponentCards(int n){
+        this.mainpanel.setOpponentCards(n);
+    }
+
+    private CardButton createCardButton(Card card, ActionListener al) {
+        BufferedImage image;
+        CardButton cp;
+        if (!imagesCache.keySet().contains(card)) {
+            try {
+                image = ImagesHelper.loadImage(card);
+                imagesCache.put(card, image);
+            } catch (IOException e) {
+                image = null;
+            }
+            cp = new CardButton(image, (int) mainpanel.getHandPanelDimension().getHeight());
+        } else {
+            cp = new CardButton(imagesCache.get(card), (int) mainpanel.getHandPanelDimension().getHeight());
+        }
+        if (al != null) {
+            cp.addActionListener(al);
+        }
+        return cp;
+    }
+
     @Override
     public void setCardsOnTable(List<Card> cards) {
-        
+
     }
 
     @Override
     public void setNumberOpponentCards(int n) {
         this.mainpanel.setOpponentCards(n);
-        
+
     }
 
     @Override
@@ -60,15 +88,27 @@ public class MainFrame extends JFrame implements View{
         return true;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Deck deck = ShuffledDeckFactoryImpl.buildDeck();
-        MainFrame mainframe = new MainFrame(Dim.MEDIUM);
+        MainFrame mainframe = new MainFrame(Dim.LARGE, new Controller());
+        mainframe.setNumberOpponentCards(3);
         mainframe.setVisible(true);
         List<Card> c = new ArrayList<Card>();
         c.add(deck.drawCard().get());
         c.add(deck.drawCard().get());
-        c.add(deck.drawCard().get());
+        Card l = deck.drawCard().get();
+        c.add(l);
         mainframe.setHand(c);
-        mainframe.setNumberOpponentCards(3);
+        c.removeAll(c);
+        mainframe.setHand(c);
+        c.add(l);
+        System.out.println(Integer.toString(mainframe.imagesCache.size()));
+        mainframe.setHand(c);
+    }
+
+    @Override
+    public void update() {
+        this.setHand(this.controller.getHand());
+        this.setOpponentCards(this.controller.getOpponentHand());
     }
 }

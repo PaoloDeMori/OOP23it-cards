@@ -29,7 +29,7 @@ public class MainPanel extends JPanel{
         return this.handPanelDimension;
     }
 
-    public void setHand(List<CardPanel> cards){
+    public void setHand(List<CardButton> cards){
         this.handpanel.setCards(cards);
     }
 

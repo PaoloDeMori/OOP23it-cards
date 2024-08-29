@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 
 public class OpponentPanel extends JPanel {
-    BackCardFactory factory;
+    CardFactory factory;
 
     public OpponentPanel(Dimension d) {
         FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 10, 5);
@@ -14,7 +14,7 @@ public class OpponentPanel extends JPanel {
         this.setLayout(layout);
         this.setSize(d);
         this.setPreferredSize(d);
-        factory = new BackCardFactory(this.getSize());
+        factory = new CardFactory(this.getSize(),"retro");
     }
 
     public void setOpponentCards(int n) {
