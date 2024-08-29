@@ -2,13 +2,15 @@ package it.unibo.itcards.view.baseelements.mainpanel;
 
 import java.awt.Dimension;
 
-import it.unibo.itcards.view.baseelements.cardview.HandPanel;
-import it.unibo.itcards.view.baseelements.cardview.OpponentPanel;
+import it.unibo.itcards.view.baseelements.panels.CentralPanel;
+import it.unibo.itcards.view.baseelements.panels.HandPanel;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
 public class MainPanelBuilder {
     Dimension dimension;
     HandPanel handPanel;
     OpponentPanel opponentPanel;
+    CentralPanel centralPanel;
 
     public MainPanelBuilder(Dimension dimension){
         this.dimension=dimension;
@@ -31,6 +33,9 @@ public class MainPanelBuilder {
         }
         if (this.opponentPanel!=null){
             mainPanel.setOpponentPanel(opponentPanel);
+        }
+        if (this.centralPanel!=null){
+            mainPanel.setCentralPanel(centralPanel);
         }
         return mainPanel;
     }

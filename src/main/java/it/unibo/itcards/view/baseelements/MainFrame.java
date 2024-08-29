@@ -3,24 +3,25 @@ package it.unibo.itcards.view.baseelements;
 import javax.swing.*;
 
 import it.unibo.itcards.controller.Controller;
+import it.unibo.itcards.controller.ControllerImpl;
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
-import it.unibo.itcards.view.baseelements.cardview.HandPanel;
-import it.unibo.itcards.view.baseelements.cardview.HandPanelImpl;
 import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
-import it.unibo.itcards.view.baseelements.cardview.OpponentPanel;
-import it.unibo.itcards.view.baseelements.cardview.OpponentPanelImpl;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
+import it.unibo.itcards.view.baseelements.panels.HandPanel;
+import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.event.*;
 import java.util.*;
-
+//classe di tests
 public class MainFrame extends JFrame implements View {
 
     private MainPanel mainpanel;
@@ -99,7 +100,7 @@ public class MainFrame extends JFrame implements View {
 
     public static void main(String[] args) {
         Deck deck = ShuffledDeckFactoryImpl.buildDeck();
-        MainFrame mainframe = new MainFrame(Dim.LARGE, new Controller());
+        MainFrame mainframe = new MainFrame(Dim.LARGE, new ControllerImpl());
         mainframe.setNumberOpponentCards(3);
         mainframe.setVisible(true);
         List<Card> c = new ArrayList<Card>();

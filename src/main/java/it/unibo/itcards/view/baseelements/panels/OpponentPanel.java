@@ -1,4 +1,4 @@
-package it.unibo.itcards.view.baseelements.cardview;
+package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.Dimension;
 

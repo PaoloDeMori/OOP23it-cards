@@ -1,7 +1,9 @@
-package it.unibo.itcards.view.baseelements.cardview;
+package it.unibo.itcards.view.baseelements.panels;
 
-import javax.swing.JPanel;
 import java.awt.FlowLayout;
+
+import it.unibo.itcards.view.baseelements.cardview.CardFactory;
+
 import java.awt.Dimension;
 import java.awt.Color;
 

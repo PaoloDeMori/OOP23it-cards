@@ -1,11 +1,11 @@
-package it.unibo.itcards.view.baseelements.cardview;
-
-import javax.swing.JPanel;
+package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
 
 import java.util.List;
+
+import it.unibo.itcards.view.baseelements.cardview.CardButton;
 
 public class HandPanelImpl extends HandPanel {
     FlowLayout layout;

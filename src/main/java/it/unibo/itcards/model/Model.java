@@ -3,7 +3,6 @@ package it.unibo.itcards.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;

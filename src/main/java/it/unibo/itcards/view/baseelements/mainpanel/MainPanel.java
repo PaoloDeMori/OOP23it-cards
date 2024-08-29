@@ -5,9 +5,10 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
-import it.unibo.itcards.view.baseelements.cardview.HandPanel;
-import it.unibo.itcards.view.baseelements.cardview.HandPanelImpl;
-import it.unibo.itcards.view.baseelements.cardview.OpponentPanel;
+import it.unibo.itcards.view.baseelements.panels.CentralPanel;
+import it.unibo.itcards.view.baseelements.panels.HandPanel;
+import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
 import javax.swing.*;
 import java.util.*;
@@ -18,6 +19,7 @@ public class MainPanel extends JPanel{
     private final Dimension upPanelDimension;
     private HandPanel handPanel;
     private OpponentPanel opponentPanel;
+    private CentralPanel centralPanel;
 
     protected MainPanel(Dimension d) {
         this.setPreferredSize(d);
@@ -38,6 +40,12 @@ public class MainPanel extends JPanel{
         this.opponentPanel=opponentPanel;
         this.opponentPanel.init(upPanelDimension);
         this.add(opponentPanel,BorderLayout.NORTH);
+    }
+
+    public void setCentralPanel(CentralPanel centralPanel){
+        this.centralPanel = centralPanel;
+        this.centralPanel.init();
+        this.add(centralPanel,BorderLayout.CENTER);
     }
 
     public Dimension getHandPanelDimension(){
