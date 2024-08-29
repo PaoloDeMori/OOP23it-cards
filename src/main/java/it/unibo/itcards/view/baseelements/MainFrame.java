@@ -8,8 +8,14 @@ import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
+import it.unibo.itcards.view.baseelements.cardview.HandPanel;
+import it.unibo.itcards.view.baseelements.cardview.HandPanelImpl;
 import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
-import it.unibo.itcards.view.baseelements.cardview.MainPanel;
+import it.unibo.itcards.view.baseelements.cardview.OpponentPanel;
+import it.unibo.itcards.view.baseelements.cardview.OpponentPanelImpl;
+import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
+import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.event.*;
@@ -27,7 +33,10 @@ public class MainFrame extends JFrame implements View {
         this.setPreferredSize(d.getDimension());
         this.setSize(d.getDimension());
         this.imagesCache = new HashMap<>();
-        this.mainpanel = new MainPanel(d.getDimension());
+        this.mainpanel = new MainPanelBuilder(d.getDimension())
+                         .addHandPanel(new HandPanelImpl())
+                         .addopponentPanel(new OpponentPanelImpl())
+                         .build();
         this.add(mainpanel);
         this.controller = controller;
     }
@@ -110,5 +119,11 @@ public class MainFrame extends JFrame implements View {
     public void update() {
         this.setHand(this.controller.getHand());
         this.setOpponentCards(this.controller.getOpponentHand());
+    }
+
+    @Override
+    public void stop() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
 }

@@ -11,6 +11,10 @@ import java.util.List;
 
 public interface View extends Observer{
 
+    void show();
+
+    void stop();
+
     void setHand(List<Card> hand);
 
     void setCardsOnTable(List<Card> cards);

@@ -5,6 +5,7 @@ import it.unibo.itcards.model.baseelements.cards.Card;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 
 public class CardButton extends JButton {
     String path;
