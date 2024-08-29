@@ -14,7 +14,9 @@ public abstract class Model {
     List<Player> players;
     Player currentPlayer;
 
-
+    /**
+     * Constructs a new model with a shuffled deck.
+     */
     public Model() {
         this.deck = ShuffledDeckFactoryImpl.buildDeck();
         this.players = new ArrayList<>();
@@ -28,21 +30,46 @@ public abstract class Model {
 
     public abstract boolean isGameOver();
 
-    public  boolean isDeckEnded(){
+    /**
+     * Checks if the deck is ended
+     * 
+     * @return true if the deck is empty, false if it is not
+     */
+    public boolean isDeckEnded() {
         return this.deck.isVoid();
     }
 
-    public  Player getCurrentPlayer(){
+    /**
+     * Returns the current player
+     * 
+     * @return the current player
+     */
+    public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
 
-    public  List<Player> getPlayers(){
+    /**
+     * Returns the list of players
+     * 
+     * @return the list of players
+     */
+    public List<Player> getPlayers() {
         return this.players;
     }
 
+    /**
+     * Gives the cards to the players
+     * 
+     * @return true if cards were successfully dealt, false otherwise
+     */
     public abstract boolean giveCards();
 
-    public  Deck getDeck(){
+    /**
+     * Returns the deck
+     * 
+     * @return the deck
+     */
+    public Deck getDeck() {
         return this.deck;
     }
 
