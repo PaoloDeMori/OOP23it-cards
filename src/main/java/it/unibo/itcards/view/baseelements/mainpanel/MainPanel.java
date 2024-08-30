@@ -8,6 +8,7 @@ import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
 import javax.swing.*;
@@ -20,14 +21,18 @@ public class MainPanel extends JPanel{
     private HandPanel handPanel;
     private OpponentPanel opponentPanel;
     private CentralPanel centralPanel;
+    private LateralPanel lateralPanel;
+    private final static int HAND_PANEL_RATIO = 4;
+    private final static int OPPONENT_PANEL_RATIO = 6;
+    private final static int LATERAL_PANEL_RATIO = 13;
 
     protected MainPanel(Dimension d) {
         this.setPreferredSize(d);
         this.setSize(d);
         this.setLayout(new BorderLayout());
-        this.handPanelDimension = new Dimension(this.getWidth(), this.getHeight() / 4);
-        this.lateralPanelDimension = new Dimension(this.getWidth() / 13, this.getHeight());
-        this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ 4);
+        this.handPanelDimension = new Dimension(this.getWidth(), this.getHeight() / HAND_PANEL_RATIO);
+        this.lateralPanelDimension = new Dimension(this.getWidth() / LATERAL_PANEL_RATIO, this.getHeight());
+        this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ OPPONENT_PANEL_RATIO);
     }
 
     public void setHandPanel(HandPanel handPanel){
@@ -43,10 +48,17 @@ public class MainPanel extends JPanel{
     }
 
     public void setCentralPanel(CentralPanel centralPanel){
+        this.lateralPanel = lateralPanel;
+        this.lateralPanel.init();
+        this.add(lateralPanel,BorderLayout.CENTER);
+    }
+
+    public void setLateralPanel(LateralPanel centralPanel){
         this.centralPanel = centralPanel;
         this.centralPanel.init();
         this.add(centralPanel,BorderLayout.CENTER);
     }
+
 
     public Dimension getHandPanelDimension(){
         return this.handPanelDimension;
