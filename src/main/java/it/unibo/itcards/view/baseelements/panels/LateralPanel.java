@@ -1,14 +1,26 @@
 package it.unibo.itcards.view.baseelements.panels;
+
 import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-public abstract class LateralPanel extends JPanel{
+public abstract class LateralPanel extends JPanel {
 
-    public abstract void setPoints();
+    private BorderLayout layout;
 
-    public abstract void setCenter(JPanel panel);
+    public LateralPanel() {
+        layout = new BorderLayout();
+    }
+    public abstract void setPoints(final int botPoints , final int playerPoint);
 
-    public abstract void setNames();
+    public abstract void setCenter(final JPanel panel);
 
-    public abstract void init(Dimension d);
+    public abstract void setNames(final String botName , final String playerName);
+
+    public  void init(final Dimension d){
+        this.setLayout(layout);
+        this.setSize(d);
+        this.setPreferredSize(d);
+    }
 }

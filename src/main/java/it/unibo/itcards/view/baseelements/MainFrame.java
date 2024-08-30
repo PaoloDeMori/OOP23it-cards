@@ -14,8 +14,10 @@ import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.LeftPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -37,6 +39,8 @@ public class MainFrame extends JFrame implements View {
         this.mainpanel = new MainPanelBuilder(d.getDimension())
                          .addHandPanel(new HandPanelImpl())
                          .addopponentPanel(new OpponentPanelImpl())
+                         .addLeftPanel(new LeftPanelImpl())
+                         .addRightPanel(new RightPanelImpl())
                          .build();
         this.add(mainpanel);
         this.controller = controller;
@@ -98,6 +102,12 @@ public class MainFrame extends JFrame implements View {
         return true;
     }
 
+    public void setNames(final String botName, final String playerName) {
+        this.mainpanel.setNames(botName, playerName);
+    }
+    public void setPoints(final int botPoints, final int playerPoint) {
+        this.mainpanel.setPoints(botPoints, playerPoint);
+    }
     public static void main(String[] args) {
         Deck deck = ShuffledDeckFactoryImpl.buildDeck();
         MainFrame mainframe = new MainFrame(Dim.LARGE, new ControllerImpl());
@@ -114,6 +124,8 @@ public class MainFrame extends JFrame implements View {
         c.add(l);
         System.out.println(Integer.toString(mainframe.imagesCache.size()));
         mainframe.setHand(c);
+        mainframe.setNames("bot", "player");
+        mainframe.setPoints(3, 4);
     }
 
     @Override

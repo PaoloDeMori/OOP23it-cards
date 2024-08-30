@@ -21,7 +21,8 @@ public class MainPanel extends JPanel{
     private HandPanel handPanel;
     private OpponentPanel opponentPanel;
     private CentralPanel centralPanel;
-    private LateralPanel lateralPanel;
+    private LateralPanel rightPanel;
+    private LateralPanel leftPanel;
     private final static int HAND_PANEL_RATIO = 4;
     private final static int OPPONENT_PANEL_RATIO = 6;
     private final static int LATERAL_PANEL_RATIO = 13;
@@ -53,10 +54,19 @@ public class MainPanel extends JPanel{
         this.add(centralPanel,BorderLayout.CENTER);
     }
 
-    public void setLateralPanel(LateralPanel lateralPanel){
-        this.lateralPanel = lateralPanel;
-        this.lateralPanel.init(lateralPanelDimension);
-        this.add(lateralPanel,BorderLayout.CENTER);
+    public void setLateralPanel(LateralPanel lateralPanel , String borderLayoutPosition){
+        if(borderLayoutPosition.equals(BorderLayout.WEST)){
+            this.leftPanel = lateralPanel;
+            this.leftPanel.init(lateralPanelDimension);
+            this.add(leftPanel,BorderLayout.WEST);
+        }else if(borderLayoutPosition.equals(BorderLayout.EAST)){
+            this.rightPanel = lateralPanel;
+            this.rightPanel.init(lateralPanelDimension);
+            this.add(rightPanel,BorderLayout.EAST);
+        }
+        else{
+            throw new IllegalArgumentException("The position must be 'left' or 'right'");
+        }
     }
 
 
@@ -70,6 +80,14 @@ public class MainPanel extends JPanel{
 
     public void setOpponentCards(int n){
         this.opponentPanel.setOpponentCards(n);
+    }
+
+    public void setNames(String botName, String playerName) {
+       this.leftPanel.setNames(botName,playerName);
+    }
+
+    public void setPoints(int botPoints, int playerPoint) {
+        this.rightPanel.setPoints(botPoints,playerPoint);
     }
 
 
