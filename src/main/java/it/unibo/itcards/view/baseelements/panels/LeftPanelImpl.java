@@ -1,6 +1,7 @@
 package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -24,17 +25,23 @@ public class LeftPanelImpl extends LateralPanel {
     public void setNames(String botName, String playerName) {
         JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        botJPanel.setBackground(new Color(0,0,0,0));
         JLabel bot = new JLabel();
         bot.setFont(new Font("Arial", Font.BOLD, 40));
+        bot.setBackground(new Color(0,0,0,0));
+        bot.setOpaque(false);
         bot.setText(botName);
         botJPanel.add(bot);
         this.add(botJPanel, BorderLayout.NORTH);
 
         JPanel playerJPanel = new JPanel();
         playerJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        playerJPanel.setBackground(new Color(0,0,0,0));
         JLabel player = new JLabel();
         player.setFont(new Font("Arial", Font.BOLD, 40));
+        player.setOpaque(false);
         player.setText(playerName);
+        player.setBackground(new Color(0,0,0,0));
         playerJPanel.add(player);
         this.add(playerJPanel, BorderLayout.SOUTH);
         this.revalidate();

@@ -3,6 +3,7 @@ package it.unibo.itcards.view.baseelements.panels;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 public abstract class LateralPanel extends JPanel {
@@ -11,6 +12,7 @@ public abstract class LateralPanel extends JPanel {
 
     public LateralPanel() {
         layout = new BorderLayout();
+        this.setBackground(new Color(0,0,0,0));
     }
     public abstract void setPoints(final int botPoints , final int playerPoint);
 

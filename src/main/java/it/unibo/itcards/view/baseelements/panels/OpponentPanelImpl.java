@@ -12,7 +12,7 @@ public class OpponentPanelImpl extends OpponentPanel {
     FlowLayout layout;
     public OpponentPanelImpl() {
         layout = new FlowLayout(FlowLayout.CENTER, 10, 5);
-        this.setBackground(Color.BLUE);
+        this.setBackground(new Color(0,0,0,0));
     }
 
     @Override
