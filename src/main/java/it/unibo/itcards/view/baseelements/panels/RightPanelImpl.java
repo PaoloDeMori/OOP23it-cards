@@ -11,10 +11,19 @@ import javax.swing.JPanel;
 
 public class RightPanelImpl extends LateralPanel {
 
+    /**
+     * RightPanelImpl
+     */
     public RightPanelImpl() {
         super();
     }
+
     @Override
+    /**
+     * set the points of the player in the right panel and the bot
+     * @param Botpoints 
+     * @param Playerpoints
+     */
     public void setPoints( final int Botpoints , final int Playerpoints) {
         JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,5));
@@ -39,6 +48,12 @@ public class RightPanelImpl extends LateralPanel {
         
     }
 
+    /**
+     * unimplemented methods
+     * @param botName
+     * @param playerName
+     * @throws UnsupportedOperationException
+     */
     @Override
     public void setNames(final String botName, final String playerName) {
         throw new UnsupportedOperationException(" you can't set names here");

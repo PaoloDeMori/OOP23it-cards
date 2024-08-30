@@ -46,6 +46,7 @@ public final class BriscolaHelper {
         } else if (card1.getSuit().equals(card2.getSuit())) {
             return Cards.isGreater(card1, card2);
         }
+        
 
         return true;
 

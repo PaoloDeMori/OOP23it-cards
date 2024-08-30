@@ -17,10 +17,22 @@ public class LeftPanelImpl extends LateralPanel {
 
     }
     @Override
+    /**
+     * unimplemented method
+     * @param botPoints
+     * @param playerPoint
+     * @throws UnsupportedOperationException
+     */
     public void setPoints(final int botPoints, final int playerPoint) {
         throw new UnsupportedOperationException("can't set points here");
     }
     @Override
+    /**
+     * set the player and bot names
+     * @param botName
+     * @param playerNameColor green = new Color(0xFF3E8E41);
+     myPanel.setBackground(green);
+     */
     public void setNames(String botName, String playerName) {
         JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));

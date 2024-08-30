@@ -27,6 +27,10 @@ public class MainPanel extends JPanel{
     private final static int OPPONENT_PANEL_RATIO = 6;
     private final static int LATERAL_PANEL_RATIO = 13;
 
+    /**
+     * initialize the Main panel
+     * @param d
+     */
     protected MainPanel(Dimension d) {
         this.setPreferredSize(d);
         this.setSize(d);
@@ -36,6 +40,10 @@ public class MainPanel extends JPanel{
         this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ OPPONENT_PANEL_RATIO);
     }
 
+    /**
+     * set the hand panel
+     * @param handPanel
+     */
     public void setHandPanel(HandPanel handPanel){
         this.handPanel=handPanel;
         this.handPanel.init(handPanelDimension);

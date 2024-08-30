@@ -159,4 +159,9 @@ public class PlayerImpl implements Player {
         this.playedCards.add(card);
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
 }

@@ -44,10 +44,10 @@ public class BriscolaImplTest {
      */
     @BeforeEach
     private void init() {
-        briscolaGame = new BriscolaImpl();
-        deck = ShuffledDeckFactoryImpl.buildDeck();
         player1 = new PlayerImpl("Player1", DEFAULT_MAX_NUMBER_OF_CARDS);
         player2 = new PlayerImpl("player2", DEFAULT_MAX_NUMBER_OF_CARDS);
+        briscolaGame = new BriscolaImpl(player1 , player2);
+        deck = ShuffledDeckFactoryImpl.buildDeck();
         cards=new HashSet<>();
         cardFactory = new CardFactoryImpl();
         briscolaGame.start();
@@ -96,6 +96,21 @@ public class BriscolaImplTest {
         for(Player p: players) {
             assertEquals(3, p.getCards().size());
         }
+    }
     
+    @Test
+    void testWinner() {
+            final Card card1 = cardFactory.buildCard(Suit.DENARI, 10);
+            final Card card2 = cardFactory.buildCard(Suit.DENARI, 9);
+            List<Card> cards = List.of(card1, card2);
+            briscolaGame.playTurn(card1, this.player1);
+            briscolaGame.playTurn(card2, this.player2);
+            assertEquals(this.player1, briscolaGame.winner(cards));
+    }
+
+    public static void main(String[] args) {
+        BriscolaImplTest test = new BriscolaImplTest();
+        test.init();
+        test.testWinner();
     }
 }

@@ -13,6 +13,7 @@ import java.util.Set;
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.player.Player;
+import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.BriscolaHelper;
 
 public class BriscolaImpl extends Model {
@@ -21,17 +22,23 @@ public class BriscolaImpl extends Model {
     private Card briscola;
     private List<Card> playedCards;
     private PlayerIterator iterator;
+    
 
     /**
      * Constructor which initializes the BriscolaImpl object
      * with an empty ArrayList of playedCards.
      */
-    public BriscolaImpl() {
+    public BriscolaImpl(Player player , Player bot) {
         super();
         this.playedCards = new ArrayList<>();
         this.iterator = new PlayerIterator(players);
+        setPlayer(player , bot);
     }
 
+    private void setPlayer(Player player , Player bot){
+        players.add(player);
+        players.add(bot);
+    }
     /**
      * Returns the list of cards currently on the table.
      * This includes the Briscola card followed by the cards played by the players.
@@ -59,21 +66,24 @@ public class BriscolaImpl extends Model {
 
     @Override
     public void playTurn(Card card, Player player) {
+        if(player != currentPlayer){
+            throw new IllegalStateException("It's not your turn");
+        }
         if (playedCards.size() < 1) {
             playedCards.add(card);
             currentPlayer = iterator.next();
-            player.addPlayedCard(card);
+            currentPlayer.addPlayedCard(card);
         } else {
             playedCards.add(card);
             player.addPlayedCard(card);
-            Player wonPlayer = winner();
-            wonPlayer.addWonCards(new HashSet<Card>(playedCards));
-            currentPlayer = wonPlayer;
-            iterator.setWinnerPlayer(wonPlayer);
-            playedCards.clear();
-            this.giveCards();
+           // Player wonPlayer = winner(this.playedCards);
+            //wonPlayer.addWonCards(new HashSet<Card>(playedCards));
+            //currentPlayer = wonPlayer;
+            //iterator.setWinnerPlayer(wonPlayer);
+            //playedCards.clear();
+            //this.giveCards();
         }
-        this.notifyObserver();
+        /*this.notifyObserver();*/
 
     }
 
@@ -106,6 +116,8 @@ public class BriscolaImpl extends Model {
         } else {
             throw new InGameException("Deck is empty");
         }
+        iterator.setWinnerPlayer(players.get(0));
+        this.currentPlayer=players.get(0);
         for(var player: players){
             for (int i = 0; i < 3; i++) {
                 this.giveCards();
@@ -123,7 +135,10 @@ public class BriscolaImpl extends Model {
      * @throws InGameException if no winner can be determined.
      */
     @Override
-    public Player winner() {
+    public Player winner(List<Card> playedCards) {
+        if (playedCards.size() < 2) {
+            throw new InGameException("Not enough cards played");
+        }
         if (BriscolaHelper.isWinner(playedCards.get(0), playedCards.get(1), briscola)) {
             for (var player : players) {
                 if (player.getPlayedCards().contains(playedCards.get(0))) {

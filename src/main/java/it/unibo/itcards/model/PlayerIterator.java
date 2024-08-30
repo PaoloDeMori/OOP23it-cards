@@ -10,6 +10,7 @@ public class PlayerIterator implements Iterator<Player> {
     List<Player> players;
     int current = 0;
     Player winnerPlayer;
+    boolean hasplayed = false;
 
     public PlayerIterator(List<Player> players) {
         this.players = players;
@@ -17,16 +18,15 @@ public class PlayerIterator implements Iterator<Player> {
 
     @Override
     public boolean hasNext() {
-        return current<players.indexOf(winnerPlayer);
+        return current+1!=players.indexOf(winnerPlayer);
     }
 
     @Override
     public Player next() {
         if(!hasNext()){
-            throw new ExcessiveIterationException("The turn ended");
-
+            throw new ExcessiveIterationException("No next player");
         }
-        if (current < players.size()) {
+        if (current+1 == players.size()) {
             current = 0;
         } else {
             current++;
