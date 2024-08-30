@@ -46,17 +46,52 @@ public class BriscolaImpl extends Model {
         return cardsOnTable;
     }
 
+    /**
+     * Determines if the game is over by checking if any player still has cards.
+     * This method iterates over all player and check if any player has one or more
+     * cards left
+     * in their hand. If at least one player has card, the game is considered
+     * ongoing and the
+     * method returns {@code false}. If no players have card left, the game is over
+     * and the method
+     * returns {@code true}.
+     * 
+     * @return {@code true} if no player has cards left(game over), {@code false}
+     *         otherwise(game ongoing).
+     */
     @Override
     public boolean isGameOver() {
         boolean haveCards = false;
-        for(var player: players){
-            if(player.getCards().size() > 0){
+        for (var player : players) {
+            if (player.getCards().size() > 0) {
                 haveCards = true;
             }
         }
         return haveCards;
     }
 
+    /**
+     * Manages a player's turn.
+     * 
+     * This method performs the following actions:
+     * (1) if no cards have been played in the current round, the given card is
+     * added to
+     * the played cards, and the turn is passed to the next player.
+     * (2) if there is already at least one card played, the method adds the given
+     * card,
+     * determines the winner of round, and assisgn all played cards to the winner.
+     * The
+     * winner becomes the next player to play
+     * (3) the turn iterator is updated to set the new winner, and the played cards
+     * are cleared
+     * for the next round.
+     * (4) New cards are dealt to the players if necessary, and observers are
+     * notified of the
+     * change in game state.
+     * 
+     * @param card   the card played by the player during the turn
+     * @param player the player who is playing the card
+     */
     @Override
     public void playTurn(Card card, Player player) {
         if (playedCards.size() < 1) {
@@ -106,10 +141,10 @@ public class BriscolaImpl extends Model {
         } else {
             throw new InGameException("Deck is empty");
         }
-        for(var player: players){
+        for (var player : players) {
             for (int i = 0; i < 3; i++) {
                 this.giveCards();
-                
+
             }
         }
 
