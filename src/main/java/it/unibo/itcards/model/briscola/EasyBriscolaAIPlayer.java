@@ -1,13 +1,12 @@
 package it.unibo.itcards.model.briscola;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import it.unibo.itcards.model.BriscolaImpl;
+import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
+import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 
 public class EasyBriscolaAIPlayer extends PlayerImpl implements AIPlayer {
@@ -27,6 +26,7 @@ public class EasyBriscolaAIPlayer extends PlayerImpl implements AIPlayer {
      * This method calculate the best card to play and returns it in easy mode.
      * 
      * @return an instance of the class card that represents the best card to play.
+     * @throws InvalidOperationException 
      */
     @Override
     public Card chooseCard() {
@@ -40,6 +40,11 @@ public class EasyBriscolaAIPlayer extends PlayerImpl implements AIPlayer {
                 } else if (BriscolaHelper.getCardValue(tempCard) > BriscolaHelper.getCardValue(card)) {
                     tempCard = card;
                 }
+            }
+            try {
+                this.playCard(tempCard);
+            } catch (InvalidOperationException e) {
+                throw new InGameException(e.getMessage());
             }
             return tempCard;
         } else {
@@ -66,6 +71,11 @@ public class EasyBriscolaAIPlayer extends PlayerImpl implements AIPlayer {
             }
         }
 
+        try {
+            this.playCard(tempCard);
+        } catch (InvalidOperationException e) {
+            throw new InGameException(e.getMessage());
+        }
         return tempCard;
 
     }

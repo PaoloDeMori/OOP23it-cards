@@ -1,19 +1,13 @@
 package it.unibo.itcards.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
 import it.unibo.itcards.model.baseelements.cards.Card;
-import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.player.Player;
-import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.BriscolaHelper;
 
 public class BriscolaImpl extends Model {
@@ -144,6 +138,7 @@ public class BriscolaImpl extends Model {
      * Briscola.
      * Throws an exception if the deck is empty.
      */
+    @SuppressWarnings("unused")
     @Override
     public void start() {
         Optional<Card> card = this.deck.drawCard();
