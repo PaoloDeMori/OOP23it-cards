@@ -118,10 +118,6 @@ public class MainFrame extends JFrame implements View {
         c.add(deck.drawCard().get());
         Card l = deck.drawCard().get();
         c.add(l);
-        mainframe.setHand(c);
-        c.removeAll(c);
-        mainframe.setHand(c);
-        c.add(l);
         System.out.println(Integer.toString(mainframe.imagesCache.size()));
         mainframe.setHand(c);
         mainframe.setNames("bot", "player");

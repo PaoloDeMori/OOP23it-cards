@@ -163,5 +163,13 @@ public class PlayerImpl implements Player {
     public String toString() {
         return this.name;
     }
-
+    /**
+     * Sets the hand of the player
+     * @param hand
+     */
+    public void setHand(List<Card> hand){
+        for(Card card : hand){
+            cards.add(card);
+        }
+    }
 }

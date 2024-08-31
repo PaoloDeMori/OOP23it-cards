@@ -245,4 +245,25 @@ public class BriscolaImpl extends Model {
         return briscola;
     }
 
+    public List<Card> playedCards() {
+        return playedCards;
+    }
+
+    public static int getNumberOfPlayers() {
+        return NUMBER_OF_PLAYERS;
+    }
+
+    public void setPlayedCards(List<Card> playedCards) {
+        this.playedCards = playedCards;
+    }
+
+    public PlayerIterator getIterator() {
+        return iterator;
+    }
+
+    public void setIterator(PlayerIterator iterator) {
+        this.iterator = iterator;
+    }
+
+
 }

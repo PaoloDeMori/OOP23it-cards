@@ -98,4 +98,24 @@ public abstract class Model implements Observable{
         
     }
 
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
+    }
+
 }
