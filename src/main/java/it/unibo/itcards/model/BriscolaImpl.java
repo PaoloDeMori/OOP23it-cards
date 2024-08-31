@@ -106,17 +106,18 @@ public class BriscolaImpl extends Model {
         }
         if (playedCards.size() < 1) {
             playedCards.add(card);
-            currentPlayer = iterator.next();
             currentPlayer.addPlayedCard(card);
+            currentPlayer = iterator.next();
+            
         } else {
             playedCards.add(card);
             player.addPlayedCard(card);
-           // Player wonPlayer = winner(this.playedCards);
-            //wonPlayer.addWonCards(new HashSet<Card>(playedCards));
-            //currentPlayer = wonPlayer;
-            //iterator.setWinnerPlayer(wonPlayer);
-            //playedCards.clear();
-            //this.giveCards();
+            Player wonPlayer = winner(this.playedCards);
+            wonPlayer.addWonCards(new HashSet<Card>(playedCards));
+            currentPlayer = wonPlayer;
+            iterator.setWinnerPlayer(wonPlayer);
+            playedCards.clear();
+            this.giveCards();
         }
         /*this.notifyObserver();*/
 
