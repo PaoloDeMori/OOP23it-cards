@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
+import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
 import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
@@ -13,6 +14,9 @@ import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
 import javax.swing.*;
 import java.util.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.awt.Graphics;
 
 public class MainPanel extends JPanel{
     private final Dimension handPanelDimension;
@@ -26,6 +30,7 @@ public class MainPanel extends JPanel{
     private final static int HAND_PANEL_RATIO = 4;
     private final static int OPPONENT_PANEL_RATIO = 6;
     private final static int LATERAL_PANEL_RATIO = 13;
+    private BufferedImage backgroundImage;
 
     /**
      * initialize the Main panel
@@ -38,6 +43,10 @@ public class MainPanel extends JPanel{
         this.handPanelDimension = new Dimension(this.getWidth(), this.getHeight() / HAND_PANEL_RATIO);
         this.lateralPanelDimension = new Dimension(this.getWidth() / LATERAL_PANEL_RATIO, this.getHeight());
         this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ OPPONENT_PANEL_RATIO);
+        try {
+            backgroundImage=ImagesHelper.loadImage("green");
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -96,6 +105,13 @@ public class MainPanel extends JPanel{
 
     public void setPoints(int botPoints, int playerPoint) {
         this.rightPanel.setPoints(botPoints,playerPoint);
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
 
