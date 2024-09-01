@@ -100,6 +100,13 @@ public class BriscolaImplTest {
         }
     }
 
+    /**
+     * Tests the correct implementation of the method that determines the winner of
+     * a game.
+     *
+     * @return the winner of the game
+     */
+
     @Test
     void testWinner() {
         final Card card1 = cardFactory.buildCard(Suit.DENARI, 10);
@@ -173,6 +180,11 @@ public class BriscolaImplTest {
 
     }
 
+    /**
+     * Tests if an exception is thrown when the wrong player tries to play a turn.
+     *
+     * @throws IllegalStateException if the wrong player tries to play
+     */
     @Test
     void testPlayTurnWrongPlayer() {
 
