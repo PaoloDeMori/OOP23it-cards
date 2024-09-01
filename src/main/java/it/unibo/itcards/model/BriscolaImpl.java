@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.briscola.BriscolaHelper;
 
@@ -142,6 +143,7 @@ public class BriscolaImpl extends Model {
     @Override
     public void start() {
         Optional<Card> card = this.deck.drawCard();
+        players.stream().filter(player -> player instanceof AIPlayer).map(player-> (AIPlayer) player).forEach(player->player.setGame(this));
         if (card.isPresent()) {
             setBriscola(card.get());
         } else {
@@ -149,13 +151,9 @@ public class BriscolaImpl extends Model {
         }
         iterator.setWinnerPlayer(players.get(0));
         this.currentPlayer=players.get(0);
-        for(var player: players){
             for (int i = 0; i < 3; i++) {
                 this.giveCards();
-
             }
-        }
-
     }
 
     /**
