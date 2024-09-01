@@ -94,4 +94,6 @@ public interface Player {
      * @param card the card to add
      */
     void addPlayedCard(Card card);
+
+    boolean isAi();
 }

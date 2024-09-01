@@ -173,4 +173,9 @@ public class PlayerImpl implements Player {
             cards.add(card);
         }
     }
+
+    @Override
+    public boolean isAi() {
+       return false;
+    }
 }

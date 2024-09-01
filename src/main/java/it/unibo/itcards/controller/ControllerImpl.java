@@ -35,7 +35,7 @@ public class ControllerImpl implements Controller {
     @Override
     public void start() {
         model.start();
-        if (this.model.getCurrentPlayer() instanceof AIPlayer) {
+        if (this.model.getCurrentPlayer().isAi()) {
             this.aiPlay();
         }
     }
@@ -57,7 +57,7 @@ public class ControllerImpl implements Controller {
                 this.model.notifyObserver();
                 this.end();
             } else {
-                if (this.model.getCurrentPlayer() instanceof AIPlayer) {
+                if (this.model.getCurrentPlayer().isAi()) {
                     this.aiPlay();
                 }
 
@@ -65,7 +65,7 @@ public class ControllerImpl implements Controller {
                     this.play(card);
                 }
             }
-        } while (this.model.getCurrentPlayer() instanceof AIPlayer);
+        } while (this.model.getCurrentPlayer().isAi());
         this.model.notifyObserver();
     }
 
@@ -105,11 +105,11 @@ public class ControllerImpl implements Controller {
         List<Player> players = this.model.getPlayers();
         int pos = 0;
         Player p = players.get(pos);
-        while (p instanceof AIPlayer) {
+        while (p.isAi()) {
             pos++;
             p = players.get(pos);
         }
-        if (!(p instanceof AIPlayer)) {
+        if (!(p.isAi())) {
             return p.getCards();
         }
         throw new InGameException("The player required does not exists");
@@ -125,7 +125,7 @@ public class ControllerImpl implements Controller {
         List<Player> players = this.model.getPlayers();
         int pos = 0;
         Player p = players.get(pos);
-        while (!(p instanceof AIPlayer)) {
+        while (!(p.isAi())) {
             pos++;
             p = players.get(pos);
         }
