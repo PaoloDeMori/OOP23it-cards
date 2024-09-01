@@ -2,8 +2,10 @@ package it.unibo.itcards.model.baseelements.player;
 
 import java.util.List;
 import java.util.Set;
+
+import it.unibo.itcards.commons.Card;
+
 import java.util.Optional;
-import it.unibo.itcards.model.baseelements.cards.Card;
 
 /**
  * Represents a player of a card game.

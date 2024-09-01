@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.briscola.BriscolaHelper;

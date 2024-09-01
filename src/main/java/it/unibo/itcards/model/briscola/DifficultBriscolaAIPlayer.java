@@ -2,9 +2,10 @@ package it.unibo.itcards.model.briscola;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import java.util.stream.*;;

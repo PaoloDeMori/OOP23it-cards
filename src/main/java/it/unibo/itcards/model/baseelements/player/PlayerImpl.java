@@ -3,10 +3,11 @@ package it.unibo.itcards.model.baseelements.player;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import it.unibo.itcards.commons.Card;
+
 import java.util.List;
 import java.util.Optional;
-
-import it.unibo.itcards.model.baseelements.cards.Card;
 
 /**
  * This class implements the player interface and represent a human player.

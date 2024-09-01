@@ -1,7 +1,7 @@
 package it.unibo.itcards.model.baseelements.player;
 
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.cards.Card;
 
 public interface AIPlayer extends Player {
 

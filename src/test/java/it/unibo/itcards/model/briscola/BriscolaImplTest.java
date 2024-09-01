@@ -1,7 +1,7 @@
 package it.unibo.itcards.model.briscola;
 
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.BriscolaImpl;
-import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;

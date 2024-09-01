@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
 
 /**
  * Test the deck creation using the factory that shuffle its cards.

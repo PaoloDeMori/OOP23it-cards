@@ -2,10 +2,12 @@ package it.unibo.itcards.view.baseelements;
 
 import javax.swing.*;
 
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
 import it.unibo.itcards.controller.ControllerImpl;
 import it.unibo.itcards.model.BriscolaImpl;
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.model.baseelements.player.AIPlayer;
+import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.EasyBriscolaAIPlayer;
 import it.unibo.itcards.view.View;
@@ -32,13 +34,13 @@ public class MainFrame extends JFrame implements View {
         this.setResizable(false);
         this.setPreferredSize(d.getDimension());
         this.setSize(d.getDimension());
-        this.cardButtonFactory=new CardButtonFactory();
+        this.cardButtonFactory = new CardButtonFactory();
         this.mainpanel = new MainPanelBuilder(d.getDimension())
-                         .addHandPanel(new HandPanelImpl())
-                         .addopponentPanel(new OpponentPanelImpl())
-                         .addLeftPanel(new LeftPanelImpl())
-                         .addRightPanel(new RightPanelImpl())
-                         .build();
+                .addHandPanel(new HandPanelImpl())
+                .addopponentPanel(new OpponentPanelImpl())
+                .addLeftPanel(new LeftPanelImpl())
+                .addRightPanel(new RightPanelImpl())
+                .build();
         this.add(mainpanel);
         this.controller = controller;
     }
@@ -52,7 +54,7 @@ public class MainFrame extends JFrame implements View {
                 controller.playturn(card);
                 System.out.println(card.toString());
             };
-            cp = this.cardButtonFactory.build(card, al,this.mainpanel.getHandPanelDimension());
+            cp = this.cardButtonFactory.build(card, al, this.mainpanel.getHandPanelDimension());
             panels.add(cp);
         }
         mainpanel.setHand(panels);
@@ -91,14 +93,23 @@ public class MainFrame extends JFrame implements View {
     public void start() {
         this.update();
         this.setVisible(true);
+        this.setNames();
     }
 
     private void setOpponentCards(int n) {
         this.mainpanel.setOpponentCards(n);
     }
 
+    public void setNames() {
+        String botName = this.controller.getPlayers().stream().filter((player) -> player instanceof AIPlayer)
+                .map(Player::toString)
+                .findFirst()
+                .orElse("name not found");
+        String playerName = this.controller.getPlayers().stream().filter((player) -> !(player instanceof AIPlayer))
+        .map(Player::toString)
+        .findFirst()
+        .orElse("name not found");
 
-    public void setNames(final String botName, final String playerName) {
         this.mainpanel.setNames(botName, playerName);
     }
 

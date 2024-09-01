@@ -3,12 +3,12 @@ package it.unibo.itcards.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
+import it.unibo.itcards.commons.Observable;
+import it.unibo.itcards.commons.Observer;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.Player;
-import it.unibo.itcards.observerpattern.Observable;
-import it.unibo.itcards.observerpattern.Observer;
 
 public abstract class Model implements Observable{
 

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
 
 public class CardButtonFactory {
 

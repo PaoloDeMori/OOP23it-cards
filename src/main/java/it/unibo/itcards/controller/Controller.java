@@ -2,8 +2,9 @@ package it.unibo.itcards.controller;
 
 import java.util.List;
 
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 
 public interface Controller {
@@ -51,5 +52,7 @@ public interface Controller {
      * @return true if the deck in the model is empty, otherwise false 
      */
     boolean isDeckEmpty();
+
+    List<Player> getPlayers();
 
 }
