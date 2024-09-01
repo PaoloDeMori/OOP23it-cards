@@ -4,30 +4,27 @@ import javax.swing.*;
 
 import it.unibo.itcards.controller.Controller;
 import it.unibo.itcards.controller.ControllerImpl;
+import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.baseelements.cards.Card;
-import it.unibo.itcards.model.baseelements.deck.Deck;
-import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
+import it.unibo.itcards.model.baseelements.player.PlayerImpl;
+import it.unibo.itcards.model.briscola.EasyBriscolaAIPlayer;
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
-import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
+import it.unibo.itcards.view.baseelements.cardview.CardButtonFactory;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
-import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.LeftPanelImpl;
-import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.awt.event.*;
 import java.util.*;
-//classe di tests
+
 public class MainFrame extends JFrame implements View {
 
     private MainPanel mainpanel;
-    public Map<Card, BufferedImage> imagesCache;
+    private CardButtonFactory cardButtonFactory;
     private Controller controller;
 
     public MainFrame(Dim d, Controller controller) {
@@ -35,7 +32,7 @@ public class MainFrame extends JFrame implements View {
         this.setResizable(false);
         this.setPreferredSize(d.getDimension());
         this.setSize(d.getDimension());
-        this.imagesCache = new HashMap<>();
+        this.cardButtonFactory=new CardButtonFactory();
         this.mainpanel = new MainPanelBuilder(d.getDimension())
                          .addHandPanel(new HandPanelImpl())
                          .addopponentPanel(new OpponentPanelImpl())
@@ -49,52 +46,25 @@ public class MainFrame extends JFrame implements View {
     @Override
     public void setHand(List<Card> cards) {
         CardButton cp;
-
         List<CardButton> panels = new ArrayList<>();
         for (Card card : cards) {
             ActionListener al = e -> {
-                // controller.playturn(card);
+                controller.playturn(card);
                 System.out.println(card.toString());
             };
-            cp = this.createCardButton(card, al);
+            cp = this.cardButtonFactory.build(card, al,this.mainpanel.getHandPanelDimension());
             panels.add(cp);
         }
         mainpanel.setHand(panels);
     }
 
-    private void setOpponentCards(int n){
-        this.mainpanel.setOpponentCards(n);
-    }
-
-    private CardButton createCardButton(Card card, ActionListener al) {
-        BufferedImage image;
-        CardButton cp;
-        if (!imagesCache.keySet().contains(card)) {
-            try {
-                image = ImagesHelper.loadImage(card);
-                imagesCache.put(card, image);
-            } catch (IOException e) {
-                image = null;
-            }
-            cp = new CardButton(image, (int) mainpanel.getHandPanelDimension().getHeight());
-        } else {
-            cp = new CardButton(imagesCache.get(card), (int) mainpanel.getHandPanelDimension().getHeight());
-        }
-        if (al != null) {
-            cp.addActionListener(al);
-        }
-        return cp;
-    }
-
     @Override
     public void setCardsOnTable(List<Card> cards) {
-
     }
 
     @Override
     public void setNumberOpponentCards(int n) {
         this.mainpanel.setOpponentCards(n);
-
     }
 
     @Override
@@ -102,37 +72,46 @@ public class MainFrame extends JFrame implements View {
         return true;
     }
 
-    public void setNames(final String botName, final String playerName) {
-        this.mainpanel.setNames(botName, playerName);
-    }
-    public void setPoints(final int botPoints, final int playerPoint) {
-        this.mainpanel.setPoints(botPoints, playerPoint);
-    }
-    public static void main(String[] args) {
-        Deck deck = ShuffledDeckFactoryImpl.buildDeck();
-        MainFrame mainframe = new MainFrame(Dim.LARGE, new ControllerImpl());
-        mainframe.setNumberOpponentCards(3);
-        mainframe.setVisible(true);
-        List<Card> c = new ArrayList<Card>();
-        c.add(deck.drawCard().get());
-        c.add(deck.drawCard().get());
-        Card l = deck.drawCard().get();
-        c.add(l);
-        System.out.println(Integer.toString(mainframe.imagesCache.size()));
-        mainframe.setHand(c);
-        mainframe.setNames("bot", "player");
-        mainframe.setPoints(3, 4);
-    }
-
     @Override
     public void update() {
-        this.setHand(this.controller.getHand());
-        this.setOpponentCards(this.controller.getOpponentHand());
+        SwingUtilities.invokeLater(() -> {
+            this.setHand(this.controller.getHand());
+            this.setOpponentCards(this.controller.getOpponentHand());
+            this.mainpanel.revalidate();
+            this.mainpanel.repaint();
+        });
     }
 
     @Override
     public void stop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'stop'");
+        System.out.println("Hai vinto");
+    }
+
+    @Override
+    public void start() {
+        this.update();
+        this.setVisible(true);
+    }
+
+    private void setOpponentCards(int n) {
+        this.mainpanel.setOpponentCards(n);
+    }
+
+
+    public void setNames(final String botName, final String playerName) {
+        this.mainpanel.setNames(botName, playerName);
+    }
+
+    public void setPoints(final int botPoints, final int playerPoint) {
+        this.mainpanel.setPoints(botPoints, playerPoint);
+    }
+
+    public static void main(String[] args) {
+        Controller controller = new ControllerImpl();
+        MainFrame mainframe = new MainFrame(Dim.LARGE, controller);
+        BriscolaImpl briscola = new BriscolaImpl(new PlayerImpl("gino", 3), new EasyBriscolaAIPlayer("bot", 3));
+        controller.init(briscola, mainframe);
+        briscola.start();
+        mainframe.start();
     }
 }

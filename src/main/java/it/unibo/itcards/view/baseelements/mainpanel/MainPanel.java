@@ -8,11 +8,9 @@ import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
 import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
-import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
-import javax.swing.*;
 import java.util.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

@@ -100,7 +100,6 @@ public class DifficultBriscolaAIPlayer extends PlayerImpl implements AIPlayer {
     @Override
     public Card chooseCard() {
         List<Card> hand = getCards();
-        Card tempCard = null;
         List<Card> totalPlayedCards = new ArrayList<>();
         for (var player : game.getPlayers()) {
             totalPlayedCards.addAll(player.getPlayedCards());

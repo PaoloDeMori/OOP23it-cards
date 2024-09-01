@@ -10,6 +10,8 @@ public interface View extends Observer{
 
     void show();
 
+    void start();
+
     void stop();
 
     void setHand(List<Card> hand);

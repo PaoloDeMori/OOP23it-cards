@@ -59,6 +59,7 @@ public class ControllerImpl implements Controller {
         if(this.model.isGameOver()){
             this.end();
         }
+        this.model.notifyObserver();
     }
 
 /**
@@ -155,7 +156,7 @@ public class ControllerImpl implements Controller {
      * Handles what happens when the game ends.
      */
     private void end(){
-
+        this.view.stop();
     }
    /**
      * Handle what happens when a Player decided to play

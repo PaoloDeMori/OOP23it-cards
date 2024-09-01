@@ -2,10 +2,8 @@ package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Label;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
