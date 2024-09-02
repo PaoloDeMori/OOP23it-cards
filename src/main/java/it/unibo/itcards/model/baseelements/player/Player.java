@@ -96,4 +96,8 @@ public interface Player {
     void addPlayedCard(Card card);
 
     boolean isAi();
+
+    int getPoints();
+
+    void setPoints(int points);
 }

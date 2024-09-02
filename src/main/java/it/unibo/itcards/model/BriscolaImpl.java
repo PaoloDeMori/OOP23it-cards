@@ -163,7 +163,6 @@ public class BriscolaImpl extends Model {
      * @return the player who won the hand.
      * @throws InGameException if no winner can be determined.
      */
-    @Override
     public Player winner(List<Card> playedCards) {
         if (playedCards.size() < 2) {
             throw new InGameException("Not enough cards played");

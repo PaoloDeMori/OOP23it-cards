@@ -78,7 +78,6 @@ public abstract class Model implements Observable{
 
     public abstract int points(Player player);
 
-    public abstract Player winner(List<Card> playedCards);
 
     @Override
     public void addObserver(Observer observer) {

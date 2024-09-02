@@ -7,6 +7,7 @@ import java.util.Set;
 import it.unibo.itcards.commons.Card;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -20,6 +21,7 @@ public class PlayerImpl implements Player {
     private final Hand cards;
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
+    private int points;
 
     /**
      * Constructor of this class that sets the name and the maximum number of
@@ -34,6 +36,7 @@ public class PlayerImpl implements Player {
         this.maxNumberOfCards = maxNumberOfCards;
         cards = new Hand(this.maxNumberOfCards);
         this.playedCards = new ArrayList<>();
+        this.points = 0; 
     }
 
     /**
@@ -177,5 +180,15 @@ public class PlayerImpl implements Player {
     @Override
     public boolean isAi() {
        return false;
+    }
+
+    @Override
+    public int getPoints() {
+        return this.points;
+    }
+
+    @Override
+    public void setPoints(int points) {
+        this.points = points; 
     }
 }
