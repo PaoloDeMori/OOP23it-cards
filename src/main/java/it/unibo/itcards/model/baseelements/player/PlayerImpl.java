@@ -20,6 +20,7 @@ public class PlayerImpl implements Player {
     private final Hand cards;
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
+    private Card selectedCard = null;
 
     /**
      * Constructor of this class that sets the name and the maximum number of
@@ -177,5 +178,13 @@ public class PlayerImpl implements Player {
     @Override
     public boolean isAi() {
        return false;
+    }
+
+    public void selectCard(Card card){
+        this.selectedCard=card;
+    }
+
+    public Card chooseCard() throws InvalidOperationException{
+       return this.playCard(selectedCard);
     }
 }

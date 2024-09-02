@@ -6,7 +6,6 @@ import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
 import it.unibo.itcards.controller.ControllerImpl;
 import it.unibo.itcards.model.BriscolaImpl;
-import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.EasyBriscolaAIPlayer;
@@ -101,11 +100,11 @@ public class MainFrame extends JFrame implements View {
     }
 
     public void setNames() {
-        String botName = this.controller.getPlayers().stream().filter((player) -> player instanceof AIPlayer)
+        String botName = this.controller.getPlayers().stream().filter((player) -> player.isAi())
                 .map(Player::toString)
                 .findFirst()
                 .orElse("name not found");
-        String playerName = this.controller.getPlayers().stream().filter((player) -> !(player instanceof AIPlayer))
+        String playerName = this.controller.getPlayers().stream().filter((player) -> !(player.isAi()))
         .map(Player::toString)
         .findFirst()
         .orElse("name not found");

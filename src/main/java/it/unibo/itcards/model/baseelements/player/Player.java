@@ -96,4 +96,8 @@ public interface Player {
     void addPlayedCard(Card card);
 
     boolean isAi();
+
+    Card chooseCard()  throws InvalidOperationException;
+
+    public void selectCard(Card card);
 }

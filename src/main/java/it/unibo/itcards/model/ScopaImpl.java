@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.baseelements.player.Player;
 
 public class ScopaImpl extends Model {
@@ -53,8 +53,13 @@ public class ScopaImpl extends Model {
         throw new UnsupportedOperationException("Unimplemented method 'points'");
     }
 
-    @Override
     public Player winner() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'winner'");
+    }
+
+    @Override
+    public Player winner(List<Card> playedCards) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'winner'");
     }
