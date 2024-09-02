@@ -3,13 +3,12 @@ package it.unibo.itcards.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
+import it.unibo.itcards.commons.Observable;
+import it.unibo.itcards.commons.Observer;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.Player;
-import it.unibo.itcards.observerpattern.Observable;
-import it.unibo.itcards.observerpattern.Observer;
 
 public abstract class Model implements Observable{
 
@@ -79,7 +78,7 @@ public abstract class Model implements Observable{
 
     public abstract int points(Player player);
 
-    public abstract Player winner();
+    public abstract Player winner(List<Card> playedCards);
 
     @Override
     public void addObserver(Observer observer) {
@@ -97,6 +96,26 @@ public abstract class Model implements Observable{
             observer.update();
         }
         
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
     }
 
 }

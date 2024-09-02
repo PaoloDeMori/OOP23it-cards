@@ -1,101 +1,58 @@
 package it.unibo.itcards.controller;
 
-import it.unibo.itcards.model.InGameException;
+import java.util.List;
+
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.cards.Card;
-import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 
-import java.util.List;
+public interface Controller {
 
-public class Controller {
-    private Model model;
-    private View view;
+    /**
+     * Sets the model and the view of the mvc pattern of this application.
+     * @param model the game that the user decided to play
+     * @param view the graphical interface
+     */
+    void init(Model model, View view);
 
-    public void init(Model model, View view) {
-        this.setModel(model);
-        this.setView(view);
-        this.model.addObserver(this.view);
-    }
+    /**
+     * This method is called to start the game.
+     */
+    void start();
 
-    public void start() {
-        model.start();
-        if (this.model.getCurrentPlayer() instanceof AIPlayer) {
-            this.aiPlay();
-        }
-    }
+    /**
+     * This method is called by action listeners, it accepts a card as a parameter that represents the card to play.
+     * If the current player is not a user this called the aiPlay method, otherwise it called the play method.
+     * If the game ended this method will handle that situation by calling the end method.
+     * @param card the card to play, when this method is called by a user.
+     */
+    void playturn(Card card);
 
-    public void playturn(Card card) {
-        if (this.model.getCurrentPlayer() instanceof AIPlayer) {
-            this.aiPlay();
-        }
+    /**
+     * Returns the hand of the human player of this application.
+     * @return the hand of the human player of the game.
+     */
+    List<Card> getHand();
 
-        else {
-            this.play(card);
-        }
-    }
+    /**
+     * Returns the hand of the AI player of this application.
+     * @return the hand of the AI player of the game.
+     */
+    int getOpponentHand();
 
-    private void setModel(Model model) {
-        this.model = model;
-    }
+    /**
+     * Return the cards on table of the game.
+     * @return the cards on table of the model.
+     */
+    List<Card> getCardsOnTable();
 
-    private void setView(View view) {
-        this.view = view;
-    }
+    /**
+     * Checks if the deck is empty.
+     * @return true if the deck in the model is empty, otherwise false 
+     */
+    boolean isDeckEmpty();
 
-    private void error() {
-        System.exit(0);
-    }
+    List<Player> getPlayers();
 
-    public List<Card> getHand(){
-        List<Player> players = this.model.getPlayers();
-        int pos = 0;
-        Player p = players.get(pos);
-        while ( p instanceof AIPlayer) {
-            pos++;
-            p = players.get(pos);
-        }
-        if(!(p instanceof AIPlayer)){
-                return p.getCards();
-            }
-            throw new InGameException("The player required does not exists");
-        }
-
-    public int getOpponentHand(){
-            List<Player> players = this.model.getPlayers();
-            int pos = 0;
-            Player p = players.get(pos);
-            while ( !(p instanceof AIPlayer)) {
-                pos++;
-                p = players.get(pos);
-            }
-            return p.getCards().size();
-        }
-
-    public List<Card> getCardsOnTable(){
-        return this.model.getCardsOnTable();
-    }
-
-    public boolean isDeckEmpty(){
-        return this.model.getDeck().isVoid();
-    }
-
-    private void aiPlay() {
-        try {
-            model.playTurn(((AIPlayer) this.model.getCurrentPlayer()).chooseCard(), this.model.getCurrentPlayer());
-        } catch (Exception e) {
-            this.error();
-            return;
-        }
-    }
-
-    private void play(Card card) {
-        try {
-            model.playTurn(this.model.getCurrentPlayer().playCard(card), this.model.getCurrentPlayer());
-        } catch (Exception e) {
-            this.error();
-            return;
-        }
-    }
 }

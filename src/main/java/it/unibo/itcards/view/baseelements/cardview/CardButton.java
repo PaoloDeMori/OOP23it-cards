@@ -1,7 +1,9 @@
 package it.unibo.itcards.view.baseelements.cardview;
 
 import javax.swing.*;
-import it.unibo.itcards.model.baseelements.cards.Card;
+
+import it.unibo.itcards.commons.Card;
+
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.Image;

@@ -1,5 +1,7 @@
 package it.unibo.itcards.model.baseelements.cards;
 
+import it.unibo.itcards.commons.Card;
+
 /**
  * Implementation of the abstract class Card.
  * 

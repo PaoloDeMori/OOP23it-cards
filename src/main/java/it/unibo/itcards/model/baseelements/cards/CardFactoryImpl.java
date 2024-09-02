@@ -1,5 +1,7 @@
 package it.unibo.itcards.model.baseelements.cards;
 
+import it.unibo.itcards.commons.Card;
+
 /**
  * An implementation of the CardFactory interface.
  * This class creates a new instance of the CardImpl class.

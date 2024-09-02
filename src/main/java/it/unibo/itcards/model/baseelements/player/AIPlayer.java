@@ -1,9 +1,13 @@
 package it.unibo.itcards.model.baseelements.player;
 
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.cards.Card;
 
-public interface AIPlayer extends Player {
+public abstract class AIPlayer extends PlayerImpl {
+
+    public AIPlayer(String name, int maxNumberOfCards) {
+        super(name, maxNumberOfCards);
+    }
 
     /**
      * This method set the game environment in wich the aiplayer is playing.
@@ -11,13 +15,18 @@ public interface AIPlayer extends Player {
      * 
      * @param game is the game to set,
      */
-    void setGame(Model game);
+    public abstract void setGame(Model game);
 
     /**
      * This method calculate the best card to play and returns it.
      * 
      * @return an instance of the class card that represents the best card to play.
      */
-    Card chooseCard();
+    public abstract Card chooseCard();
+
+    @Override
+    public boolean isAi(){
+        return true;
+    }
 
 }

@@ -1,5 +1,7 @@
 package it.unibo.itcards.model.baseelements.cards;
 
+import it.unibo.itcards.commons.Card;
+
 /**
  * Helper class for the class Card.
  */
@@ -21,7 +23,7 @@ public final class Cards {
      * @return true if c1 has a greater numerical value and the same suit as c2
      */
     public static boolean isGreater(final Card c1, final Card c2) {
-        return c1.getValue() > c2.getValue() && c1.getSuit().equals(c2.getSuit());
+        return (c1.getValue() > c2.getValue() && c1.getSuit().equals(c2.getSuit()));
     }
 
     /**

@@ -3,10 +3,11 @@ package it.unibo.itcards.model.baseelements.player;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import it.unibo.itcards.commons.Card;
+
 import java.util.List;
 import java.util.Optional;
-
-import it.unibo.itcards.model.baseelements.cards.Card;
 
 /**
  * This class implements the player interface and represent a human player.
@@ -159,4 +160,22 @@ public class PlayerImpl implements Player {
         this.playedCards.add(card);
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+    /**
+     * Sets the hand of the player
+     * @param hand
+     */
+    public void setHand(List<Card> hand){
+        for(Card card : hand){
+            cards.add(card);
+        }
+    }
+
+    @Override
+    public boolean isAi() {
+       return false;
+    }
 }
