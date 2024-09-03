@@ -10,6 +10,7 @@ import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.baseelements.cards.CardFactory;
 import it.unibo.itcards.model.baseelements.cards.CardFactoryImpl;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -76,10 +77,10 @@ public class DifficultBriscolaAITest {
         difficultBriscolaAIPlayer.drawCard(card6);
         difficultBriscolaAIPlayer.setGame(briscolaGame);
         assertEquals(card4, difficultBriscolaAIPlayer.chooseCard());
-        briscolaGame.setPlayedCards(List.of(card1));
+        briscolaGame.setPlayedCards(new ArrayList<>(List.of(card1)));
         assertEquals(card6, difficultBriscolaAIPlayer.chooseCard());
         briscolaGame.clearPlayedCards();
-        briscolaGame.setPlayedCards(List.of(card3));
+        briscolaGame.setPlayedCards(new ArrayList<>(List.of(card3)));
         assertEquals(card4, difficultBriscolaAIPlayer.chooseCard());
 
 }

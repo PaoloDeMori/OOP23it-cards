@@ -59,13 +59,13 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
         }
         switch (card.getValue()) {
             case 1:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? 10 - value : 0);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? 10 - value : 0);
             case 2:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? 19 - value : 9 - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? 19 - value : 9 - value);
             case 3:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? 11 - value : 1 - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? 11 - value : 1 - value);
             default:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? (22 - card.getValue()) - value
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? (22 - card.getValue()) - value
                         : (12 - card.getValue()) - value);
         }
     }
