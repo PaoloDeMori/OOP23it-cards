@@ -17,23 +17,23 @@ public class BriscolaImpl extends Model {
     private Card briscola;
     private List<Card> playedCards;
     private PlayerIterator iterator;
-    
 
     /**
      * Constructor which initializes the BriscolaImpl object
      * with an empty ArrayList of playedCards.
      */
-    public BriscolaImpl(Player player , Player bot) {
+    public BriscolaImpl(Player player, Player bot) {
         super();
         this.playedCards = new ArrayList<>();
         this.iterator = new PlayerIterator(players);
-        setPlayer(player , bot);
+        setPlayer(player, bot);
     }
 
-    private void setPlayer(Player player , Player bot){
+    private void setPlayer(Player player, Player bot) {
         players.add(player);
         players.add(bot);
     }
+
     /**
      * Returns the list of cards currently on the table.
      * This includes the Briscola card followed by the cards played by the players.
@@ -96,14 +96,14 @@ public class BriscolaImpl extends Model {
      */
     @Override
     public void playTurn(Card card, Player player) {
-        if(player != currentPlayer){
+        if (player != currentPlayer) {
             throw new IllegalStateException("It's not your turn");
         }
         if (playedCards.size() < 1) {
             playedCards.add(card);
             currentPlayer.addPlayedCard(card);
             currentPlayer = iterator.next();
-            
+
         } else {
             playedCards.add(card);
             player.addPlayedCard(card);
@@ -114,7 +114,7 @@ public class BriscolaImpl extends Model {
             playedCards.clear();
             this.giveCards();
         }
-        /*this.notifyObserver();*/
+        /* this.notifyObserver(); */
 
     }
 
@@ -143,17 +143,18 @@ public class BriscolaImpl extends Model {
     @Override
     public void start() {
         Optional<Card> card = this.deck.drawCard();
-        players.stream().filter(player -> player instanceof AIPlayer).map(player-> (AIPlayer) player).forEach(player->player.setGame(this));
+        players.stream().filter(player -> player instanceof AIPlayer).map(player -> (AIPlayer) player)
+                .forEach(player -> player.setGame(this));
         if (card.isPresent()) {
             setBriscola(card.get());
         } else {
             throw new InGameException("Deck is empty");
         }
         iterator.setWinnerPlayer(players.get(0));
-        this.currentPlayer=players.get(0);
-            for (int i = 0; i < 3; i++) {
-                this.giveCards();
-            }
+        this.currentPlayer = players.get(0);
+        for (int i = 0; i < 3; i++) {
+            this.giveCards();
+        }
     }
 
     /**
@@ -223,6 +224,25 @@ public class BriscolaImpl extends Model {
     }
 
     /**
+     * Determines the player with the highest points.
+     *
+     * @return the player with the highest points
+     */
+    public Player winnePlayer() {
+        Player winner = null;
+        for (var player : players) {
+            if (winner == null) {
+                winner = player;
+            } else {
+                if (this.points(player) > this.points(winner)) {
+                    winner = player;
+                }
+            }
+        }
+        return winner;
+    }
+
+    /**
      * Sets the Briscola card for the game.
      * 
      * @param briscolaCard the card to be set as the Briscola.
@@ -257,6 +277,5 @@ public class BriscolaImpl extends Model {
     public void setIterator(PlayerIterator iterator) {
         this.iterator = iterator;
     }
-
 
 }
