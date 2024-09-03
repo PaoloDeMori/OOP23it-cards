@@ -11,10 +11,8 @@ import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.baseelements.cards.CardFactory;
 import it.unibo.itcards.model.baseelements.cards.CardFactoryImpl;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -100,10 +98,26 @@ public class BriscolaImplTest {
         }
     }
 
+    /**
+     * Tests the correct implementation of the method that retrieves the cards 
+     * currently on the table.
+     *
+     * @return none
+     */
     @Test
     void testGetCardsOnTable() {
-
-        
+        Card briscola =cardFactory.buildCard(Suit.BASTONI, 5); 
+        briscolaGame.setBriscola(briscola);
+        final Card card1 = cardFactory.buildCard(Suit.DENARI, 10);
+        final Card card2 = cardFactory.buildCard(Suit.BASTONI, 9);
+        List<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        briscolaGame.setPlayedCards(cards);
+        assertEquals(3, briscolaGame.getCardsOnTable().size());
+        assertEquals(briscola, briscolaGame.getCardsOnTable().get(0));
+        assertEquals(card1, briscolaGame.getCardsOnTable().get(1));
+        assertEquals(card2, briscolaGame.getCardsOnTable().get(2));
     }
 
 
