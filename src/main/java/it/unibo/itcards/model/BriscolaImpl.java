@@ -138,6 +138,7 @@ public class BriscolaImpl extends Model {
      * Starts the game by drawing the first card from the deck and setting it as the
      * Briscola.
      * Throws an exception if the deck is empty.
+     * @throws InGameException if the deck is empty
      */
     @Override
     public void start() {
