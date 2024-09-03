@@ -2,7 +2,7 @@ package it.unibo.itcards.model.baseelements.player;
 
 import java.util.ArrayList;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
 
 /**
  * A representation of the playable cards of a player.

@@ -9,8 +9,8 @@
     import org.junit.jupiter.api.BeforeEach;
     import org.junit.jupiter.api.Test;
 
-    import it.unibo.itcards.model.baseelements.cards.Card;
-    import it.unibo.itcards.model.baseelements.deck.Deck;
+import it.unibo.itcards.commons.Card;
+import it.unibo.itcards.model.baseelements.deck.Deck;
     import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
     import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
     import it.unibo.itcards.model.baseelements.player.Player;

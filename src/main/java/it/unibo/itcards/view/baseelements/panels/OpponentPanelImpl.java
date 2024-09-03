@@ -25,6 +25,7 @@ public class OpponentPanelImpl extends OpponentPanel {
 
     @Override
     public void setOpponentCards(int n) {
+        this.removeAll();
         for (int i = 0; i < n; i++) {
             this.add(factory.build());
             revalidate();

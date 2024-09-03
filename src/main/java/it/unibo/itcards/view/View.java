@@ -1,7 +1,7 @@
 package it.unibo.itcards.view;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
-import it.unibo.itcards.observerpattern.Observer;
+import it.unibo.itcards.commons.Card;
+import it.unibo.itcards.commons.Observer;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import java.util.List;
 public interface View extends Observer{
 
     void show();
+
+    void start();
 
     void stop();
 

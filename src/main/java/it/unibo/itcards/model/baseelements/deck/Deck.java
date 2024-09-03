@@ -1,7 +1,9 @@
 package it.unibo.itcards.model.baseelements.deck;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
 import java.util.Optional;
+
+import it.unibo.itcards.commons.Card;
+
 import java.util.List;
 
 /**

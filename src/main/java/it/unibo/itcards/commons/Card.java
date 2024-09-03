@@ -1,4 +1,6 @@
-package it.unibo.itcards.model.baseelements.cards;
+package it.unibo.itcards.commons;
+
+import it.unibo.itcards.model.baseelements.cards.Suit;
 
 /**
  * Represent traditional Italian playing cards.

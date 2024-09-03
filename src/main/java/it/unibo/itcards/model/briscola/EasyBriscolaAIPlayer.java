@@ -1,15 +1,15 @@
 package it.unibo.itcards.model.briscola;
 
 import java.util.List;
+
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.cards.Card;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
-import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 
-public class EasyBriscolaAIPlayer extends PlayerImpl implements AIPlayer {
+public class EasyBriscolaAIPlayer extends AIPlayer {
 
     private BriscolaImpl game;
 

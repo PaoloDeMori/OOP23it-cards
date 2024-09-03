@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import it.unibo.itcards.model.baseelements.cards.Card;
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.baseelements.cards.CardFactory;
 import it.unibo.itcards.model.baseelements.cards.CardFactoryImpl;
 import it.unibo.itcards.model.baseelements.cards.Suit;

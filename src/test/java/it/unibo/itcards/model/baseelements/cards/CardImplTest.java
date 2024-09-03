@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.itcards.commons.Card;
+
 /**
  * Test the correct implementation of the class CardImpl.
  */

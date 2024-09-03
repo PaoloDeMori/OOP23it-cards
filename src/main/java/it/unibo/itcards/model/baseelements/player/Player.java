@@ -2,8 +2,10 @@ package it.unibo.itcards.model.baseelements.player;
 
 import java.util.List;
 import java.util.Set;
+
+import it.unibo.itcards.commons.Card;
+
 import java.util.Optional;
-import it.unibo.itcards.model.baseelements.cards.Card;
 
 /**
  * Represents a player of a card game.
@@ -92,4 +94,10 @@ public interface Player {
      * @param card the card to add
      */
     void addPlayedCard(Card card);
+
+    boolean isAi();
+
+    Card chooseCard()  throws InvalidOperationException;
+
+    public void selectCard(Card card);
 }

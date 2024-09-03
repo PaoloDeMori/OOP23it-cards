@@ -3,10 +3,11 @@ package it.unibo.itcards.model.baseelements.player;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import it.unibo.itcards.commons.Card;
+
 import java.util.List;
 import java.util.Optional;
-
-import it.unibo.itcards.model.baseelements.cards.Card;
 
 /**
  * This class implements the player interface and represent a human player.
@@ -19,6 +20,7 @@ public class PlayerImpl implements Player {
     private final Hand cards;
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
+    private Card selectedCard = null;
 
     /**
      * Constructor of this class that sets the name and the maximum number of
@@ -171,5 +173,18 @@ public class PlayerImpl implements Player {
         for(Card card : hand){
             cards.add(card);
         }
+    }
+
+    @Override
+    public boolean isAi() {
+       return false;
+    }
+
+    public void selectCard(Card card){
+        this.selectedCard=card;
+    }
+
+    public Card chooseCard() throws InvalidOperationException{
+       return this.playCard(selectedCard);
     }
 }
