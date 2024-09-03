@@ -121,14 +121,14 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
                 cardToPlay = hand.stream()
                         .filter((card) -> card.getSuit() == this.game.getBriscola().getSuit()
                                 && BriscolaHelper.getCardValue(card) == 0)
-                        .min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
+                        .max((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
                 return cardToPlay;
             } else if (hand.stream().anyMatch((card) -> BriscolaHelper.getCardValue(card) <= 4
                     && card.getSuit() == this.game.getBriscola().getSuit())) {
                 cardToPlay = hand.stream()
                         .filter((card) -> card.getSuit() != this.game.getBriscola().getSuit()
                                 && BriscolaHelper.getCardValue(card) <= 4)
-                        .min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
+                        .max((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
                 return cardToPlay;
             }
         } else if (hand.stream().anyMatch((card) -> card.getSuit() != this.game.getBriscola().getSuit())) {

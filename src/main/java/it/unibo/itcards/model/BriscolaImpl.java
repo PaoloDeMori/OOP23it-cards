@@ -268,6 +268,18 @@ public class BriscolaImpl extends Model {
     }
     
     /**
+     * Clears the list of played cards in the game.
+     * 
+     * This method resets the played cards to an empty list, effectively clearing
+     * all cards that have been played.
+     * 
+     * @return  no return value
+     */
+    public void clearPlayedCards() {
+        this.playedCards.clear();
+    }
+
+    /**
      * Returns the number of players in the game.
      *
      * @return the number of players
@@ -284,7 +296,7 @@ public class BriscolaImpl extends Model {
     public void setPlayedCards(List<Card> playedCards) {
         this.playedCards = playedCards;
     }
-    
+
     /**
      * Returns the PlayerIterator object associated with the game.
      *
