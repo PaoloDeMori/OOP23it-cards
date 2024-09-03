@@ -139,7 +139,6 @@ public class BriscolaImpl extends Model {
      * Briscola.
      * Throws an exception if the deck is empty.
      */
-    @SuppressWarnings("unused")
     @Override
     public void start() {
         Optional<Card> card = this.deck.drawCard();
