@@ -257,23 +257,48 @@ public class BriscolaImpl extends Model {
     public Card getBriscola() {
         return briscola;
     }
-
+    
+    /**
+     * Returns a list of all the cards that have been played in the game.
+     *
+     * @return  a list of played cards
+     */
     public List<Card> playedCards() {
         return playedCards;
     }
-
+    
+    /**
+     * Returns the number of players in the game.
+     *
+     * @return the number of players
+     */
     public static int getNumberOfPlayers() {
         return NUMBER_OF_PLAYERS;
     }
 
+    /**
+     * Sets the list of played cards for the game.
+     *
+     * @param playedCards the list of cards that have been played
+     */
     public void setPlayedCards(List<Card> playedCards) {
         this.playedCards = playedCards;
     }
-
+    
+    /**
+     * Returns the PlayerIterator object associated with the game.
+     *
+     * @return the PlayerIterator object
+     */
     public PlayerIterator getIterator() {
         return iterator;
     }
 
+    /**
+     * Sets the PlayerIterator object associated with the game.
+     *
+     * @param iterator  the PlayerIterator object to be set
+     */
     public void setIterator(PlayerIterator iterator) {
         this.iterator = iterator;
     }

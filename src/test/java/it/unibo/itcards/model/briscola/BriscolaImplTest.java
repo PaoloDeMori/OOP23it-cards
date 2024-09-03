@@ -100,6 +100,13 @@ public class BriscolaImplTest {
         }
     }
 
+    @Test
+    void testGetCardsOnTable() {
+
+        
+    }
+
+
     /**
      * Tests the correct implementation of the method that determines the winner of
      * a game.
