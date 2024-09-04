@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 import it.unibo.itcards.commons.Card;
-import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
+import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
+
 import java.util.stream.*;;
 
 /**
@@ -241,23 +242,27 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * and the cards that have been played.
      *
      * @return the best card to play
+     * @throws InvalidOperationException 
      */
     @Override
-    public Card chooseCard() {
+    public Card chooseCard() throws InvalidOperationException {
         List<Card> hand = getCards();
+        Card cardToPlay;
         if (this.game.playedCards().size() == 0) {
             if (hand.stream().anyMatch((card) -> card.getSuit() == this.game.getBriscola().getSuit())) {
-                return this.chooseCardToPlayWithBriscola(hand);
+                cardToPlay = this.chooseCardToPlayWithBriscola(hand);
             } else {
-                return this.chooseCardToPlayWithoutBriscola(hand);
+                cardToPlay = this.chooseCardToPlayWithoutBriscola(hand);
             }
         } else {
             if (this.game.playedCards().get(0).getSuit() != this.game.getBriscola().getSuit()) {
-                return this.chooseCardToPlayAgainst(hand, this.game.playedCards().get(0));
+                cardToPlay = this.chooseCardToPlayAgainst(hand, this.game.playedCards().get(0));
             } else {
-                return this.chooseCardToPlayAgainstWithBriscola(hand, this.game.playedCards().get(0));
+                cardToPlay = this.chooseCardToPlayAgainstWithBriscola(hand, this.game.playedCards().get(0));
             }
         }
+        playCard(cardToPlay);
+        return cardToPlay;
     }
 
 }

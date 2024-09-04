@@ -3,7 +3,6 @@ package it.unibo.itcards.model.briscola;
 import java.util.List;
 
 import it.unibo.itcards.commons.Card;
-import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;

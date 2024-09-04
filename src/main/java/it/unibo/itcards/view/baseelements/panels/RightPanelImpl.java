@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class RightPanelImpl extends LateralPanel {
+    JLabel bot = new JLabel();
+    JLabel player = new JLabel();
+
 
     /**
      * RightPanelImpl
@@ -27,7 +30,7 @@ public class RightPanelImpl extends LateralPanel {
         JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,5));
         botJPanel.setBackground(new Color(0,0,0,0));
-        JLabel bot = new JLabel();
+        bot.removeAll();
         bot.setText(Integer.toString(Botpoints));
         bot.setFont( new Font("Arial", Font.BOLD, 40) );
         bot.setBackground(new Color(0,0,0,0));
@@ -37,7 +40,7 @@ public class RightPanelImpl extends LateralPanel {
         JPanel playerJPanel = new JPanel();
         playerJPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,5));
         playerJPanel.setBackground(new Color(0,0,0,0));
-        JLabel player = new JLabel();
+        player.removeAll();
         player.setText(Integer.toString(Playerpoints));
         player.setFont( new Font("Arial", Font.BOLD, 40) );
         player.setBackground(new Color(0,0,0,0));
@@ -46,6 +49,7 @@ public class RightPanelImpl extends LateralPanel {
         this.add(playerJPanel , BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
+        return;
     }
 
     @Override

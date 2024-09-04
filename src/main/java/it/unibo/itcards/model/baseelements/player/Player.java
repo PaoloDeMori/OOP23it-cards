@@ -100,4 +100,8 @@ public interface Player {
     Card chooseCard()  throws InvalidOperationException;
 
     public void selectCard(Card card);
+
+    public void setPoints(int points);
+
+    public int getPoints();
 }

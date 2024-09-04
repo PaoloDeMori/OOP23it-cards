@@ -1,6 +1,5 @@
 package it.unibo.itcards.model.briscola;
 import it.unibo.itcards.commons.Card;
-import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
@@ -58,9 +57,10 @@ public class DifficultBriscolaAITest {
      * from its hand.
      *
      * @return  the result of the assertEquals method
+     * @throws InvalidOperationException 
      */
     @Test
-    public void testChooseCard() {
+    public void testChooseCard() throws InvalidOperationException {
         final Card card0 = cardFactory.buildCard(Suit.SPADE, 5);
         briscolaGame.setBriscola(card0);
         final Card card1 = cardFactory.buildCard(Suit.DENARI, 5);
@@ -85,7 +85,7 @@ public class DifficultBriscolaAITest {
 
 }
 
-public static void main(String[] args) {
+public static void main(String[] args) throws InvalidOperationException {
     DifficultBriscolaAITest test = new DifficultBriscolaAITest();
     test.init();
     test.testChooseCard();

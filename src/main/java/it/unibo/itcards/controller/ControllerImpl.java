@@ -52,7 +52,8 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void playturn(Card card) {
-        do { this.model.getCurrentPlayer().selectCard(card);
+        this.model.getCurrentPlayer().selectCard(card);
+        do {
             if (this.model.isGameOver()) {
                 this.model.notifyObserver();
                 this.end();
@@ -60,7 +61,6 @@ public class ControllerImpl implements Controller {
                 this.play(card);
             }
         } while (this.model.getCurrentPlayer().isAi());
-        this.model.notifyObserver();
     }
 
     /**

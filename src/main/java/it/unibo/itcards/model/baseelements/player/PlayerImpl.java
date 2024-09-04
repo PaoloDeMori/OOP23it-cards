@@ -21,6 +21,15 @@ public class PlayerImpl implements Player {
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
     private Card selectedCard = null;
+    private int points=0;
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getPoints() {
+        return points;
+    }
 
     /**
      * Constructor of this class that sets the name and the maximum number of
