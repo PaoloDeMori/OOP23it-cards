@@ -1,9 +1,12 @@
 package it.unibo.itcards.view.baseelements;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
 import it.unibo.itcards.controller.ControllerImpl;
+import it.unibo.itcards.model.Audio.Audio;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.BriscolaImpl;
@@ -20,6 +23,7 @@ import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +49,7 @@ public class MainFrame extends JFrame implements View {
                 .addCentralPanel(new CentralPanelImpl())
                 .build();
 
+        this.setMusic();
         this.add(mainpanel);
         this.controller = controller;
     }
@@ -53,6 +58,14 @@ public class MainFrame extends JFrame implements View {
     public void setHand(List<Card> cards) {
         List<CardButton> panels = createCardButtons(cards);
         mainpanel.setHand(panels);
+    }
+
+    public void setMusic(){
+        JButton button = new JButton("Start/Stop music");
+        button.addActionListener(e -> {
+                this.controller.startAudio();
+        });
+        this.mainpanel.setMusicButtons(button);
     }
 
     private List<CardButton> createCardButtons(List<Card> cards) {
@@ -163,9 +176,9 @@ public class MainFrame extends JFrame implements View {
         this.mainpanel.setNames(botName, playerName);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         Controller controller = new ControllerImpl();
-        MainFrame mainframe = new MainFrame(Dim.LARGE, controller);
+        MainFrame mainframe = new MainFrame(Dim.MEDIUM, controller);
         BriscolaImpl briscola = new BriscolaImpl(new PlayerImpl("gino", 3), new DifficultBriscolaAIPlayer("bot", 3));
         controller.init(briscola, mainframe);
         briscola.start();

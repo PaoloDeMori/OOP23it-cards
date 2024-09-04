@@ -2,6 +2,8 @@ package it.unibo.itcards.view.baseelements.mainpanel;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import it.unibo.itcards.commons.Card;
@@ -17,6 +19,8 @@ import java.util.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.Graphics;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
 
 public class MainPanel extends JPanel{
     private final Dimension handPanelDimension;
@@ -88,6 +92,14 @@ public class MainPanel extends JPanel{
         else{
             throw new IllegalArgumentException("The position must be 'left' or 'right'");
         }
+    }
+
+    public void setMusicButtons(JButton jbutton){
+        JPanel jpanel = new JPanel();
+        jpanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,(int)this.lateralPanelDimension.getHeight()/6));
+        jpanel.setBackground(new Color(0,0,0,0));
+        jpanel.add(jbutton);
+        this.leftPanel.setCenter(jpanel);
     }
 
 

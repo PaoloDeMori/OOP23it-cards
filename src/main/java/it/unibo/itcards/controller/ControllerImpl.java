@@ -173,4 +173,16 @@ public class ControllerImpl implements Controller {
     public List<Player> getPlayers() {
         return this.model.getPlayers();
     }
+
+    @Override
+    public void startAudio() {
+        this.model.startAudio();
+    }
+
+    @Override
+    public void stopAudio() {
+        this.model.stopAudio();
+    }
+
+    
 }
