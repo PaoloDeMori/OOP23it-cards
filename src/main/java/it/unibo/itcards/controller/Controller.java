@@ -55,4 +55,7 @@ public interface Controller {
 
     List<Player> getPlayers();
 
+    void startAudio();
+
+    void stopAudio();
 }

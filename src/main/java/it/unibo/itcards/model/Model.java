@@ -1,11 +1,16 @@
 package it.unibo.itcards.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.commons.Observable;
 import it.unibo.itcards.commons.Observer;
+import it.unibo.itcards.model.Audio.Audio;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.Player;
@@ -16,6 +21,7 @@ public abstract class Model implements Observable{
     List<Player> players;
     Player currentPlayer;
     List<Observer> observers = new ArrayList<>();
+    Audio audio;
 
     /**
      * Constructs a new model with a shuffled deck.
@@ -23,6 +29,13 @@ public abstract class Model implements Observable{
     public Model() {
         this.deck = ShuffledDeckFactoryImpl.buildDeck();
         this.players = new ArrayList<>();
+        try {
+            audio = new Audio();
+            audio.start();
+        } catch (Exception e) {
+            audio=null;
+            e.printStackTrace();
+        }
     }
 
     public abstract void playTurn(Card card, Player player);
@@ -117,4 +130,14 @@ public abstract class Model implements Observable{
         this.observers = observers;
     }
 
+    public void startAudio() {
+        if (audio != null) {
+            audio.start();
+        }
+    }
+    public void stopAudio() {
+        if (audio != null) {
+            audio.stop();
+        }
+    }
 }

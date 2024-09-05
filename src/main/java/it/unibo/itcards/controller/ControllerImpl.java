@@ -36,7 +36,7 @@ public class ControllerImpl implements Controller {
     public void start() {
         model.start();
         if (this.model.getCurrentPlayer().isAi()) {
-            this.aiPlay();
+            this.play(null);
         }
     }
 
@@ -52,21 +52,15 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void playturn(Card card) {
+        this.model.getCurrentPlayer().selectCard(card);
         do {
             if (this.model.isGameOver()) {
                 this.model.notifyObserver();
                 this.end();
             } else {
-                if (this.model.getCurrentPlayer().isAi()) {
-                    this.aiPlay();
-                }
-
-                else {
-                    this.play(card);
-                }
+                this.play(card);
             }
         } while (this.model.getCurrentPlayer().isAi());
-        this.model.notifyObserver();
     }
 
     /**
@@ -153,22 +147,6 @@ public class ControllerImpl implements Controller {
     }
 
     /**
-     * Handle what happens when an AI has to play
-     * When an AI player has to play, this method is called, this calls the playturn
-     * method of the model
-     * using the chooseCard method of the AIPlayer interface, to play in the model
-     * the card the ai decided to play.
-     */
-    private void aiPlay() {
-        try {
-            model.playTurn(((AIPlayer) this.model.getCurrentPlayer()).chooseCard(), this.model.getCurrentPlayer());
-        } catch (Exception e) {
-            this.error();
-            return;
-        }
-    }
-
-    /**
      * Handles what happens when the game ends.
      */
     private void end() {
@@ -184,7 +162,7 @@ public class ControllerImpl implements Controller {
      */
     private void play(Card card) {
         try {
-            model.playTurn(this.model.getCurrentPlayer().playCard(card), this.model.getCurrentPlayer());
+            model.playTurn(this.model.getCurrentPlayer().chooseCard(), this.model.getCurrentPlayer());
         } catch (Exception e) {
             this.error();
             return;
@@ -195,4 +173,16 @@ public class ControllerImpl implements Controller {
     public List<Player> getPlayers() {
         return this.model.getPlayers();
     }
+
+    @Override
+    public void startAudio() {
+        this.model.startAudio();
+    }
+
+    @Override
+    public void stopAudio() {
+        this.model.stopAudio();
+    }
+
+    
 }

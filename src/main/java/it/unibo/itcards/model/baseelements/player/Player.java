@@ -97,7 +97,12 @@ public interface Player {
 
     boolean isAi();
 
-    int getPoints();
+    Card chooseCard()  throws InvalidOperationException;
 
-    void setPoints(int points);
+    public void selectCard(Card card);
+
+    public void setPoints(int points);
+
+    public int getPoints();
+
 }

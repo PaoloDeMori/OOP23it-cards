@@ -4,11 +4,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.view.baseelements.cardview.CardFactory;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
-import it.unibo.itcards.view.baseelements.cardview.CardPanel;
-
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,7 +29,7 @@ public class CentralPanelImpl extends CentralPanel{
     }
 
     @Override
-    public void setCardsOnTable(List<CardPanel> cards) {
+    public void setCardsOnTable(List<JPanel> cards) {
         leftPanel.removeAll();
         if(briscola==null){
             briscola = cards.get(0);
@@ -76,5 +73,5 @@ public class CentralPanelImpl extends CentralPanel{
         this.revalidate();
         this.repaint();
     }
-
+    
 }

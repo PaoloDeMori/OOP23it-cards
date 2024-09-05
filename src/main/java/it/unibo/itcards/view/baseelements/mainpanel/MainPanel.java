@@ -2,10 +2,14 @@ package it.unibo.itcards.view.baseelements.mainpanel;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
+import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
+import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
 import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.LateralPanel;
@@ -15,11 +19,16 @@ import java.util.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.Graphics;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
 
 public class MainPanel extends JPanel{
     private final Dimension handPanelDimension;
     private final Dimension lateralPanelDimension;
     private final Dimension upPanelDimension;
+    private final Dimension centralPanelDImension;
+
+
     private HandPanel handPanel;
     private OpponentPanel opponentPanel;
     private CentralPanel centralPanel;
@@ -41,6 +50,7 @@ public class MainPanel extends JPanel{
         this.handPanelDimension = new Dimension(this.getWidth(), this.getHeight() / HAND_PANEL_RATIO);
         this.lateralPanelDimension = new Dimension(this.getWidth() / LATERAL_PANEL_RATIO, this.getHeight());
         this.upPanelDimension = new Dimension(this.getWidth() , this.getHeight()/ OPPONENT_PANEL_RATIO);
+        this.centralPanelDImension=new Dimension((int)(this.getWidth()-(lateralPanelDimension.getWidth()*2)),(int)(this.getHeight()-(this.handPanelDimension.getHeight()+this.upPanelDimension.getHeight())));
         try {
             backgroundImage=ImagesHelper.loadImage("green");
         } catch (IOException e) {
@@ -65,7 +75,7 @@ public class MainPanel extends JPanel{
 
     public void setCentralPanel(CentralPanel centralPanel){
         this.centralPanel = centralPanel;
-        this.centralPanel.init(lateralPanelDimension);
+        this.centralPanel.init(centralPanelDImension);
         this.add(centralPanel,BorderLayout.CENTER);
     }
 
@@ -82,6 +92,14 @@ public class MainPanel extends JPanel{
         else{
             throw new IllegalArgumentException("The position must be 'left' or 'right'");
         }
+    }
+
+    public void setMusicButtons(JButton jbutton){
+        JPanel jpanel = new JPanel();
+        jpanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,(int)this.lateralPanelDimension.getHeight()/6));
+        jpanel.setBackground(new Color(0,0,0,0));
+        jpanel.add(jbutton);
+        this.leftPanel.setCenter(jpanel);
     }
 
 
@@ -105,6 +123,22 @@ public class MainPanel extends JPanel{
         this.rightPanel.setPoints(botPoints,playerPoint);
     }
 
+    public void setCardsOnTable(List<Card> cards){
+
+        List<JPanel> panels=new ArrayList<>();
+        panels.add(StaticCardFactory.build(cards.get(0),new Dimension((int)(this.centralPanelDImension.getWidth()/5),(int)(this.centralPanelDImension.getHeight()/5))));
+        for(int i=1; i<cards.size();i++){
+            if(cards.get(i)!=null){
+                panels.add(StaticCardFactory.build(cards.get(i),new Dimension((int)(this.centralPanelDImension.getWidth()/5),(int)(this.centralPanelDImension.getHeight()/5))));
+            }
+        }
+        this.centralPanel.setCardsOnTable(panels);
+    }
+
+    public void setDeck(boolean isPresent){
+        this.centralPanel.setDeck(isPresent);
+    }
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (backgroundImage != null) {
@@ -112,5 +146,8 @@ public class MainPanel extends JPanel{
         }
     }
 
+    public Dimension getCentralPanelDImension() {
+        return centralPanelDImension;
+    }
 
 }

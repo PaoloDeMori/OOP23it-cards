@@ -1,7 +1,6 @@
 package it.unibo.itcards.model.briscola;
 
 import it.unibo.itcards.commons.Card;
-import it.unibo.itcards.model.baseelements.cards.Cards;
 
 public final class BriscolaHelper {
 
@@ -44,11 +43,8 @@ public final class BriscolaHelper {
         } else if (card2.getSuit().equals(briscola.getSuit()) && !(card1.getSuit().equals(briscola.getSuit()))) {
             return false;
         } else if (card1.getSuit().equals(card2.getSuit())) {
-            return Cards.isGreater(card1, card2);
+            return BriscolaHelper.getCardValue(card1)>BriscolaHelper.getCardValue(card2);
         }
-        
-
         return true;
-
     }
 }

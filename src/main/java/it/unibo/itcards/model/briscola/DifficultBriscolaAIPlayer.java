@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 import it.unibo.itcards.commons.Card;
-import it.unibo.itcards.model.BriscolaImpl;
 import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
+import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
+
 import java.util.stream.*;;
 
 /**
@@ -59,13 +60,13 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
         }
         switch (card.getValue()) {
             case 1:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? 10 - value : 0);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? 10 - value : 0);
             case 2:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? 19 - value : 9 - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? 19 - value : 9 - value);
             case 3:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? 11 - value : 1 - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? 11 - value : 1 - value);
             default:
-                return (card.getSuit() == this.game.getBriscola().getSuit() ? (22 - card.getValue()) - value
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? (22 - card.getValue()) - value
                         : (12 - card.getValue()) - value);
         }
     }
@@ -121,14 +122,14 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
                 cardToPlay = hand.stream()
                         .filter((card) -> card.getSuit() == this.game.getBriscola().getSuit()
                                 && BriscolaHelper.getCardValue(card) == 0)
-                        .min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
+                        .max((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
                 return cardToPlay;
             } else if (hand.stream().anyMatch((card) -> BriscolaHelper.getCardValue(card) <= 4
                     && card.getSuit() == this.game.getBriscola().getSuit())) {
                 cardToPlay = hand.stream()
                         .filter((card) -> card.getSuit() != this.game.getBriscola().getSuit()
                                 && BriscolaHelper.getCardValue(card) <= 4)
-                        .min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
+                        .max((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
                 return cardToPlay;
             }
         } else if (hand.stream().anyMatch((card) -> card.getSuit() != this.game.getBriscola().getSuit())) {
@@ -241,23 +242,27 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * and the cards that have been played.
      *
      * @return the best card to play
+     * @throws InvalidOperationException 
      */
     @Override
-    public Card chooseCard() {
+    public Card chooseCard() throws InvalidOperationException {
         List<Card> hand = getCards();
+        Card cardToPlay;
         if (this.game.playedCards().size() == 0) {
             if (hand.stream().anyMatch((card) -> card.getSuit() == this.game.getBriscola().getSuit())) {
-                return this.chooseCardToPlayWithBriscola(hand);
+                cardToPlay = this.chooseCardToPlayWithBriscola(hand);
             } else {
-                return this.chooseCardToPlayWithoutBriscola(hand);
+                cardToPlay = this.chooseCardToPlayWithoutBriscola(hand);
             }
         } else {
             if (this.game.playedCards().get(0).getSuit() != this.game.getBriscola().getSuit()) {
-                return this.chooseCardToPlayAgainst(hand, this.game.playedCards().get(0));
+                cardToPlay = this.chooseCardToPlayAgainst(hand, this.game.playedCards().get(0));
             } else {
-                return this.chooseCardToPlayAgainstWithBriscola(hand, this.game.playedCards().get(0));
+                cardToPlay = this.chooseCardToPlayAgainstWithBriscola(hand, this.game.playedCards().get(0));
             }
         }
+        playCard(cardToPlay);
+        return cardToPlay;
     }
 
 }

@@ -17,13 +17,6 @@ public abstract class AIPlayer extends PlayerImpl {
      */
     public abstract void setGame(Model game);
 
-    /**
-     * This method calculate the best card to play and returns it.
-     * 
-     * @return an instance of the class card that represents the best card to play.
-     */
-    public abstract Card chooseCard();
-
     @Override
     public boolean isAi(){
         return true;

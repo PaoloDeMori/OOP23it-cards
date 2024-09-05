@@ -21,7 +21,16 @@ public class PlayerImpl implements Player {
     private final Hand cards;
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
-    private int points;
+    private Card selectedCard = null;
+    private int points=0;
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getPoints() {
+        return points;
+    }
 
     /**
      * Constructor of this class that sets the name and the maximum number of
@@ -182,13 +191,11 @@ public class PlayerImpl implements Player {
        return false;
     }
 
-    @Override
-    public int getPoints() {
-        return this.points;
+    public void selectCard(Card card){
+        this.selectedCard=card;
     }
 
-    @Override
-    public void setPoints(int points) {
-        this.points = points; 
+    public Card chooseCard() throws InvalidOperationException{
+       return this.playCard(selectedCard);
     }
 }

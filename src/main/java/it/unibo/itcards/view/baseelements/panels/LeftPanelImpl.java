@@ -15,7 +15,7 @@ public class LeftPanelImpl extends LateralPanel {
     }
     @Override
     public void setCenter(JPanel panel) {
-
+        this.add(panel, BorderLayout.CENTER);
     }
     @Override
     /**

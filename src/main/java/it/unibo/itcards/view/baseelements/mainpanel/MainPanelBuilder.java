@@ -24,7 +24,7 @@ public class MainPanelBuilder {
         return this;
     }
 
-    public MainPanelBuilder addopponentPanel(OpponentPanel opponentPanel){
+    public MainPanelBuilder addOpponentPanel(OpponentPanel opponentPanel){
         this.opponentPanel=opponentPanel;
         return this;
     }
@@ -36,6 +36,10 @@ public class MainPanelBuilder {
 
     public MainPanelBuilder addRightPanel(LateralPanel rightLateralPanel){
         this.rightLateralPanel=rightLateralPanel;
+        return this;
+    }
+    public MainPanelBuilder addCentralPanel(CentralPanel centralPanel){
+        this.centralPanel=centralPanel;
         return this;
     }
 
@@ -55,6 +59,9 @@ public class MainPanelBuilder {
         }
         if (this.rightLateralPanel!=null){
             mainPanel.setLateralPanel(rightLateralPanel, BorderLayout.EAST);
+        }
+        if (this.centralPanel!=null){
+            mainPanel.setCentralPanel(centralPanel);
         }
         return mainPanel;
     }
