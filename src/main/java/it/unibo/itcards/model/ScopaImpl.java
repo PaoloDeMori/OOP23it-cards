@@ -54,14 +54,27 @@ public class ScopaImpl extends Model {
         throw new UnsupportedOperationException("Unimplemented method 'isGameOver'");
     }
 
+    public List<List<Card>> getSubsetsOnTable() {
+        List<List<Card>> subsetCollection = new ArrayList<>();
+        subsetCollection.add(new ArrayList<>());
+
+        for (Card card : getCardsOnTable()) {
+            int size = subsetCollection.size();
+            for(int i = 0; i < size; i++) {
+                List<Card> subset = new ArrayList<>(subsetCollection.get(i));
+                subset.add(card);
+                subsetCollection.add(subset);
+            }
+        }
+
+        return subsetCollection;
+    }
+
     @Override
     public boolean giveCards() {
         if (deck.isVoid()) {
             return false;
         }
-        //controllo che ci siano abbastanza carte TODO
-
-
         for(var Player : players){
             if(Player.getNumberOfCards()==0){
                 Optional<Card> card;

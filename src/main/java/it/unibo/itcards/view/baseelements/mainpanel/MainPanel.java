@@ -65,7 +65,7 @@ public class MainPanel extends JPanel{
 
     public void setCentralPanel(CentralPanel centralPanel){
         this.centralPanel = centralPanel;
-        this.centralPanel.init();
+        this.centralPanel.init(lateralPanelDimension);
         this.add(centralPanel,BorderLayout.CENTER);
     }
 
