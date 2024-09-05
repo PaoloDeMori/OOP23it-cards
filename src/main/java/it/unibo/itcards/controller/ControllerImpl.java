@@ -3,7 +3,6 @@ package it.unibo.itcards.controller;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 

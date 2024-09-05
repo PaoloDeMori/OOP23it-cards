@@ -6,7 +6,6 @@ import javax.swing.*;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
 import it.unibo.itcards.controller.ControllerImpl;
-import it.unibo.itcards.model.Audio.Audio;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.BriscolaImpl;
