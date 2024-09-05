@@ -8,7 +8,6 @@ import it.unibo.itcards.model.baseelements.player.AIPlayer;
 public class AIScopaEasy extends AIPlayer {
 
     private ScopaImpl game;
-    
 
     public AIScopaEasy(String name, int maxNumberOfCards) {
         super(name, maxNumberOfCards);
