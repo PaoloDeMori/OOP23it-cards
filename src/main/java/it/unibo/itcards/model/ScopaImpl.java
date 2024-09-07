@@ -1,12 +1,15 @@
 package it.unibo.itcards.model;
 
 
+import static java.util.stream.Collectors.toSet;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+import java.util.Comparator;
+
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
@@ -14,7 +17,8 @@ import it.unibo.itcards.model.baseelements.player.Player;
 
 public class ScopaImpl extends Model {
     private List<Card> cardsOnTable;
-    private Map<Player, Set<Card>> scope; 
+    private Map<Player, Integer> scope;
+    //private Map<Player, Set<Card>> scope; 
 
     public ScopaImpl(Player player , Player bot){
         super();
@@ -54,21 +58,6 @@ public class ScopaImpl extends Model {
         throw new UnsupportedOperationException("Unimplemented method 'isGameOver'");
     }
 
-    public List<List<Card>> getSubsetsOnTable() {
-        List<List<Card>> subsetCollection = new ArrayList<>();
-        subsetCollection.add(new ArrayList<>());
-
-        for (Card card : getCardsOnTable()) {
-            int size = subsetCollection.size();
-            for(int i = 0; i < size; i++) {
-                List<Card> subset = new ArrayList<>(subsetCollection.get(i));
-                subset.add(card);
-                subsetCollection.add(subset);
-            }
-        }
-
-        return subsetCollection;
-    }
 
     @Override
     public boolean giveCards() {
@@ -92,31 +81,111 @@ public class ScopaImpl extends Model {
         return true; 
     }
 
-    @Override
-    public int points(Player player) {
-        //for(var card : player.getWonCards())
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'points'");
+
+    private List<List<Card>> getSubsetsOnTable() {
+        List<List<Card>> subsetCollection = new ArrayList<>();
+        subsetCollection.add(new ArrayList<>());
+
+        for (Card card : getCardsOnTable()) {
+            for (int i = 0; i < subsetCollection.size(); i++) {
+                List<Card> subset = new ArrayList<>(subsetCollection.get(i));
+                subset.add(card);
+                if (subset.stream().mapToInt(oneCard -> oneCard.getValue()).sum() <= Card.MAX_NUMERICAL_VALUE) {
+                    subsetCollection.add(subset);
+                }
+            }
+        }
+
+        return subsetCollection.stream().sorted((l1, l2) -> l1.size() - l2.size()).toList();
     }
 
-    public void winnerRound(Card playedCard){
-        //controllo carte sul tavolo
-        //Se c'è una sola carta aggiorno scope
-        //se posso prendere aggiorno wonCards 
-        //altrimenti aggiorno carte sul tavolo
+
+    private List<List<Card>> getShortestSubsets(int cardPlayedValue) {
+        List<List<Card>> shortestSubsets = new ArrayList<>();
+        for (List<Card> subset : getSubsetsOnTable()) {
+            if (subset.stream().mapToInt(card -> card.getValue()).sum() == cardPlayedValue &&
+                    (shortestSubsets.isEmpty() || shortestSubsets.get(0).size() == subset.size())) {
+
+                shortestSubsets.add(subset);
+            }
+        }
+
+        if (shortestSubsets.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return shortestSubsets;
+    }
+
+    public void playRound(Card playedCard){
+        Player player = getCurrentPlayer();
+        List<List<Card>> takingPossibility = getShortestSubsets(playedCard.getValue());
         
-        
+        if (takingPossibility.isEmpty()){
+            this.cardsOnTable.add(playedCard);
+        } else {
+
+            //idk
+            this.cardsOnTable.removeAll(takingPossibility.getFirst());
+            player.addWonCards(takingPossibility.getFirst().stream().collect(toSet()));
+            player.addPlayedCard(playedCard);
+        }
+
+        if (this.cardsOnTable.isEmpty()){
+            this.scope.put(player, scope.getOrDefault(player, 0)+1);
+        }
 
     }
+
+
+
+    private Map<Player, List<Card>> populateAllPlayedCardsMap(){
+        Map<Player, List<Card>> allPlayedCard = new HashMap<>();
+        
+        for (Player player : getPlayers()){
+            allPlayedCard.put(player, player.getPlayedCards());
+        }
+
+        return allPlayedCard;
+    }
+
 
     public Player winner(){
-        players.stream().forEach((player) -> player.setPoints(this.points(player)));
-        return players.stream().max((p1, p2) -> p1.getPoints() - p2.getPoints()).get();
+        ScopaScore score = new ScopaScore(populateAllPlayedCardsMap());
+        Map<Player, Integer> playersScore = new HashMap<>();
+        
+        score.winnerCards().ifPresent(winPlayer -> 
+            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
+        );
+        score.winnnerPrimiera().ifPresent(winPlayer -> 
+            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
+        );
+        score.winnerCoins().ifPresent(winPlayer -> 
+            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
+        );
+        score.winnerSevenOfCoins().ifPresent(winPlayer -> 
+            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
+        );
+        scope.entrySet().stream().forEach(entry ->
+            playersScore.put(entry.getKey(), playersScore.getOrDefault(entry.getKey(), 0)+entry.getValue())
+        );
+
+        return playersScore.entrySet().stream().max(Comparator.comparingInt(entry -> entry.getValue())).map(entry -> entry.getKey()).get();
     }
     
-
+    /* 
     public Set<Card> getScope(Player player){
         return this.scope.get(player);
+    }
+    */
+
+    
+
+    
+    //inutile
+    @Override
+    public int points(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'points'");
     }
     
 }
