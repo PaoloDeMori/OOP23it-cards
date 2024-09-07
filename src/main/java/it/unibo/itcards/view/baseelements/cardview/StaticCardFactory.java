@@ -16,26 +16,19 @@ public final class StaticCardFactory {
     }
 
     public static JPanel build(Card card,Dimension dimension){
-        Image resizedImg=null;
+        BufferedImage image=null;
         Dimension d=null;
         try {
-            BufferedImage image =ImagesHelper.loadImage(card.toString());
-            if (image == null) {
-                throw new IOException("Image not found");
-            }
-            int height = (int) dimension.getHeight();
-            int width = (int) (height * (double) image.getWidth() / image.getHeight());
-            resizedImg = ImagesHelper.resizeCardShapedImage(image, height);
-            d = new Dimension(width, height);
+            image =ImagesHelper.loadImage(card.toString());
         } catch (IOException e) {
             System.err.println("Error while loading the image" + e.getMessage());
-            resizedImg = null;
-        } catch (Exception e) {
-            System.err.println("Uknown error" + e.getMessage());
-            resizedImg = null;
+            image = null;
         }
-        if (resizedImg != null) {
-            return new CardPanel(resizedImg, d);
+        if (image != null) {
+            int height = (int) dimension.getHeight();
+            int width = (int) (height * (double) image.getWidth() / image.getHeight());
+            d = new Dimension(width, height);
+            return new CardPanel(image, (int)d.getHeight(),card.toString());
         }
         JPanel p = new JPanel();
         p.add(new JLabel("Opponent Card"));
@@ -43,30 +36,23 @@ public final class StaticCardFactory {
     }
 
     public static JPanel build(String name,Dimension dimension){
-        Image resizedImg=null;
+        BufferedImage image=null;
         Dimension d=null;
         try {
-            BufferedImage image =ImagesHelper.loadImage(name);
-            if (image == null) {
-                throw new IOException("Image not found");
-            }
-            int height = (int) dimension.getHeight();
-            int width = (int) (height * (double) image.getWidth() / image.getHeight());
-            resizedImg = ImagesHelper.resizeCardShapedImage(image, height);
-            d = new Dimension(width, height);
+            image =ImagesHelper.loadImage(name);
         } catch (IOException e) {
             System.err.println("Error while loading the image" + e.getMessage());
-            resizedImg = null;
-        } catch (Exception e) {
-            System.err.println("Uknown error" + e.getMessage());
-            resizedImg = null;
+            image = null;
         }
-        if (resizedImg != null) {
-            return new CardPanel(resizedImg, d);
+        if (image != null) {
+            int height = (int) dimension.getHeight();
+            int width = (int) (height * (double) image.getWidth() / image.getHeight());
+            d = new Dimension(width, height);
+            return new CardPanel(image, (int)d.getHeight(),name);
         }
         JPanel p = new JPanel();
         p.add(new JLabel("Opponent Card"));
         return p;
-    }
 
+    }
 }

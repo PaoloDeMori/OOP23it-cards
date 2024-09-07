@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import it.unibo.itcards.view.baseelements.cardview.CardFactory;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
 
 import java.awt.BorderLayout;
@@ -17,7 +16,6 @@ public class CentralPanelImpl extends CentralPanel{
     BorderLayout layout;
     JPanel leftPanel;
     JPanel rightPanel;
-    CardFactory factory;
     JPanel deck;
     JPanel briscola=null;
 

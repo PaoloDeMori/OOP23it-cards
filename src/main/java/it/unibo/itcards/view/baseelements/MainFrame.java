@@ -6,14 +6,14 @@ import javax.swing.*;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
 import it.unibo.itcards.controller.ControllerImpl;
-import it.unibo.itcards.model.Audio.Audio;
+
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.BriscolaImpl;
 import it.unibo.itcards.model.briscola.DifficultBriscolaAIPlayer;
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
-import it.unibo.itcards.view.baseelements.cardview.CardButtonFactory;
+import it.unibo.itcards.view.baseelements.cardview.CardViewFactory;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
 import it.unibo.itcards.view.baseelements.panels.CentralPanelImpl;
@@ -31,7 +31,7 @@ import java.util.Optional;
 public class MainFrame extends JFrame implements View {
 
     private final MainPanel mainpanel;
-    private final CardButtonFactory cardButtonFactory;
+    private final CardViewFactory cardViewFactory;
     private final Controller controller;
 
     public MainFrame(Dim d, Controller controller) {
@@ -40,7 +40,7 @@ public class MainFrame extends JFrame implements View {
         this.setPreferredSize(d.getDimension());
         this.setSize(d.getDimension());
 
-        this.cardButtonFactory = new CardButtonFactory();
+        this.cardViewFactory = new CardViewFactory();
         this.mainpanel = new MainPanelBuilder(d.getDimension())
                 .addHandPanel(new HandPanelImpl())
                 .addOpponentPanel(new OpponentPanelImpl())
@@ -75,7 +75,7 @@ public class MainFrame extends JFrame implements View {
                 controller.playturn(card);
                 System.out.println("Card played: " + card);
             };
-            CardButton button = this.cardButtonFactory.build(card, al, this.mainpanel.getHandPanelDimension());
+            CardButton button = this.cardViewFactory.buildButton(card, al, this.mainpanel.getHandPanelDimension());
             buttons.add(button);
         }
         return buttons;
