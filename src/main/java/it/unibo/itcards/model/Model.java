@@ -1,11 +1,7 @@
 package it.unibo.itcards.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.commons.Observable;

@@ -116,10 +116,15 @@ public class BriscolaImpl extends Model {
             this.setCurrentPlayer(wonPlayer);
             iterator.setWinnerPlayer(wonPlayer);
             wonPlayer.setPoints(this.points(wonPlayer));
+            this.notifyObserver();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             playedCards.clear();
             this.giveCards();
         }
-        this.notifyObserver();
     }
 
     /**

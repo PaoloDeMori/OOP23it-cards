@@ -3,7 +3,6 @@ package it.unibo.itcards.controller;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 
@@ -43,24 +42,37 @@ public class ControllerImpl implements Controller {
     /**
      * This method is called by action listeners, it accepts a card as a parameter
      * that represents the card to play.
-     * If the current player is not a user this called the aiPlay method, otherwise
+     * This method select the card for the player to playe and while the current player is an ai it keeps asking them to play.
      * it called the play method.
      * If the game ended this method will handle that situation by calling the end
      * method.
      * 
      * @param card the card to play, when this method is called by a user.
      */
-    @Override
     public void playturn(Card card) {
-        this.model.getCurrentPlayer().selectCard(card);
-        do {
-            if (this.model.isGameOver()) {
-                this.model.notifyObserver();
-                this.end();
-            } else {
-                this.play(card);
-            }
-        } while (this.model.getCurrentPlayer().isAi());
+        new Thread(() -> {
+            model.getCurrentPlayer().selectCard(card);
+            do{
+                if (!model.getCurrentPlayer().isAi()) {
+                    play(card);
+                    model.notifyObserver();   
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } 
+                if (model.getCurrentPlayer().isAi()) {
+                    play(null);
+                    model.notifyObserver();   
+                }
+
+                if (model.isGameOver()) {
+                    model.notifyObserver();
+                    end();
+                }     
+            } while(this.model.getCurrentPlayer().isAi());
+        }).start();
     }
 
     /**
