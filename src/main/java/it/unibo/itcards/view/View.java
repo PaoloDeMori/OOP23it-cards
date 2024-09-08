@@ -7,7 +7,6 @@ import java.util.List;
 
 
 public interface View extends Observer{
-
     void show();
 
     void start();
@@ -19,8 +18,6 @@ public interface View extends Observer{
     void setCardsOnTable(List<Card> cards);
 
     void setNumberOpponentCards(int n);
-
-    boolean isDeckEnded();
 
     public void aiCanPlay();
     public void playerCanPlay();

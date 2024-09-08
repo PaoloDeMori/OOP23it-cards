@@ -22,21 +22,26 @@ import it.unibo.itcards.view.baseelements.panels.LeftPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
 import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MainFrame extends JFrame implements View {
+public class BriscolaView extends JFrame implements View {
 
     private final MainPanel mainpanel;
     private final CardViewFactory cardViewFactory;
     private final Controller controller;
 
+    public static final Color invisibleColor = new Color(0, 0, 0, 0);
+    public static final Color opponentColor = new Color(255, 0, 0);
+    public static final Color playerColor = new Color(255, 217, 46);
+
     private boolean canPlayerPlay = true;
 
-    public MainFrame(Dim d, Controller controller) {
+    public BriscolaView(Dim d, Controller controller) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setPreferredSize(d.getDimension());
@@ -62,10 +67,10 @@ public class MainFrame extends JFrame implements View {
         mainpanel.setHand(panels);
     }
 
-    public void setMusic(){
+    public void setMusic() {
         JButton button = new JButton("Start/Stop music");
         button.addActionListener(e -> {
-                this.controller.startAudio();
+            this.controller.startAudio();
         });
         this.mainpanel.setMusicButtons(button);
     }
@@ -78,7 +83,7 @@ public class MainFrame extends JFrame implements View {
                 System.out.println("Card played: " + card);
             };
             CardButton button = this.cardViewFactory.buildButton(card, al, this.mainpanel.getHandPanelDimension());
-            if(!canPlayerPlay){
+            if (!canPlayerPlay) {
                 button.setEnabled(false);
                 button.setOpaque(false);
             }
@@ -93,25 +98,25 @@ public class MainFrame extends JFrame implements View {
         this.mainpanel.setCardsOnTable(cards);
     }
 
+    public void updateCurrentPlayer() {
+        this.mainpanel.updateCurrentPlayer(this.controller.getCurrentPlayer());
+    }
+
     @Override
     public void setNumberOpponentCards(int n) {
         this.mainpanel.setOpponentCards(n);
     }
 
     @Override
-    public boolean isDeckEnded() {
-        return this.controller.isDeckEmpty();
-    }
-
-    @Override
     public void update() {
         SwingUtilities.invokeLater(() -> {
-                updateHand();
-                updateOpponentCards();
-                updateCardsOnTable();
-                updatePoints();
-                updateDeckStatus();
-                refreshUI();
+            updateHand();
+            updateCurrentPlayer();
+            updateOpponentCards();
+            updateCardsOnTable();
+            updatePoints();
+            updateDeckStatus();
+            refreshUI();
         });
     }
 
@@ -120,6 +125,7 @@ public class MainFrame extends JFrame implements View {
         if (hand != null) {
             setHand(hand);
         }
+        this.refreshUI();
     }
 
     private void updateOpponentCards() {
@@ -146,8 +152,8 @@ public class MainFrame extends JFrame implements View {
     }
 
     private void updateDeckStatus() {
-        boolean isDeckEmpty = controller.isDeckEmpty();
-        mainpanel.setDeck(!isDeckEmpty);
+        int deckNumberOfCards = controller.deckNumberOfCards();
+        mainpanel.setDeck(deckNumberOfCards);
     }
 
     private void refreshUI() {
@@ -170,13 +176,13 @@ public class MainFrame extends JFrame implements View {
     private void setNames() {
         String botName = this.controller.getPlayers().stream()
                 .filter(Player::isAi)
-                .map(Player::toString)
+                .map(Player::getName)
                 .findFirst()
                 .orElse("name not found");
 
         String playerName = this.controller.getPlayers().stream()
                 .filter(player -> !player.isAi())
-                .map(Player::toString)
+                .map(Player::getName)
                 .findFirst()
                 .orElse("name not found");
 
@@ -185,20 +191,20 @@ public class MainFrame extends JFrame implements View {
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         Controller controller = new ControllerImpl();
-        MainFrame mainframe = new MainFrame(Dim.MEDIUM, controller);
+        BriscolaView briscolaView = new BriscolaView(Dim.MEDIUM, controller);
         BriscolaImpl briscola = new BriscolaImpl(new PlayerImpl("gino", 3), new DifficultBriscolaAIPlayer("bot", 3));
-        controller.init(briscola, mainframe);
+        controller.init(briscola, briscolaView);
         briscola.start();
-        mainframe.start();
+        briscolaView.start();
     }
 
     @Override
     public void aiCanPlay() {
-        this.canPlayerPlay=false;
+        this.canPlayerPlay = false;
     }
 
     @Override
     public void playerCanPlay() {
-        this.canPlayerPlay=true;
+        this.canPlayerPlay = true;
     }
 }

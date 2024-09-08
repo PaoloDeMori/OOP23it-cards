@@ -48,14 +48,16 @@ public interface Controller {
     List<Card> getCardsOnTable();
 
     /**
-     * Checks if the deck is empty.
-     * @return true if the deck in the model is empty, otherwise false 
+     * Return the number of cards in the deck.
+     * @return the number of cards in the deck.
      */
-    boolean isDeckEmpty();
+    int deckNumberOfCards(); 
 
     List<Player> getPlayers();
 
     void startAudio();
 
     void stopAudio();
+
+    Player getCurrentPlayer();
 }

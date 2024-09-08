@@ -107,6 +107,12 @@ public class BriscolaImpl extends Model {
             playedCards.add(card);
             this.getCurrentPlayer().addPlayedCard(card);
             this.setCurrentPlayer(iterator.next());
+            this.notifyObserver();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         } else {
             playedCards.add(card);
@@ -125,6 +131,7 @@ public class BriscolaImpl extends Model {
             playedCards.clear();
             this.giveCards();
         }
+        this.notifyObserver();
     }
 
     /**

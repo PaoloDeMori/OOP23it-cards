@@ -8,6 +8,8 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unibo.itcards.view.baseelements.BriscolaView;
+
 public class LeftPanelImpl extends LateralPanel {
 
     public LeftPanelImpl() {
@@ -37,10 +39,10 @@ public class LeftPanelImpl extends LateralPanel {
     public void setNames(String botName, String playerName) {
         JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        botJPanel.setBackground(new Color(0,0,0,0));
+        botJPanel.setBackground(BriscolaView.invisibleColor);
         JLabel bot = new JLabel();
         bot.setFont(new Font("Arial", Font.BOLD, 40));
-        bot.setBackground(new Color(0,0,0,0));
+        bot.setBackground(BriscolaView.invisibleColor);
         bot.setForeground(new Color(255,0,0));
         bot.setOpaque(false);
         bot.setText(botName);
@@ -49,13 +51,13 @@ public class LeftPanelImpl extends LateralPanel {
 
         JPanel playerJPanel = new JPanel();
         playerJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
-        playerJPanel.setBackground(new Color(0,0,0,0));
+        playerJPanel.setBackground(BriscolaView.invisibleColor);
         JLabel player = new JLabel();
         player.setFont(new Font("Arial", Font.BOLD, 40));
         player.setOpaque(false);
         player.setText(playerName);
         player.setForeground(new Color(255,217,46));
-        player.setBackground(new Color(0,0,0,0));
+        player.setBackground(BriscolaView.invisibleColor);
         playerJPanel.add(player);
         this.add(playerJPanel, BorderLayout.SOUTH);
         this.revalidate();

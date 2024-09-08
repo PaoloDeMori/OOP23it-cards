@@ -56,17 +56,9 @@ public class ControllerImpl implements Controller {
                 if (!model.getCurrentPlayer().isAi()) {
                     this.view.aiCanPlay();
                     play(card);
-                    model.notifyObserver();   
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 } 
                 if (model.getCurrentPlayer().isAi()) {
                     play(null);
-                    model.notifyObserver();   
-                    this.view.playerCanPlay();
                 }
 
                 if (model.isGameOver()) {
@@ -153,13 +145,12 @@ public class ControllerImpl implements Controller {
     }
 
     /**
-     * Checks if the deck is empty.
-     * 
-     * @return true if the deck in the model is empty, otherwise false
+     * Return the number of cards in the deck.
+     * @return the number of cards in the deck.
      */
     @Override
-    public boolean isDeckEmpty() {
-        return this.model.getDeck().isVoid();
+    public int deckNumberOfCards() {
+        return this.model.getDeck().numberOfCards();
     }
 
     /**
@@ -198,6 +189,10 @@ public class ControllerImpl implements Controller {
     @Override
     public void stopAudio() {
         this.model.stopAudio();
+    }
+
+    public Player getCurrentPlayer(){
+        return this.model.getCurrentPlayer();
     }
 
     
