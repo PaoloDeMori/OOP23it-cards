@@ -34,6 +34,8 @@ public class MainFrame extends JFrame implements View {
     private final CardViewFactory cardViewFactory;
     private final Controller controller;
 
+    private boolean canPlayerPlay = true;
+
     public MainFrame(Dim d, Controller controller) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -76,6 +78,11 @@ public class MainFrame extends JFrame implements View {
                 System.out.println("Card played: " + card);
             };
             CardButton button = this.cardViewFactory.buildButton(card, al, this.mainpanel.getHandPanelDimension());
+            if(!canPlayerPlay){
+                button.setEnabled(false);
+                button.setOpaque(false);
+            }
+
             buttons.add(button);
         }
         return buttons;
@@ -183,5 +190,15 @@ public class MainFrame extends JFrame implements View {
         controller.init(briscola, mainframe);
         briscola.start();
         mainframe.start();
+    }
+
+    @Override
+    public void aiCanPlay() {
+        this.canPlayerPlay=false;
+    }
+
+    @Override
+    public void playerCanPlay() {
+        this.canPlayerPlay=true;
     }
 }

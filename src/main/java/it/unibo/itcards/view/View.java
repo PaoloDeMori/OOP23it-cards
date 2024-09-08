@@ -21,4 +21,7 @@ public interface View extends Observer{
     void setNumberOpponentCards(int n);
 
     boolean isDeckEnded();
+
+    public void aiCanPlay();
+    public void playerCanPlay();
 }

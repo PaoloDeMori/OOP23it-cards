@@ -44,7 +44,9 @@ public class CentralPanelImpl extends CentralPanel{
     @Override
     public void setDeck(boolean hasCards) {
         if(!hasCards){
-            rightPanel.remove(0);
+            if(deck!=null){
+            rightPanel.removeAll();
+            deck=null;}
         }
         else{
             if(deck==null){

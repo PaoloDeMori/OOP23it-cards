@@ -11,7 +11,7 @@ import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.Player;
 
-public abstract class Model implements Observable{
+public abstract class Model implements Observable {
 
     Deck deck;
     List<Player> players;
@@ -29,7 +29,7 @@ public abstract class Model implements Observable{
             audio = new Audio();
             audio.start();
         } catch (Exception e) {
-            audio=null;
+            audio = null;
             e.printStackTrace();
         }
     }
@@ -91,7 +91,7 @@ public abstract class Model implements Observable{
 
     @Override
     public void addObserver(Observer observer) {
-       this.observers.add(observer);
+        this.observers.add(observer);
     }
 
     @Override
@@ -101,10 +101,10 @@ public abstract class Model implements Observable{
 
     @Override
     public void notifyObserver() {
-        for (var observer : observers){
+        for (var observer : observers) {
             observer.update();
         }
-        
+
     }
 
     public void setDeck(Deck deck) {
@@ -132,6 +132,7 @@ public abstract class Model implements Observable{
             audio.start();
         }
     }
+
     public void stopAudio() {
         if (audio != null) {
             audio.stop();

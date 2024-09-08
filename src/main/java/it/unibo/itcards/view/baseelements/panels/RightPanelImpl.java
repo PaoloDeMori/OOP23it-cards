@@ -33,6 +33,7 @@ public class RightPanelImpl extends LateralPanel {
         bot.removeAll();
         bot.setText(Integer.toString(Botpoints));
         bot.setFont( new Font("Arial", Font.BOLD, 40) );
+        bot.setForeground(new Color(255,0,0));
         bot.setBackground(new Color(0,0,0,0));
         bot.setOpaque(false);
         botJPanel.add(bot);
@@ -44,6 +45,7 @@ public class RightPanelImpl extends LateralPanel {
         player.setText(Integer.toString(Playerpoints));
         player.setFont( new Font("Arial", Font.BOLD, 40) );
         player.setBackground(new Color(0,0,0,0));
+        player.setForeground(new Color(255,217,46));
         player.setOpaque(false);
         playerJPanel.add(player);
         this.add(playerJPanel , BorderLayout.SOUTH);

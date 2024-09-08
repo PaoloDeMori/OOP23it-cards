@@ -54,6 +54,7 @@ public class ControllerImpl implements Controller {
             model.getCurrentPlayer().selectCard(card);
             do{
                 if (!model.getCurrentPlayer().isAi()) {
+                    this.view.aiCanPlay();
                     play(card);
                     model.notifyObserver();   
                     try {
@@ -65,6 +66,7 @@ public class ControllerImpl implements Controller {
                 if (model.getCurrentPlayer().isAi()) {
                     play(null);
                     model.notifyObserver();   
+                    this.view.playerCanPlay();
                 }
 
                 if (model.isGameOver()) {
@@ -72,6 +74,8 @@ public class ControllerImpl implements Controller {
                     end();
                 }     
             } while(this.model.getCurrentPlayer().isAi());
+            this.view.playerCanPlay();
+            model.notifyObserver();   
         }).start();
     }
 

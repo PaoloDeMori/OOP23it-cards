@@ -41,6 +41,7 @@ public class LeftPanelImpl extends LateralPanel {
         JLabel bot = new JLabel();
         bot.setFont(new Font("Arial", Font.BOLD, 40));
         bot.setBackground(new Color(0,0,0,0));
+        bot.setForeground(new Color(255,0,0));
         bot.setOpaque(false);
         bot.setText(botName);
         botJPanel.add(bot);
@@ -53,6 +54,7 @@ public class LeftPanelImpl extends LateralPanel {
         player.setFont(new Font("Arial", Font.BOLD, 40));
         player.setOpaque(false);
         player.setText(playerName);
+        player.setForeground(new Color(255,217,46));
         player.setBackground(new Color(0,0,0,0));
         playerJPanel.add(player);
         this.add(playerJPanel, BorderLayout.SOUTH);
