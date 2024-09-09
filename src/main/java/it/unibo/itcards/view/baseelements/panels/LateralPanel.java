@@ -2,8 +2,9 @@ package it.unibo.itcards.view.baseelements.panels;
 
 import javax.swing.JPanel;
 
+import it.unibo.itcards.view.briscola.BriscolaView;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 public abstract class LateralPanel extends JPanel {
@@ -14,7 +15,7 @@ public abstract class LateralPanel extends JPanel {
      */
     public LateralPanel() {
         layout = new BorderLayout();
-        this.setBackground(new Color(0,0,0,0));
+        this.setBackground(BriscolaView.invisibleColor);
     }
     /**
      * set the points of the player in the right panel and the bot

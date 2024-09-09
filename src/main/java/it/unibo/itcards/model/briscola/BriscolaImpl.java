@@ -52,28 +52,19 @@ public class BriscolaImpl extends Model {
         return cardsOnTable;
     }
 
-    /**
-     * Determines if the game is over by checking if any player still has cards.
-     * This method iterates over all player and check if any player has one or more
-     * cards left
-     * in their hand. If at least one player has card, the game is considered
-     * ongoing and the
-     * method returns {@code false}. If no players have card left, the game is over
-     * and the method
-     * returns {@code true}.
-     * 
-     * @return {@code true} if no player has cards left(game over), {@code false}
-     *         otherwise(game ongoing).
-     */
     @Override
     public boolean isGameOver() {
-        boolean haveCards = false;
+        if (this.getDeck().numberOfCards() > 0) {
+            return false;
+        }
+
         for (var player : this.getPlayers()) {
-            if (player.getCards().size() == 0 && this.getDeck().numberOfCards() == 0) {
-                haveCards = true;
+            if (player.getCards().size() > 0) {
+                return false;
             }
         }
-        return haveCards;
+
+        return true;
     }
 
     /**
@@ -107,6 +98,12 @@ public class BriscolaImpl extends Model {
             playedCards.add(card);
             this.getCurrentPlayer().addPlayedCard(card);
             this.setCurrentPlayer(iterator.next());
+            this.notifyObserver();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         } else {
             playedCards.add(card);
@@ -116,6 +113,12 @@ public class BriscolaImpl extends Model {
             this.setCurrentPlayer(wonPlayer);
             iterator.setWinnerPlayer(wonPlayer);
             wonPlayer.setPoints(this.points(wonPlayer));
+            this.notifyObserver();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             playedCards.clear();
             this.giveCards();
         }
@@ -316,6 +319,42 @@ public class BriscolaImpl extends Model {
      */
     public void setIterator(PlayerIterator iterator) {
         this.iterator = iterator;
+    }
+
+    public List<Integer> getPlayersPoints() {
+        List<Player> players = new ArrayList<>();
+        players.addAll(this.getPlayers());
+        List<Integer> points = new ArrayList<>();
+
+        Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
+        Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
+
+        if (bot.isPresent() && player.isPresent()) {
+            int botPoints = bot.get().getPoints();
+            int playerPoints = player.get().getPoints();
+            points.add(playerPoints);
+            points.add(botPoints);
+        }
+        return points;
+
+    }
+
+    @Override
+    public List<String> getPlayersNames() {
+        List<Player> players = new ArrayList<>();
+        players.addAll(this.getPlayers());
+        List<String> names = new ArrayList<>();
+
+        Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
+        Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
+
+        if (bot.isPresent() && player.isPresent()) {
+            String botPoints = bot.get().getName();
+            String playerPoints = player.get().getName();
+            names.add(playerPoints);
+            names.add(botPoints);
+        }
+        return names;
     }
 
 }

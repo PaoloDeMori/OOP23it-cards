@@ -2,11 +2,11 @@ package it.unibo.itcards.view.baseelements.mainpanel;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JPanel;
 
 import it.unibo.itcards.commons.Card;
+import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
@@ -14,6 +14,7 @@ import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
+import it.unibo.itcards.view.briscola.BriscolaView;
 
 import java.util.*;
 import java.awt.image.BufferedImage;
@@ -97,7 +98,7 @@ public class MainPanel extends JPanel{
     public void setMusicButtons(JButton jbutton){
         JPanel jpanel = new JPanel();
         jpanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,(int)this.lateralPanelDimension.getHeight()/6));
-        jpanel.setBackground(new Color(0,0,0,0));
+        jpanel.setBackground(BriscolaView.invisibleColor);
         jpanel.add(jbutton);
         this.leftPanel.setCenter(jpanel);
     }
@@ -135,8 +136,8 @@ public class MainPanel extends JPanel{
         this.centralPanel.setCardsOnTable(panels);
     }
 
-    public void setDeck(boolean isPresent){
-        this.centralPanel.setDeck(isPresent);
+    public void setDeck(int numberOfCards){
+        this.centralPanel.setDeck(numberOfCards);
     }
 
     protected void paintComponent(Graphics g) {
@@ -148,6 +149,10 @@ public class MainPanel extends JPanel{
 
     public Dimension getCentralPanelDImension() {
         return centralPanelDImension;
+    }
+
+    public void updateCurrentPlayer(Player player){
+        this.centralPanel.updateCurrentPlayer(player);
     }
 
 }

@@ -1,15 +1,11 @@
 package it.unibo.itcards.model.briscola;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.baseelements.cards.Suit;
-import it.unibo.itcards.model.baseelements.deck.Deck;
-import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.baseelements.cards.CardFactory;
 import it.unibo.itcards.model.baseelements.cards.CardFactoryImpl;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,11 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test; 
 public class EasyBriscolaIATest {
-    private Deck deck;
     private BriscolaImpl briscolaGame;
     private EasyBriscolaAIPlayer easyBriscolaAIPlayer;
     private Player player1;
-    private Set<Card> cards;
     private CardFactory cardFactory;
     private static final int DEFAULT_MAX_NUMBER_OF_CARDS = 3;
     @BeforeEach
@@ -29,8 +23,6 @@ public class EasyBriscolaIATest {
         player1 = new PlayerImpl("Player1", DEFAULT_MAX_NUMBER_OF_CARDS);
         easyBriscolaAIPlayer = new EasyBriscolaAIPlayer("BotEasy" , DEFAULT_MAX_NUMBER_OF_CARDS);
         briscolaGame = new BriscolaImpl(player1 , easyBriscolaAIPlayer);
-        deck = ShuffledDeckFactoryImpl.buildDeck();
-        cards=new HashSet<>();
         cardFactory = new CardFactoryImpl();
     }
 

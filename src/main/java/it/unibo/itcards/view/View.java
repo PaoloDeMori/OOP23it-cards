@@ -1,24 +1,17 @@
 package it.unibo.itcards.view;
 
-import it.unibo.itcards.commons.Card;
-import it.unibo.itcards.commons.Observer;
 
-import java.util.List;
+import it.unibo.itcards.commons.Observer;
 
 
 public interface View extends Observer{
-
     void show();
 
     void start();
 
     void stop();
 
-    void setHand(List<Card> hand);
+    public void aiCanPlay();
 
-    void setCardsOnTable(List<Card> cards);
-
-    void setNumberOpponentCards(int n);
-
-    boolean isDeckEnded();
+    public void playerCanPlay();
 }

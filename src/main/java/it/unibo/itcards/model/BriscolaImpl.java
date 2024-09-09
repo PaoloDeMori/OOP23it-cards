@@ -314,4 +314,16 @@ public class BriscolaImpl extends Model {
         this.iterator = iterator;
     }
 
+    @Override
+    public List<Integer> getPlayersPoints() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayersPoints'");
+    }
+
+    @Override
+    public List<String> getPlayersNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayersNames'");
+    }
+
 }

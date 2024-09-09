@@ -42,24 +42,32 @@ public class ControllerImpl implements Controller {
     /**
      * This method is called by action listeners, it accepts a card as a parameter
      * that represents the card to play.
-     * If the current player is not a user this called the aiPlay method, otherwise
+     * This method select the card for the player to playe and while the current player is an ai it keeps asking them to play.
      * it called the play method.
      * If the game ended this method will handle that situation by calling the end
      * method.
      * 
      * @param card the card to play, when this method is called by a user.
      */
-    @Override
     public void playturn(Card card) {
-        this.model.getCurrentPlayer().selectCard(card);
-        do {
-            if (this.model.isGameOver()) {
-                this.model.notifyObserver();
-                this.end();
-            } else {
-                this.play(card);
-            }
-        } while (this.model.getCurrentPlayer().isAi());
+        new Thread(() -> {
+            model.getCurrentPlayer().selectCard(card);
+            do{
+                if (!model.getCurrentPlayer().isAi()) {
+                    this.view.aiCanPlay();
+                    play(card);
+                } 
+                if (model.getCurrentPlayer().isAi()) {
+                    play(null);
+                }
+                if (model.isGameOver()) {
+                    model.notifyObserver();
+                    end();
+                }     
+            } while(this.model.getCurrentPlayer().isAi());
+            this.view.playerCanPlay();
+            model.notifyObserver();   
+        }).start();
     }
 
     /**
@@ -136,13 +144,12 @@ public class ControllerImpl implements Controller {
     }
 
     /**
-     * Checks if the deck is empty.
-     * 
-     * @return true if the deck in the model is empty, otherwise false
+     * Return the number of cards in the deck.
+     * @return the number of cards in the deck.
      */
     @Override
-    public boolean isDeckEmpty() {
-        return this.model.getDeck().isVoid();
+    public int deckNumberOfCards() {
+        return this.model.getDeck().numberOfCards();
     }
 
     /**
@@ -181,6 +188,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void stopAudio() {
         this.model.stopAudio();
+    }
+
+    public Player getCurrentPlayer(){
+        return this.model.getCurrentPlayer();
+    }
+
+    public List<Integer> getPlayerPoints(){
+        return this.model.getPlayersPoints();
+    }
+
+    public List<String> getPlayerNames(){
+        return this.model.getPlayersNames();
     }
 
     

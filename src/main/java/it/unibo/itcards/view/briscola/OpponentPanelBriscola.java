@@ -1,18 +1,17 @@
-package it.unibo.itcards.view.baseelements.panels;
+package it.unibo.itcards.view.briscola;
 
 import java.awt.FlowLayout;
 
-import it.unibo.itcards.view.baseelements.cardview.CardFactory;
+import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
 import java.awt.Dimension;
-import java.awt.Color;
 
-public class OpponentPanelImpl extends OpponentPanel {
-    CardFactory factory;
+public class OpponentPanelBriscola extends OpponentPanel {
     FlowLayout layout;
-    public OpponentPanelImpl() {
+    public OpponentPanelBriscola() {
         layout = new FlowLayout(FlowLayout.CENTER, 10, 5);
-        this.setBackground(new Color(0,0,0,0));
+        this.setBackground(BriscolaView.invisibleColor);
     }
 
     @Override
@@ -20,14 +19,13 @@ public class OpponentPanelImpl extends OpponentPanel {
         this.setLayout(layout);
         this.setSize(d);
         this.setPreferredSize(d);
-        factory = new CardFactory(this.getSize(),"retro");
     }
 
     @Override
     public void setOpponentCards(int n) {
         this.removeAll();
         for (int i = 0; i < n; i++) {
-            this.add(factory.build());
+            this.add(StaticCardFactory.build("retro", getSize()));
             revalidate();
             repaint();
         }
