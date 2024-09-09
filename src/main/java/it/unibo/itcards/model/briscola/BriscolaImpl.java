@@ -331,4 +331,40 @@ public class BriscolaImpl extends Model {
         this.iterator = iterator;
     }
 
+    public List<Integer> getPlayersPoints(){
+        List<Player> players= new ArrayList<>();
+        players.addAll(this.getPlayers());
+        List<Integer>points = new ArrayList<>();
+
+        Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
+        Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
+
+        if (bot.isPresent() && player.isPresent()) {
+            int botPoints = bot.get().getPoints();
+            int playerPoints = player.get().getPoints();
+            points.add(playerPoints);
+            points.add(botPoints);
+        }
+        return points;
+
+    }
+
+    @Override
+    public List<String> getPlayersNames() {
+        List<Player> players= new ArrayList<>();
+        players.addAll(this.getPlayers());
+        List<String>names = new ArrayList<>();
+
+        Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
+        Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
+
+        if (bot.isPresent() && player.isPresent()) {
+            String botPoints = bot.get().getName();
+            String playerPoints = player.get().getName();
+            names.add(playerPoints);
+            names.add(botPoints);
+        }
+        return names;
+    }
+
 }

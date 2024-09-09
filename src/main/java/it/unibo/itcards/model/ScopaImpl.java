@@ -63,5 +63,17 @@ public class ScopaImpl extends Model {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'winner'");
     }
+
+    @Override
+    public List<Integer> getPlayersPoints() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayersPoints'");
+    }
+
+    @Override
+    public List<String> getPlayersNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayersNames'");
+    }
     
 }

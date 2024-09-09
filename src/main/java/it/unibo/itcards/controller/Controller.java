@@ -60,4 +60,8 @@ public interface Controller {
     void stopAudio();
 
     Player getCurrentPlayer();
+
+    public List<Integer> getPlayerPoints();
+
+    List<String> getPlayerNames();
 }

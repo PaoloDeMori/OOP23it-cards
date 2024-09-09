@@ -1,16 +1,11 @@
 package it.unibo.itcards.view.baseelements;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javax.swing.*;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
-import it.unibo.itcards.controller.ControllerImpl;
 
-import it.unibo.itcards.model.baseelements.player.Player;
-import it.unibo.itcards.model.baseelements.player.PlayerImpl;
-import it.unibo.itcards.model.briscola.BriscolaImpl;
-import it.unibo.itcards.model.briscola.DifficultBriscolaAIPlayer;
+
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.cardview.CardViewFactory;
@@ -24,10 +19,8 @@ import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class BriscolaView extends JFrame implements View {
 
@@ -141,14 +134,9 @@ public class BriscolaView extends JFrame implements View {
     }
 
     private void updatePoints() {
-        Optional<Player> bot = controller.getPlayers().stream().filter(Player::isAi).findFirst();
-        Optional<Player> player = controller.getPlayers().stream().filter(p -> !p.isAi()).findFirst();
+        List<Integer> points = this.controller.getPlayerPoints();
 
-        if (bot.isPresent() && player.isPresent()) {
-            int botPoints = bot.get().getPoints();
-            int playerPoints = player.get().getPoints();
-            mainpanel.setPoints(botPoints, playerPoints);
-        }
+            mainpanel.setPoints(points.get(1), points.get(0));
     }
 
     private void updateDeckStatus() {
@@ -174,28 +162,11 @@ public class BriscolaView extends JFrame implements View {
     }
 
     private void setNames() {
-        String botName = this.controller.getPlayers().stream()
-                .filter(Player::isAi)
-                .map(Player::getName)
-                .findFirst()
-                .orElse("name not found");
 
-        String playerName = this.controller.getPlayers().stream()
-                .filter(player -> !player.isAi())
-                .map(Player::getName)
-                .findFirst()
-                .orElse("name not found");
-
+        List<String> names = this.controller.getPlayerNames();
+        String botName = names.get(1);
+        String playerName = names.get(0);
         this.mainpanel.setNames(botName, playerName);
-    }
-
-    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        Controller controller = new ControllerImpl();
-        BriscolaView briscolaView = new BriscolaView(Dim.MEDIUM, controller);
-        BriscolaImpl briscola = new BriscolaImpl(new PlayerImpl("gino", 3), new DifficultBriscolaAIPlayer("bot", 3));
-        controller.init(briscola, briscolaView);
-        briscola.start();
-        briscolaView.start();
     }
 
     @Override

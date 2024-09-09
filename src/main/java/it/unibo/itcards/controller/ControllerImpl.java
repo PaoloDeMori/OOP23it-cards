@@ -195,5 +195,13 @@ public class ControllerImpl implements Controller {
         return this.model.getCurrentPlayer();
     }
 
+    public List<Integer> getPlayerPoints(){
+        return this.model.getPlayersPoints();
+    }
+
+    public List<String> getPlayerNames(){
+        return this.model.getPlayersNames();
+    }
+
     
 }
