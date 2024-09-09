@@ -1,4 +1,4 @@
-package it.unibo.itcards.view.baseelements.panels;
+package it.unibo.itcards.view.briscola;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,11 +8,11 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import it.unibo.itcards.view.baseelements.BriscolaView;
+import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 
-public class LeftPanelImpl extends LateralPanel {
+public class LeftPanelBriscola extends LateralPanel {
 
-    public LeftPanelImpl() {
+    public LeftPanelBriscola() {
         super();
     }
     @Override

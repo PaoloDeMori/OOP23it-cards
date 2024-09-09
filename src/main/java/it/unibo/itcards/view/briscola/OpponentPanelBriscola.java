@@ -1,14 +1,15 @@
-package it.unibo.itcards.view.baseelements.panels;
+package it.unibo.itcards.view.briscola;
 
 import java.awt.FlowLayout;
 
-import it.unibo.itcards.view.baseelements.BriscolaView;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
+
 import java.awt.Dimension;
 
-public class OpponentPanelImpl extends OpponentPanel {
+public class OpponentPanelBriscola extends OpponentPanel {
     FlowLayout layout;
-    public OpponentPanelImpl() {
+    public OpponentPanelBriscola() {
         layout = new FlowLayout(FlowLayout.CENTER, 10, 5);
         this.setBackground(BriscolaView.invisibleColor);
     }

@@ -60,7 +60,6 @@ public class ControllerImpl implements Controller {
                 if (model.getCurrentPlayer().isAi()) {
                     play(null);
                 }
-
                 if (model.isGameOver()) {
                     model.notifyObserver();
                     end();

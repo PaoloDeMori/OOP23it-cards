@@ -2,13 +2,11 @@ package it.unibo.itcards.view.baseelements.mainpanel;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JPanel;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.baseelements.player.Player;
-import it.unibo.itcards.view.baseelements.BriscolaView;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.cardview.ImagesHelper;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
@@ -16,6 +14,7 @@ import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 import it.unibo.itcards.view.baseelements.panels.HandPanel;
 import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
+import it.unibo.itcards.view.briscola.BriscolaView;
 
 import java.util.*;
 import java.awt.image.BufferedImage;

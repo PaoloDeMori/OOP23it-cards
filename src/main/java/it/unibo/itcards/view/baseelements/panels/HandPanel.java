@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 
 public abstract class HandPanel extends JPanel{
-    List<CardButton> cards;
+    public List<CardButton> cards;
     public abstract void init(Dimension d);
 
     public abstract void setCards(List<CardButton> cards);

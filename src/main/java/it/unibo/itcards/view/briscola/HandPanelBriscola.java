@@ -1,17 +1,16 @@
-package it.unibo.itcards.view.baseelements.panels;
+package it.unibo.itcards.view.briscola;
 
 import java.awt.FlowLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import java.util.List;
 
-import it.unibo.itcards.view.baseelements.BriscolaView;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
+import it.unibo.itcards.view.baseelements.panels.HandPanel;
 
-public class HandPanelImpl extends HandPanel {
+public class HandPanelBriscola extends HandPanel {
     FlowLayout layout;
-    public HandPanelImpl() {
+    public HandPanelBriscola() {
         layout = new FlowLayout(FlowLayout.CENTER,10,5);
         this.setBackground(BriscolaView.invisibleColor);
     }

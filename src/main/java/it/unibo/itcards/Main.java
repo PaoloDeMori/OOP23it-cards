@@ -5,8 +5,8 @@ import it.unibo.itcards.controller.ControllerImpl;
 import it.unibo.itcards.model.baseelements.player.PlayerImpl;
 import it.unibo.itcards.model.briscola.BriscolaImpl;
 import it.unibo.itcards.model.briscola.DifficultBriscolaAIPlayer;
-import it.unibo.itcards.view.baseelements.BriscolaView;
 import it.unibo.itcards.view.baseelements.Dim;
+import it.unibo.itcards.view.briscola.BriscolaView;
 
 public class Main {
 

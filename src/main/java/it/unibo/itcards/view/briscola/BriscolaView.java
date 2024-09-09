@@ -1,4 +1,4 @@
-package it.unibo.itcards.view.baseelements;
+package it.unibo.itcards.view.briscola;
 
 
 import javax.swing.*;
@@ -7,15 +7,11 @@ import it.unibo.itcards.controller.Controller;
 
 
 import it.unibo.itcards.view.View;
+import it.unibo.itcards.view.baseelements.Dim;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 import it.unibo.itcards.view.baseelements.cardview.CardViewFactory;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
-import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
-import it.unibo.itcards.view.baseelements.panels.CentralPanelImpl;
-import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
-import it.unibo.itcards.view.baseelements.panels.LeftPanelImpl;
-import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
-import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.EndPane;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -41,20 +37,13 @@ public class BriscolaView extends JFrame implements View {
         this.setSize(d.getDimension());
 
         this.cardViewFactory = new CardViewFactory();
-        this.mainpanel = new MainPanelBuilder(d.getDimension())
-                .addHandPanel(new HandPanelImpl())
-                .addOpponentPanel(new OpponentPanelImpl())
-                .addLeftPanel(new LeftPanelImpl())
-                .addRightPanel(new RightPanelImpl())
-                .addCentralPanel(new CentralPanelImpl())
-                .build();
+        this.mainpanel = MainPanelBriscolaFactory.build(d.getDimension());
 
         this.setMusic();
         this.add(mainpanel);
         this.controller = controller;
     }
 
-    @Override
     public void setHand(List<Card> cards) {
         List<CardButton> panels = createCardButtons(cards);
         mainpanel.setHand(panels);
@@ -86,7 +75,6 @@ public class BriscolaView extends JFrame implements View {
         return buttons;
     }
 
-    @Override
     public void setCardsOnTable(List<Card> cards) {
         this.mainpanel.setCardsOnTable(cards);
     }
@@ -95,7 +83,6 @@ public class BriscolaView extends JFrame implements View {
         this.mainpanel.updateCurrentPlayer(this.controller.getCurrentPlayer());
     }
 
-    @Override
     public void setNumberOpponentCards(int n) {
         this.mainpanel.setOpponentCards(n);
     }
@@ -151,7 +138,8 @@ public class BriscolaView extends JFrame implements View {
 
     @Override
     public void stop() {
-        System.out.println("Hai vinto");
+        EndPane endPane= new EndPane(controller);
+        endPane.showTwoCommandsDialog();
     }
 
     @Override

@@ -1,14 +1,13 @@
-package it.unibo.itcards.view.baseelements.panels;
+package it.unibo.itcards.view.briscola;
 
 import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import it.unibo.itcards.model.baseelements.player.Player;
-import it.unibo.itcards.view.baseelements.BriscolaView;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
+import it.unibo.itcards.view.baseelements.panels.CentralPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +15,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
-public class CentralPanelImpl extends CentralPanel {
+public class CentralPanelBriscola extends CentralPanel {
 
     BorderLayout layout;
     JPanel leftPanel;
@@ -29,7 +28,7 @@ public class CentralPanelImpl extends CentralPanel {
     JPanel deckPanel;
     JLabel numberOfCards;
 
-    public CentralPanelImpl() {
+    public CentralPanelBriscola() {
         layout = new BorderLayout();
         this.setBackground(BriscolaView.invisibleColor);
         this.leftPanel = new JPanel();

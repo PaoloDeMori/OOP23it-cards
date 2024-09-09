@@ -2,10 +2,9 @@ package it.unibo.itcards.view.baseelements.panels;
 
 import javax.swing.JPanel;
 
-import it.unibo.itcards.view.baseelements.BriscolaView;
+import it.unibo.itcards.view.briscola.BriscolaView;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 public abstract class LateralPanel extends JPanel {
