@@ -35,7 +35,7 @@ public class RightPanelBriscola extends LateralPanel {
         bot.removeAll();
         bot.setText(Integer.toString(Botpoints));
         bot.setFont( new Font("Arial", Font.BOLD, 40) );
-        bot.setForeground(new Color(255,0,0));
+        bot.setForeground(BriscolaView.opponentColor);
         bot.setBackground(BriscolaView.invisibleColor);
         bot.setOpaque(false);
         botJPanel.add(bot);

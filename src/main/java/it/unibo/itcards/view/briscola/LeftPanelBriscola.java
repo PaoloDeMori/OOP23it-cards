@@ -43,7 +43,7 @@ public class LeftPanelBriscola extends LateralPanel {
         JLabel bot = new JLabel();
         bot.setFont(new Font("Arial", Font.BOLD, 40));
         bot.setBackground(BriscolaView.invisibleColor);
-        bot.setForeground(new Color(255,0,0));
+        bot.setForeground(BriscolaView.opponentColor);
         bot.setOpaque(false);
         bot.setText(botName);
         botJPanel.add(bot);

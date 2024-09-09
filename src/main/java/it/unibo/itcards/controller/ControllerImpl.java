@@ -42,7 +42,8 @@ public class ControllerImpl implements Controller {
     /**
      * This method is called by action listeners, it accepts a card as a parameter
      * that represents the card to play.
-     * This method select the card for the player to playe and while the current player is an ai it keeps asking them to play.
+     * This method select the card for the player to playe and while the current
+     * player is an ai it keeps asking them to play.
      * it called the play method.
      * If the game ended this method will handle that situation by calling the end
      * method.
@@ -52,21 +53,26 @@ public class ControllerImpl implements Controller {
     public void playturn(Card card) {
         new Thread(() -> {
             model.getCurrentPlayer().selectCard(card);
-            do{
+            do {
                 if (!model.getCurrentPlayer().isAi()) {
                     this.view.aiCanPlay();
                     play(card);
-                } 
+                    if (model.isGameOver()) {
+                        model.notifyObserver();
+                        end();
+                    }
+                }
                 if (model.getCurrentPlayer().isAi()) {
                     play(null);
+                    if (model.isGameOver()) {
+                        model.notifyObserver();
+                        end();
+                    }
                 }
-                if (model.isGameOver()) {
-                    model.notifyObserver();
-                    end();
-                }     
-            } while(this.model.getCurrentPlayer().isAi());
+
+            } while (this.model.getCurrentPlayer().isAi());
             this.view.playerCanPlay();
-            model.notifyObserver();   
+            model.notifyObserver();
         }).start();
     }
 
@@ -145,6 +151,7 @@ public class ControllerImpl implements Controller {
 
     /**
      * Return the number of cards in the deck.
+     * 
      * @return the number of cards in the deck.
      */
     @Override
@@ -190,17 +197,16 @@ public class ControllerImpl implements Controller {
         this.model.stopAudio();
     }
 
-    public Player getCurrentPlayer(){
+    public Player getCurrentPlayer() {
         return this.model.getCurrentPlayer();
     }
 
-    public List<Integer> getPlayerPoints(){
+    public List<Integer> getPlayerPoints() {
         return this.model.getPlayersPoints();
     }
 
-    public List<String> getPlayerNames(){
+    public List<String> getPlayerNames() {
         return this.model.getPlayersNames();
     }
 
-    
 }

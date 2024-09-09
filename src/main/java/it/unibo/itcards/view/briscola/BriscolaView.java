@@ -28,6 +28,12 @@ public class BriscolaView extends JFrame implements View {
     public static final Color opponentColor = new Color(255, 0, 0);
     public static final Color playerColor = new Color(255, 217, 46);
 
+    String botName;
+    String playerName;
+
+    int botPoints;
+    int playerPoints;
+
     private boolean canPlayerPlay = true;
 
     public BriscolaView(Dim d, Controller controller) {
@@ -122,8 +128,10 @@ public class BriscolaView extends JFrame implements View {
 
     private void updatePoints() {
         List<Integer> points = this.controller.getPlayerPoints();
+        this.botPoints=points.get(1);
+        this.playerPoints=points.get(0);
 
-            mainpanel.setPoints(points.get(1), points.get(0));
+            mainpanel.setPoints(botPoints, playerPoints);
     }
 
     private void updateDeckStatus() {
@@ -138,7 +146,17 @@ public class BriscolaView extends JFrame implements View {
 
     @Override
     public void stop() {
-        EndPane endPane= new EndPane(controller);
+        String winner;
+        if(botPoints>playerPoints){
+            winner = botName;
+        }
+        else if(botPoints<playerPoints){
+            winner =playerName;
+        }
+        else{
+            winner="pareggio";
+        }
+        EndPane endPane= new EndPane(controller,winner);
         endPane.showTwoCommandsDialog();
     }
 
@@ -152,8 +170,8 @@ public class BriscolaView extends JFrame implements View {
     private void setNames() {
 
         List<String> names = this.controller.getPlayerNames();
-        String botName = names.get(1);
-        String playerName = names.get(0);
+        botName = names.get(1);
+        playerName = names.get(0);
         this.mainpanel.setNames(botName, playerName);
     }
 

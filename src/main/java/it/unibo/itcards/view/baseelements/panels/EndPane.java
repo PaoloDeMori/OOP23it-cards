@@ -5,17 +5,24 @@ import it.unibo.itcards.controller.Controller;
 public class EndPane extends JOptionPane {
 
     Controller controller;
+    String result;
 
-    public EndPane(Controller controller) {
+    public EndPane(Controller controller,String result) {
         super();
         this.controller = controller;
+        if(result.equals("pareggio")){
+            this.result=result;
+        }
+        else{
+            this.result=new String("Il vincitore è : ").concat(result);
+        }
     }
 
     public void showTwoCommandsDialog() {
         String[] options = {"Nuova partita", "Esci"};
         int result = JOptionPane.showOptionDialog(
             null,
-            "Vuoi fare un'altra partita?",
+            this.result,
             "Fine",
             JOptionPane.DEFAULT_OPTION,
             JOptionPane.DEFAULT_OPTION,

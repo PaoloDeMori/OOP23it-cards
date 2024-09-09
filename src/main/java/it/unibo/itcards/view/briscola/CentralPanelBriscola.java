@@ -36,7 +36,7 @@ public class CentralPanelBriscola extends CentralPanel {
         this.numberOfCards = new JLabel();
         this.numberOfCards.setText("0");
         numberOfCards.setFont(new Font("Arial", Font.BOLD, 20));
-        numberOfCards.setForeground(new Color(255, 217, 46));
+        numberOfCards.setForeground(BriscolaView.playerColor);
     }
 
     @Override
@@ -56,6 +56,7 @@ public class CentralPanelBriscola extends CentralPanel {
 
     @Override
     public void setDeck(int deckNumberOfCards) {
+        this.numberOfCards.setText("Carte rimanenti " + Integer.toString(deckNumberOfCards));
         if (deckNumberOfCards <= 0) {
             if (deck != null) {
                 deckPanel.removeAll();
@@ -66,7 +67,7 @@ public class CentralPanelBriscola extends CentralPanel {
                 deck = StaticCardFactory.build("retro", this.deckPanel.getSize());
                 this.deckPanel.add(deck);
             }
-            this.numberOfCards.setText("Carte rimanenti " + Integer.toString(deckNumberOfCards));
+
         }
     }
 
@@ -98,7 +99,6 @@ public class CentralPanelBriscola extends CentralPanel {
         this.playerTurnPanel.setBackground(BriscolaView.invisibleColor);
         playerTurnPanel.add(turn);
         this.leftPanel.add(playerTurnPanel, BorderLayout.SOUTH);
-
 
     }
 
