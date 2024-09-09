@@ -1,22 +1,20 @@
 package it.unibo.itcards.view.briscola;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 
 public class RightPanelBriscola extends LateralPanel {
-    JLabel bot = new JLabel();
-    JLabel player = new JLabel();
-
+    private JLabel bot = new JLabel();
+    private JLabel player = new JLabel();
 
     /**
-     * RightPanelImpl
+     * RightPanelImpl.
      */
     public RightPanelBriscola() {
         super();
@@ -24,45 +22,47 @@ public class RightPanelBriscola extends LateralPanel {
 
     @Override
     /**
-     * set the points of the player in the right panel and the bot
-     * @param Botpoints 
+     * set the points of the player in the right panel and the bot.
+     * 
+     * @param Botpoints
      * @param Playerpoints
      */
-    public void setPoints( final int Botpoints , final int Playerpoints) {
+    public void setPoints(final int botPoints, final int playerPoints) {
         JPanel botJPanel = new JPanel();
-        botJPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,5));
-        botJPanel.setBackground(BriscolaView.invisibleColor);
+        botJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP));
+        botJPanel.setBackground(View.INVISIBLE_COLOR);
         bot.removeAll();
-        bot.setText(Integer.toString(Botpoints));
-        bot.setFont( new Font("Arial", Font.BOLD, 40) );
-        bot.setForeground(BriscolaView.opponentColor);
-        bot.setBackground(BriscolaView.invisibleColor);
+        bot.setText(Integer.toString(botPoints));
+        bot.setFont(View.STANDARD_FONT);
+        bot.setForeground(View.OPPONENT_COLOR);
+        bot.setBackground(View.INVISIBLE_COLOR);
         bot.setOpaque(false);
         botJPanel.add(bot);
-        this.add(botJPanel , BorderLayout.NORTH);
+        this.add(botJPanel, BorderLayout.NORTH);
         JPanel playerJPanel = new JPanel();
-        playerJPanel.setLayout(new FlowLayout(FlowLayout.CENTER,10,5));
-        playerJPanel.setBackground(BriscolaView.invisibleColor);
+        playerJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP));
+        playerJPanel.setBackground(View.INVISIBLE_COLOR);
         player.removeAll();
-        player.setText(Integer.toString(Playerpoints));
-        player.setFont( new Font("Arial", Font.BOLD, 40) );
-        player.setBackground(BriscolaView.invisibleColor);
-        player.setForeground(new Color(255,217,46));
+        player.setText(Integer.toString(playerPoints));
+        player.setFont(View.STANDARD_FONT);
+        player.setBackground(View.INVISIBLE_COLOR);
+        player.setForeground(View.PLAYER_COLOR);
         player.setOpaque(false);
         playerJPanel.add(player);
-        this.add(playerJPanel , BorderLayout.SOUTH);
+        this.add(playerJPanel, BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
         return;
     }
 
     @Override
-    public void setCenter(JPanel panel) {
-        
+    public void setCenter(final JPanel panel) {
+
     }
 
     /**
-     * unimplemented methods
+     * unimplemented methods.
+     * 
      * @param botName
      * @param playerName
      * @throws UnsupportedOperationException

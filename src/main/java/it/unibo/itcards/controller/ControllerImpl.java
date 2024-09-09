@@ -22,7 +22,7 @@ public class ControllerImpl implements Controller {
      * @param view  the graphical interface
      */
     @Override
-    public void init(Model model, View view) {
+    public void init(final Model model, final View view) {
         this.setModel(model);
         this.setView(view);
         this.model.addObserver(this.view);
@@ -50,7 +50,7 @@ public class ControllerImpl implements Controller {
      * 
      * @param card the card to play, when this method is called by a user.
      */
-    public void playturn(Card card) {
+    public void playturn(final Card card) {
         new Thread(() -> {
             model.getCurrentPlayer().selectCard(card);
             do {
@@ -81,7 +81,7 @@ public class ControllerImpl implements Controller {
      * 
      * @param model the game choose by the user
      */
-    private void setModel(Model model) {
+    private void setModel(final Model model) {
         this.model = model;
     }
 
@@ -90,7 +90,7 @@ public class ControllerImpl implements Controller {
      * 
      * @param view the gui implemantation to run this application.
      */
-    private void setView(View view) {
+    private void setView(final View view) {
         this.view = view;
     }
 
@@ -172,8 +172,9 @@ public class ControllerImpl implements Controller {
      * method of the model
      * using the playCard method of the Player interface, to play in the model the
      * card the player decided to play.
+     * @param card the card the player wants to play, or null if it is called by a bot
      */
-    private void play(Card card) {
+    private void play(final Card card) {
         try {
             model.playTurn(this.model.getCurrentPlayer().chooseCard(), this.model.getCurrentPlayer());
         } catch (Exception e) {

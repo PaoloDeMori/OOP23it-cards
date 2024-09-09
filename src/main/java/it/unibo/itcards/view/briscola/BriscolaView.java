@@ -1,10 +1,10 @@
 package it.unibo.itcards.view.briscola;
 
-
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.controller.Controller;
-
 
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.Dim;
@@ -13,7 +13,6 @@ import it.unibo.itcards.view.baseelements.cardview.CardViewFactory;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
 import it.unibo.itcards.view.baseelements.panels.EndPane;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +23,15 @@ public class BriscolaView extends JFrame implements View {
     private final CardViewFactory cardViewFactory;
     private final Controller controller;
 
-    public static final Color invisibleColor = new Color(0, 0, 0, 0);
-    public static final Color opponentColor = new Color(255, 0, 0);
-    public static final Color playerColor = new Color(255, 217, 46);
+    private String botName;
+    private String playerName;
 
-    String botName;
-    String playerName;
-
-    int botPoints;
-    int playerPoints;
+    private int botPoints;
+    private int playerPoints;
 
     private boolean canPlayerPlay = true;
 
-    public BriscolaView(Dim d, Controller controller) {
+    public BriscolaView(final Dim d, final Controller controller) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setPreferredSize(d.getDimension());
@@ -50,7 +45,7 @@ public class BriscolaView extends JFrame implements View {
         this.controller = controller;
     }
 
-    public void setHand(List<Card> cards) {
+    public void setHand(final List<Card> cards) {
         List<CardButton> panels = createCardButtons(cards);
         mainpanel.setHand(panels);
     }
@@ -63,7 +58,7 @@ public class BriscolaView extends JFrame implements View {
         this.mainpanel.setMusicButtons(button);
     }
 
-    private List<CardButton> createCardButtons(List<Card> cards) {
+    private List<CardButton> createCardButtons(final List<Card> cards) {
         List<CardButton> buttons = new ArrayList<>();
         for (Card card : cards) {
             ActionListener al = e -> {
@@ -81,7 +76,7 @@ public class BriscolaView extends JFrame implements View {
         return buttons;
     }
 
-    public void setCardsOnTable(List<Card> cards) {
+    public void setCardsOnTable(final List<Card> cards) {
         this.mainpanel.setCardsOnTable(cards);
     }
 
@@ -89,8 +84,8 @@ public class BriscolaView extends JFrame implements View {
         this.mainpanel.updateCurrentPlayer(this.controller.getCurrentPlayer());
     }
 
-    public void setNumberOpponentCards(int n) {
-        this.mainpanel.setOpponentCards(n);
+    public void setNumberOpponentCards(final int setNumberOpponentCards) {
+        this.mainpanel.setOpponentCards(setNumberOpponentCards);
     }
 
     @Override
@@ -128,10 +123,10 @@ public class BriscolaView extends JFrame implements View {
 
     private void updatePoints() {
         List<Integer> points = this.controller.getPlayerPoints();
-        this.botPoints=points.get(1);
-        this.playerPoints=points.get(0);
+        this.botPoints = points.get(1);
+        this.playerPoints = points.get(0);
 
-            mainpanel.setPoints(botPoints, playerPoints);
+        mainpanel.setPoints(botPoints, playerPoints);
     }
 
     private void updateDeckStatus() {
@@ -147,16 +142,14 @@ public class BriscolaView extends JFrame implements View {
     @Override
     public void stop() {
         String winner;
-        if(botPoints>playerPoints){
+        if (botPoints > playerPoints) {
             winner = botName;
+        } else if (botPoints < playerPoints) {
+            winner = playerName;
+        } else {
+            winner = "pareggio";
         }
-        else if(botPoints<playerPoints){
-            winner =playerName;
-        }
-        else{
-            winner="pareggio";
-        }
-        EndPane endPane= new EndPane(controller,winner);
+        EndPane endPane = new EndPane(controller, winner);
         endPane.showTwoCommandsDialog();
     }
 

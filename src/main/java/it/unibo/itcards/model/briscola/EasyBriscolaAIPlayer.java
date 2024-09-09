@@ -12,12 +12,12 @@ public class EasyBriscolaAIPlayer extends AIPlayer {
 
     private BriscolaImpl game;
 
-    public EasyBriscolaAIPlayer(String name, int maxNumberOfCards) {
+    public EasyBriscolaAIPlayer(final String name, final int maxNumberOfCards) {
         super(name, maxNumberOfCards);
     }
 
     @Override
-    public void setGame(Model game) {
+    public void setGame(final Model game) {
         this.game = (BriscolaImpl) game;
     }
 

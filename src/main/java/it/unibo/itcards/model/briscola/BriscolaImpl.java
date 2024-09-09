@@ -19,19 +19,23 @@ public class BriscolaImpl extends Model {
     private Card briscola;
     private List<Card> playedCards;
     private PlayerIterator iterator;
+    private static final int TIME_TO_WAIT = 2000;
 
     /**
      * Constructor which initializes the BriscolaImpl object
      * with an empty ArrayList of playedCards.
+     * 
+     * @param player the human player in this game
+     * @param bot    the bot that will play against the human player
      */
-    public BriscolaImpl(Player player, Player bot) {
+    public BriscolaImpl(final Player player, final Player bot) {
         super();
         this.playedCards = new ArrayList<>();
         this.iterator = new PlayerIterator(this.getPlayers());
         setPlayer(player, bot);
     }
 
-    private void setPlayer(Player player, Player bot) {
+    private void setPlayer(final Player player, final Player bot) {
         this.getPlayers().add(player);
         this.getPlayers().add(bot);
     }
@@ -90,7 +94,7 @@ public class BriscolaImpl extends Model {
      * @param player the player who is playing the card
      */
     @Override
-    public void playTurn(Card card, Player player) {
+    public void playTurn(final Card card, final Player player) {
         if (player != this.getCurrentPlayer()) {
             throw new IllegalStateException("It's not your turn");
         }
@@ -100,7 +104,7 @@ public class BriscolaImpl extends Model {
             this.setCurrentPlayer(iterator.next());
             this.notifyObserver();
             try {
-                Thread.sleep(2000);
+                Thread.sleep(TIME_TO_WAIT);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -115,7 +119,7 @@ public class BriscolaImpl extends Model {
             wonPlayer.setPoints(this.points(wonPlayer));
             this.notifyObserver();
             try {
-                Thread.sleep(2000);
+                Thread.sleep(TIME_TO_WAIT);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -132,7 +136,7 @@ public class BriscolaImpl extends Model {
      * @return the total points of the player.
      */
     @Override
-    public int points(Player player) {
+    public int points(final Player player) {
         Set<Card> cards = player.getWonCards();
         int points = 0;
         for (Card card : cards) {
@@ -172,7 +176,7 @@ public class BriscolaImpl extends Model {
      * @throws InGameException if no winner can be determined.
      */
     @Override
-    public Player winner(List<Card> playedCards) {
+    public Player winner(final List<Card> playedCards) {
         if (playedCards.size() < 2) {
             throw new InGameException("Not enough cards played");
         }
@@ -251,15 +255,15 @@ public class BriscolaImpl extends Model {
 
     /**
      * Sets the Briscola card for the game.
-     * 
      * @param briscolaCard the card to be set as the Briscola.
      */
-    public void setBriscola(Card briscolCard) {
-        this.briscola = briscolCard;
+    public void setBriscola(final Card briscolaCard) {
+        this.briscola = briscolaCard;
     }
 
     /**
      * Returns the Briscola card of the game.
+     * @return the card used as Briscola
      */
     public Card getBriscola() {
         return briscola;
@@ -279,8 +283,6 @@ public class BriscolaImpl extends Model {
      * 
      * This method resets the played cards to an empty list, effectively clearing
      * all cards that have been played.
-     * 
-     * @return no return value
      */
     public void clearPlayedCards() {
         this.playedCards.clear();
@@ -300,7 +302,7 @@ public class BriscolaImpl extends Model {
      *
      * @param playedCards the list of cards that have been played
      */
-    public void setPlayedCards(List<Card> playedCards) {
+    public void setPlayedCards(final List<Card> playedCards) {
         this.playedCards = playedCards;
     }
 
@@ -318,7 +320,7 @@ public class BriscolaImpl extends Model {
      *
      * @param iterator the PlayerIterator object to be set
      */
-    public void setIterator(PlayerIterator iterator) {
+    public void setIterator(final PlayerIterator iterator) {
         this.iterator = iterator;
     }
 

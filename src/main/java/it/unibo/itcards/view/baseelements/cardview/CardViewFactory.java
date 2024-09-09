@@ -12,15 +12,13 @@ import it.unibo.itcards.commons.Card;
 
 public class CardViewFactory {
 
-    public Map<Card, BufferedImage> imagesCache;
+    private Map<Card, BufferedImage> imagesCache;
 
-    
-    
     public CardViewFactory() {
         this.imagesCache = new HashMap<>();
     }
 
-    public CardButton buildButton (Card card, ActionListener al,Dimension d) {
+    public CardButton buildButton(final Card card, final ActionListener al, final Dimension d) {
         BufferedImage image;
         CardButton cp;
         if (!imagesCache.keySet().contains(card)) {
@@ -30,9 +28,9 @@ public class CardViewFactory {
             } catch (IOException e) {
                 image = null;
             }
-            cp = new CardButton(image, (int)d.getHeight(),card.toString());
+            cp = new CardButton(image, (int) d.getHeight(), card.toString());
         } else {
-            cp = new CardButton(imagesCache.get(card), (int)d.getHeight(),card.toString());
+            cp = new CardButton(imagesCache.get(card), (int) d.getHeight(), card.toString());
         }
         if (al != null) {
             cp.addActionListener(al);
@@ -40,7 +38,7 @@ public class CardViewFactory {
         return cp;
     }
 
-    public JPanel buildPanel (Card card, Dimension d) {
+    public JPanel buildPanel(final Card card, final Dimension d) {
         BufferedImage image;
         JPanel cp;
         if (!imagesCache.keySet().contains(card)) {
@@ -50,9 +48,9 @@ public class CardViewFactory {
             } catch (IOException e) {
                 image = null;
             }
-            cp = new CardPanel(image, (int)d.getHeight(),card.toString());
+            cp = new CardPanel(image, (int) d.getHeight(), card.toString());
         } else {
-            cp = new CardPanel(imagesCache.get(card), (int)d.getHeight(),card.toString());
+            cp = new CardPanel(imagesCache.get(card), (int) d.getHeight(), card.toString());
         }
         return cp;
     }

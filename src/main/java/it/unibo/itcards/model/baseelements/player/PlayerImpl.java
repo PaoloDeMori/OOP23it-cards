@@ -21,9 +21,9 @@ public class PlayerImpl implements Player {
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
     private Card selectedCard = null;
-    private int points=0;
+    private int points = 0;
 
-    public void setPoints(int points) {
+    public void setPoints(final int points) {
         this.points = points;
     }
 
@@ -47,7 +47,8 @@ public class PlayerImpl implements Player {
     }
 
     /**
-     * This method checks if the specified card is playable by the player and if so, returns it.
+     * This method checks if the specified card is playable by the player and if so,
+     * returns it.
      * 
      * @param card is the card to remove
      * @throws InvalidOperationException if the specified card is not playable
@@ -157,7 +158,7 @@ public class PlayerImpl implements Player {
      */
     @Override
     public List<Card> getPlayedCards() {
-       return this.playedCards;
+        return this.playedCards;
     }
 
     /**
@@ -166,7 +167,7 @@ public class PlayerImpl implements Player {
      * @param card the card to add
      */
     @Override
-    public void addPlayedCard(Card card) {
+    public void addPlayedCard(final Card card) {
         this.playedCards.add(card);
     }
 
@@ -174,26 +175,28 @@ public class PlayerImpl implements Player {
     public String toString() {
         return this.name;
     }
+
     /**
-     * Sets the hand of the player
+     * Sets the hand of the player.
+     * 
      * @param hand
      */
-    public void setHand(List<Card> hand){
-        for(Card card : hand){
+    public void setHand(final List<Card> hand) {
+        for (Card card : hand) {
             cards.add(card);
         }
     }
 
     @Override
     public boolean isAi() {
-       return false;
+        return false;
     }
 
-    public void selectCard(Card card){
-        this.selectedCard=card;
+    public void selectCard(final Card card) {
+        this.selectedCard = card;
     }
 
-    public Card chooseCard() throws InvalidOperationException{
-       return this.playCard(selectedCard);
+    public Card chooseCard() throws InvalidOperationException {
+        return this.playCard(selectedCard);
     }
 }

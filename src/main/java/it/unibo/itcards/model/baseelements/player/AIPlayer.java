@@ -4,7 +4,7 @@ import it.unibo.itcards.model.Model;
 
 public abstract class AIPlayer extends PlayerImpl {
 
-    public AIPlayer(String name, int maxNumberOfCards) {
+    public AIPlayer(final String name, final int maxNumberOfCards) {
         super(name, maxNumberOfCards);
     }
 
@@ -17,7 +17,7 @@ public abstract class AIPlayer extends PlayerImpl {
     public abstract void setGame(Model game);
 
     @Override
-    public boolean isAi(){
+    public boolean isAi() {
         return true;
     }
 

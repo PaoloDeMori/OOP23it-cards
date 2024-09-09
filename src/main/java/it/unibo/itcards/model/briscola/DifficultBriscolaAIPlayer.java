@@ -8,7 +8,7 @@ import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
 
-import java.util.stream.*;;
+import java.util.stream.Collectors;
 
 /**
  * This class implements the player interface and represent a Difficult AI
@@ -17,9 +17,40 @@ import java.util.stream.*;;
  */
 public class DifficultBriscolaAIPlayer extends AIPlayer {
     private BriscolaImpl game;
+    /**
+     * If the value of each card with a value greater than 3 is subtracted from this
+     * number,
+     * it gives the number of cards that can beat the card at the beginning of the
+     * game.
+     */
+    private static final int CARD_POWER_CONSTANT = 22;
 
     /**
-     * Constructor
+     * This number represents how many cards can beat a 2 with a suit different from
+     * the briscola at the beginning of the game.
+     */
+    private static final int TWO_POWER_CONSTANT = 19;
+
+    /**
+     * This number represents the number of cards with the same suit as the briscola
+     * at the beginning of the game.
+     */
+    private static final int NUMBER_OF_BRISCOLE = 10;
+
+    /**
+     * This number represents how many cards can beat a 3 with a suit different from
+     * the briscola at the beginning of the game.
+     */
+    private static final int THREE_POWER_CONSTANT = 11;
+
+    /**
+     * This number represents how many cards can beat an ace with a suit different
+     * from the briscola at the beginning of the game.
+     */
+    private static final int ACE_POWER_CONSTANT = 10;
+
+    /**
+     * Constructor.
      * 
      * @param name
      * @param maxNumberOfCards
@@ -60,14 +91,17 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
         }
         switch (card.getValue()) {
             case 1:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? 10 - value : 0);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? ACE_POWER_CONSTANT - value : 0);
             case 2:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? 19 - value : 9 - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? TWO_POWER_CONSTANT - value
+                        : (TWO_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - value);
             case 3:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? 11 - value : 1 - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit() ? THREE_POWER_CONSTANT - value
+                        : (THREE_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - value);
             default:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? (22 - card.getValue()) - value
-                        : (12 - card.getValue()) - value);
+                return (card.getSuit() != this.game.getBriscola().getSuit()
+                        ? (CARD_POWER_CONSTANT - card.getValue()) - value
+                        : ((CARD_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - card.getValue()) - value);
         }
     }
 
@@ -200,11 +234,12 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      */
     private Card chooseCardToPlayAgainstWithBriscola(final List<Card> hand, final Card opponentCard) {
         Card cardToPlay = null;
-        if (BriscolaHelper.getCardValue(opponentCard) == 10) {
+        if (BriscolaHelper.getCardValue(opponentCard) == BriscolaHelper.THREE_VALUE) {
             if (hand.stream().anyMatch((card) -> card.getSuit() == this.game.getBriscola().getSuit()
-                    && BriscolaHelper.getCardValue(card) == 11)) {
+                    && BriscolaHelper.getCardValue(card) == BriscolaHelper.ACE_VALUE)) {
                 cardToPlay = hand.stream().filter((card) -> card.getSuit() == this.game.getBriscola().getSuit()
-                        && BriscolaHelper.getCardValue(card) == 11).collect(Collectors.toList()).get(0);
+                        && BriscolaHelper.getCardValue(card) == BriscolaHelper.ACE_VALUE).collect(Collectors.toList())
+                        .get(0);
                 return cardToPlay;
             } else {
                 cardToPlay = hand.stream().max((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
@@ -238,7 +273,7 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * and the cards that have been played.
      *
      * @return the best card to play
-     * @throws InvalidOperationException 
+     * @throws InvalidOperationException
      */
     @Override
     public Card chooseCard() throws InvalidOperationException {

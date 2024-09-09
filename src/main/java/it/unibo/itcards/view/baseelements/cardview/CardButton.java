@@ -1,19 +1,19 @@
 package it.unibo.itcards.view.baseelements.cardview;
 
-import javax.swing.*;
-
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
 
 public class CardButton extends JButton {
-    String path;
-    int height;
-    int width;
-    Image resizedImg;
+    private int height;
+    private int width;
+    private Image resizedImg;
 
-    public CardButton(BufferedImage im, int height, String name) {
+    public CardButton(final BufferedImage im, final int height, final String name) {
         this.height = height;
         if (im != null) {
             width = (int) (height * ImagesHelper.getImageRatio(im));

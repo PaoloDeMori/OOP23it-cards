@@ -8,7 +8,7 @@ public final class MainPanelBriscolaFactory {
     private MainPanelBriscolaFactory() {
     }
 
-    public static MainPanel build(Dimension d) {
+    public static MainPanel build(final Dimension d) {
         return new MainPanelBuilder(d)
                 .addHandPanel(new HandPanelBriscola())
                 .addOpponentPanel(new OpponentPanelBriscola())

@@ -11,24 +11,27 @@ import java.io.IOException;
 
 public final class ImagesHelper {
 
-    public static BufferedImage loadImage(Card card) throws IOException {
+    private ImagesHelper() {
+    }
+
+    public static BufferedImage loadImage(final Card card) throws IOException {
         String path = "/CardsImages/" + card.toString() + ".jpeg";
         BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
         return image;
     }
 
-    public static BufferedImage loadImage(String string) throws IOException {
+    public static BufferedImage loadImage(final String string) throws IOException {
         String path = "/CardsImages/" + string + ".jpeg";
         BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
         return image;
     }
 
-    public static double getImageRatio(BufferedImage image){
-        double ratio =((double) image.getWidth() / image.getHeight());
+    public static double getImageRatio(final BufferedImage image) {
+        double ratio = ((double) image.getWidth() / image.getHeight());
         return ratio;
     }
 
-    public static Image resizeCardShapedImage(BufferedImage image, int height){
+    public static Image resizeCardShapedImage(final BufferedImage image, final int height) {
         Image resizedImg;
         int width = (int) (height * (double) image.getWidth() / image.getHeight());
         resizedImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);

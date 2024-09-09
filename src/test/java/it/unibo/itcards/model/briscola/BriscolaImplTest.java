@@ -98,14 +98,14 @@ public class BriscolaImplTest {
     }
 
     /**
-     * Tests the correct implementation of the method that retrieves the cards 
+     * Tests the correct implementation of the method that retrieves the cards
      * currently on the table.
      *
      * @return none
      */
     @Test
     void testGetCardsOnTable() {
-        Card briscola =cardFactory.buildCard(Suit.BASTONI, 5); 
+        Card briscola = cardFactory.buildCard(Suit.BASTONI, 5);
         briscolaGame.setBriscola(briscola);
         final Card card1 = cardFactory.buildCard(Suit.DENARI, 10);
         final Card card2 = cardFactory.buildCard(Suit.BASTONI, 9);
@@ -118,7 +118,6 @@ public class BriscolaImplTest {
         assertEquals(card1, briscolaGame.getCardsOnTable().get(1));
         assertEquals(card2, briscolaGame.getCardsOnTable().get(2));
     }
-
 
     /**
      * Tests the correct implementation of the method that determines the winner of
@@ -137,11 +136,7 @@ public class BriscolaImplTest {
         assertEquals(this.player1, briscolaGame.winner(cards));
     }
 
-    public static void main(String[] args) {
-        BriscolaImplTest test = new BriscolaImplTest();
-        test.init();
-        test.testWinner();
-    }
+
 
     /**
      * Tests the correct implementation of the method that checks if the game is
@@ -149,16 +144,22 @@ public class BriscolaImplTest {
      */
     @Test
     void testIsGameOver() {
+        assertEquals(3, player1.getCards().size(), "P1 should have 3 cards");
+        assertEquals(3, player2.getCards().size(), "P2 should have 3 cards");
 
-        assertEquals(3, player1.getCards().size(), "P1 have 3 card");
-        assertEquals(3, player2.getCards().size(), "P2 have 3 card");
-
-        assertTrue(briscolaGame.isGameOver(), "The game should not be over when players still have cards.");
+        assertFalse(briscolaGame.isGameOver(), "The game should not be over when players still have cards.");
 
         player1.getCards().clear();
         player2.getCards().clear();
 
-        assertFalse(briscolaGame.isGameOver(), "The game should be over when no player has cards.");
+        int num = briscolaGame.getDeck().numberOfCards();
+
+        for(int i = 0; i<=num;i++){
+            briscolaGame.getDeck().drawCard();
+        }
+
+        assertTrue(briscolaGame.isGameOver(),
+                "The game should be over when no player has cards and the deck is empty.");
     }
 
     /**
