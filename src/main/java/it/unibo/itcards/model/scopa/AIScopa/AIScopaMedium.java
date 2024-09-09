@@ -1,10 +1,10 @@
-package it.unibo.itcards.model.scopa;
+package it.unibo.itcards.model.scopa.AIScopa;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.ScopaImpl;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
+import it.unibo.itcards.model.scopa.ScopaImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +30,11 @@ public class AIScopaMedium extends AIPlayer{
     }
 
 
-    public boolean isOver10(Card card, Integer table){
+    private boolean isOver10(Card card, Integer table){
         return table + card.getValue()>10 ? true : false;
     }
 
-    public List<Integer> populateList(){
+    private List<Integer> populateList(){
         List<Integer> mostUsedCardsValue = new ArrayList<>();
         Map<Integer, Long> map = getPlayedCards().stream().collect(Collectors.groupingBy(Card::getValue, Collectors.counting()));
         
@@ -73,6 +73,9 @@ public class AIScopaMedium extends AIPlayer{
             bestCard = hand.stream().filter(card -> card.getValue()==7).findFirst();
         }
 
+
+
+        
         
 
         if(sumTable >= 10){

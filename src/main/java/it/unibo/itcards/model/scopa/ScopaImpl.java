@@ -1,4 +1,4 @@
-package it.unibo.itcards.model;
+package it.unibo.itcards.model.scopa;
 
 
 import static java.util.stream.Collectors.toSet;
@@ -12,6 +12,8 @@ import java.util.Comparator;
 
 
 import it.unibo.itcards.commons.Card;
+import it.unibo.itcards.model.InGameException;
+import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 
@@ -148,23 +150,22 @@ public class ScopaImpl extends Model {
         return allPlayedCard;
     }
 
+    private void calculatePoints(Map<Player, Integer> playersScore, Optional<Player> player){
+        int INCREMENT = 1;
+
+        player.ifPresent(winPlayer -> 
+        playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+INCREMENT));
+    }
+
 
     public Player winner(){
-        ScopaScore score = new ScopaScore(populateAllPlayedCardsMap());
+        ScopaScoreImpl score = new ScopaScoreImpl(populateAllPlayedCardsMap());
         Map<Player, Integer> playersScore = new HashMap<>();
         
-        score.winnerCards().ifPresent(winPlayer -> 
-            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
-        );
-        score.winnnerPrimiera().ifPresent(winPlayer -> 
-            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
-        );
-        score.winnerCoins().ifPresent(winPlayer -> 
-            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
-        );
-        score.winnerSevenOfCoins().ifPresent(winPlayer -> 
-            playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+1)
-        );
+        calculatePoints(playersScore, score.winnerCards());
+        calculatePoints(playersScore, score.winnerCoins());
+        calculatePoints(playersScore, score.winnerSevenOfCoins());
+
         scope.entrySet().stream().forEach(entry ->
             playersScore.put(entry.getKey(), playersScore.getOrDefault(entry.getKey(), 0)+entry.getValue())
         );

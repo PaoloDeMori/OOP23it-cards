@@ -1,9 +1,9 @@
-package it.unibo.itcards.model.scopa;
+package it.unibo.itcards.model.scopa.AIScopa;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.Model;
-import it.unibo.itcards.model.ScopaImpl;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
+import it.unibo.itcards.model.scopa.ScopaImpl;
 
 public class AIScopaEasy extends AIPlayer {
 

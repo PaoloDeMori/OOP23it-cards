@@ -13,11 +13,11 @@ import it.unibo.itcards.model.baseelements.player.Player;
 
 public abstract class Model implements Observable{
 
-    Deck deck;
-    List<Player> players;
-    Player currentPlayer;
-    List<Observer> observers = new ArrayList<>();
-    Audio audio;
+    protected Deck deck;
+    protected List<Player> players;
+    protected Player currentPlayer;
+    protected List<Observer> observers = new ArrayList<>();
+    private Audio audio;
 
     /**
      * Constructs a new model with a shuffled deck.

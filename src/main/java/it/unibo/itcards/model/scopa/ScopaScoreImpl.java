@@ -1,4 +1,4 @@
-package it.unibo.itcards.model;
+package it.unibo.itcards.model.scopa;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import it.unibo.itcards.model.baseelements.cards.Suit;
 import it.unibo.itcards.model.baseelements.player.Player;
 
 
-public class ScopaScore {
+public class ScopaScoreImpl implements ScopaScore{
     
     private static final Map<Integer, Integer> scorePrimiera = new HashMap<>();
     private Map<Player, List<Card>> allPlayedCard = new HashMap<>();
@@ -28,7 +28,7 @@ public class ScopaScore {
         scorePrimiera.put(8,10);
     }
 
-    ScopaScore(Map<Player, List<Card>> allPlayedCard){
+    public ScopaScoreImpl(Map<Player, List<Card>> allPlayedCard){
         this.allPlayedCard = allPlayedCard;
     }
 
@@ -54,19 +54,23 @@ public class ScopaScore {
         return allPlayedCard.get(player).stream().anyMatch(card -> card.getSuit()==Suit.DENARI && card.getValue()==7);
     }
 
+    @Override
     public Optional<Player> winnerCards(){
         return allPlayedCard.entrySet().stream().max(Comparator.comparingInt(entry -> entry.getValue().size())).map(entry -> entry.getKey());
     }
 
+    @Override
     public Optional<Player> winnerSevenOfCoins(){
         return allPlayedCard.keySet().stream().filter(player -> hasSevenOfCoins(player)).findFirst();
     }
 
+    @Override
     public Optional<Player> winnerCoins (){
         return allPlayedCard.keySet().stream().max(Comparator.comparingInt(player -> countCoins(player)));
     }
 
-    public Optional<Player> winnnerPrimiera(){
+    @Override
+    public Optional<Player> winnerPrimiera(){
         return allPlayedCard.keySet().stream().max(Comparator.comparingInt(player -> getPrimieraScore(player)));
     }
 
