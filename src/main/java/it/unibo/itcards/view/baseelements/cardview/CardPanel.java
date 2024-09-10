@@ -1,8 +1,11 @@
 package it.unibo.itcards.view.baseelements.cardview;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.awt.Image;
+import java.awt.Graphics;
 
 /**
  * this class represent a card like a panel.
