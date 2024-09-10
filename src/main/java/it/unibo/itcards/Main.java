@@ -22,9 +22,9 @@ public final class Main {
      * @param args an array of command line arguments
      */
     public static void main(final String[] args) {
-        Controller controller = new ControllerImpl();
-        BriscolaView briscolaView = new BriscolaView(Dim.MEDIUM, controller);
-        BriscolaImpl briscola = new BriscolaImpl(new PlayerImpl("gino", 3), new DifficultBriscolaAIPlayer("bot", 3));
+        final Controller controller = new ControllerImpl();
+        final BriscolaView briscolaView = new BriscolaView(Dim.MEDIUM, controller);
+        final BriscolaImpl briscola = new BriscolaImpl(new PlayerImpl("gino", 3), new DifficultBriscolaAIPlayer("bot", 3));
         controller.init(briscola, briscolaView);
         briscola.start();
         briscolaView.start();

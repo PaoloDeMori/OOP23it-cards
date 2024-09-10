@@ -12,7 +12,7 @@ import java.awt.Image;
  * this class represent a card like a button.
  */
 public class CardButton extends JButton {
-    private int height;
+    private final int height;
     private int width;
     private Image resizedImg;
 
@@ -28,7 +28,7 @@ public class CardButton extends JButton {
         if (im != null) {
             width = (int) (height * ImagesHelper.getImageRatio(im));
             resizedImg = ImagesHelper.resizeCardShapedImage(im, height);
-            ImageIcon icon = new ImageIcon(resizedImg);
+            final ImageIcon icon = new ImageIcon(resizedImg);
             this.setIcon(icon);
             this.setMaximumSize(new Dimension(width, height));
         } else {

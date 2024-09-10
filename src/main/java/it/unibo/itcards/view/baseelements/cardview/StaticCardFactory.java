@@ -37,12 +37,12 @@ public final class StaticCardFactory {
             image = null;
         }
         if (image != null) {
-            int height = (int) dimension.getHeight();
-            int width = (int) (height * (double) image.getWidth() / image.getHeight());
+            final int height = (int) dimension.getHeight();
+            final int width = (int) (height * (double) image.getWidth() / image.getHeight());
             d = new Dimension(width, height);
             return new CardPanel(image, (int) d.getHeight(), card.toString());
         }
-        JPanel p = new JPanel();
+        final JPanel p = new JPanel();
         p.add(new JLabel("Opponent Card"));
         return p;
     }
@@ -64,12 +64,12 @@ public final class StaticCardFactory {
             image = null;
         }
         if (image != null) {
-            int height = (int) dimension.getHeight();
-            int width = (int) (height * (double) image.getWidth() / image.getHeight());
+            final int height = (int) dimension.getHeight();
+            final int width = (int) (height * (double) image.getWidth() / image.getHeight());
             d = new Dimension(width, height);
             return new CardPanel(image, (int) d.getHeight(), name);
         }
-        JPanel p = new JPanel();
+        final JPanel p = new JPanel();
         p.add(new JLabel("Opponent Card"));
         return p;
 

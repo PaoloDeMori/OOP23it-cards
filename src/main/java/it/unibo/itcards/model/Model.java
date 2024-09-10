@@ -148,7 +148,7 @@ public abstract class Model implements Observable {
      */
     @Override
     public void notifyObserver() {
-        for (var observer : observers) {
+        for (final var observer : observers) {
             observer.update();
         }
 

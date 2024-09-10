@@ -20,14 +20,15 @@ public class PlayerImpl implements Player {
     private final Hand cards;
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
-    private Card selectedCard = null;
-    private int points = 0;
+    private Card selectedCard;
+    private int points;
 
     /**
      * Sets the points of the player.
      *
      * @param points the points to set
      */
+    @Override
     public void setPoints(final int points) {
         this.points = points;
     }
@@ -37,6 +38,7 @@ public class PlayerImpl implements Player {
      *
      * @return the points of the player
      */
+    @Override
     public int getPoints() {
         return points;
     }
@@ -197,7 +199,7 @@ public class PlayerImpl implements Player {
      * @param hand
      */
     public void setHand(final List<Card> hand) {
-        for (Card card : hand) {
+        for (final Card card : hand) {
             cards.add(card);
         }
     }
@@ -217,6 +219,7 @@ public class PlayerImpl implements Player {
      *
      * @param card the card to select
      */
+    @Override
     public void selectCard(final Card card) {
         this.selectedCard = card;
     }

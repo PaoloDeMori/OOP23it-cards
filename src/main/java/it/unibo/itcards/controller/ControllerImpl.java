@@ -50,6 +50,7 @@ public class ControllerImpl implements Controller {
      * 
      * @param card the card to play, when this method is called by a user.
      */
+    @Override
     public void playturn(final Card card) {
         new Thread(() -> {
             model.getCurrentPlayer().selectCard(card);
@@ -109,7 +110,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public List<Card> getHand() {
-        List<Player> players = this.model.getPlayers();
+        final List<Player> players = this.model.getPlayers();
         int pos = 0;
         Player p = players.get(pos);
         while (p.isAi()) {
@@ -129,7 +130,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public int getOpponentHand() {
-        List<Player> players = this.model.getPlayers();
+        final List<Player> players = this.model.getPlayers();
         int pos = 0;
         Player p = players.get(pos);
         while (!(p.isAi())) {
@@ -226,6 +227,7 @@ public class ControllerImpl implements Controller {
      * 
      * @return the points of the players
      */
+    @Override
     public List<Integer> getPlayerPoints() {
         return this.model.getPlayersPoints();
     }

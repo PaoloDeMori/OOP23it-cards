@@ -45,11 +45,11 @@ public class EasyBriscolaAIPlayer extends AIPlayer {
      */
     @Override
     public Card chooseCard() {
-        List<Card> hand = getCards();
+        final List<Card> hand = getCards();
         Card tempCard = null;
         if (this.game.playedCards().size() == 0) {
 
-            for (var card : hand) {
+            for (final var card : hand) {
                 if (tempCard == null) {
                     tempCard = card;
                 } else if (BriscolaHelper.getCardValue(tempCard) > BriscolaHelper.getCardValue(card)) {
@@ -63,9 +63,9 @@ public class EasyBriscolaAIPlayer extends AIPlayer {
             }
             return tempCard;
         } else {
-            Card cardOnTable = this.game.playedCards().get(0);
-            for (var card : hand) {
-                if ((BriscolaHelper.isWinner(card, cardOnTable, this.game.getBriscola()))) {
+            final Card cardOnTable = this.game.playedCards().get(0);
+            for (final var card : hand) {
+                if (BriscolaHelper.isWinner(card, cardOnTable, this.game.getBriscola())) {
                     if (tempCard == null) {
                         tempCard = card;
                     } else {
@@ -76,7 +76,7 @@ public class EasyBriscolaAIPlayer extends AIPlayer {
                 }
             }
             if (tempCard == null) {
-                for (var card : hand) {
+                for (final var card : hand) {
                     if (tempCard == null) {
                         tempCard = card;
                     } else if (BriscolaHelper.getCardValue(tempCard) > BriscolaHelper.getCardValue(card)) {

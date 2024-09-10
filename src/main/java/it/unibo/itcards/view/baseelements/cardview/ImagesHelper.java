@@ -28,8 +28,8 @@ public final class ImagesHelper {
      * @throws IOException if an I/O error occurs while reading the image
      */
     public static BufferedImage loadImage(final Card card) throws IOException {
-        String path = "/CardsImages/" + card.toString() + ".jpeg";
-        BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
+        final String path = "/CardsImages/" + card.toString() + ".jpeg";
+        final BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
         return image;
     }
 
@@ -40,8 +40,8 @@ public final class ImagesHelper {
      * @return the loaded card image
      */
     public static BufferedImage loadImage(final String string) throws IOException {
-        String path = "/CardsImages/" + string + ".jpeg";
-        BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
+        final String path = "/CardsImages/" + string + ".jpeg";
+        final BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
         return image;
     }
 
@@ -52,7 +52,7 @@ public final class ImagesHelper {
      * @return the ratio of the width to the height of the image
      */
     public static double getImageRatio(final BufferedImage image) {
-        double ratio = ((double) image.getWidth() / image.getHeight());
+        final double ratio = ((double) image.getWidth() / image.getHeight());
         return ratio;
     }
 
@@ -65,7 +65,7 @@ public final class ImagesHelper {
      */
     public static Image resizeCardShapedImage(final BufferedImage image, final int height) {
         Image resizedImg;
-        int width = (int) (height * (double) image.getWidth() / image.getHeight());
+        final int width = (int) (height * (double) image.getWidth() / image.getHeight());
         resizedImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return resizedImg;
     }
