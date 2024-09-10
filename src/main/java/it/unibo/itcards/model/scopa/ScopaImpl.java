@@ -20,7 +20,7 @@ import it.unibo.itcards.model.baseelements.player.Player;
 public class ScopaImpl extends Model {
     private List<Card> cardsOnTable;
     private Map<Player, Integer> scope;
-    //private Map<Player, Set<Card>> scope; 
+    private Map<Player, Integer> playersScore;
 
     public ScopaImpl(Player player , Player bot){
         super();
@@ -84,11 +84,11 @@ public class ScopaImpl extends Model {
     }
 
 
-    private List<List<Card>> getSubsetsOnTable() {
+    public List<List<Card>> getSubsetsOnTable(List<Card> table) {
         List<List<Card>> subsetCollection = new ArrayList<>();
         subsetCollection.add(new ArrayList<>());
 
-        for (Card card : getCardsOnTable()) {
+        for (Card card : table) {
             for (int i = 0; i < subsetCollection.size(); i++) {
                 List<Card> subset = new ArrayList<>(subsetCollection.get(i));
                 subset.add(card);
@@ -102,9 +102,9 @@ public class ScopaImpl extends Model {
     }
 
 
-    private List<List<Card>> getShortestSubsets(int cardPlayedValue) {
+    public List<List<Card>> getShortestSubsets(int cardPlayedValue) {
         List<List<Card>> shortestSubsets = new ArrayList<>();
-        for (List<Card> subset : getSubsetsOnTable()) {
+        for (List<Card> subset : getSubsetsOnTable(getCardsOnTable())) {
             if (subset.stream().mapToInt(card -> card.getValue()).sum() == cardPlayedValue &&
                     (shortestSubsets.isEmpty() || shortestSubsets.get(0).size() == subset.size())) {
 
@@ -160,7 +160,7 @@ public class ScopaImpl extends Model {
 
     public Player winner(){
         ScopaScoreImpl score = new ScopaScoreImpl(populateAllPlayedCardsMap());
-        Map<Player, Integer> playersScore = new HashMap<>();
+        playersScore = new HashMap<>();
         
         calculatePoints(playersScore, score.winnerCards());
         calculatePoints(playersScore, score.winnerCoins());
@@ -173,20 +173,9 @@ public class ScopaImpl extends Model {
         return playersScore.entrySet().stream().max(Comparator.comparingInt(entry -> entry.getValue())).map(entry -> entry.getKey()).get();
     }
     
-    /* 
-    public Set<Card> getScope(Player player){
-        return this.scope.get(player);
-    }
-    */
-
-    
-
-    
-    //inutile
     @Override
     public int points(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'points'");
+        return playersScore.get(player);
     }
 
     @Override
@@ -197,8 +186,18 @@ public class ScopaImpl extends Model {
 
     @Override
     public List<String> getPlayersNames() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayersNames'");
+        List<String> nameList = new ArrayList<>();
+        for (Player player : players) {
+            nameList.add(player.getName());
+        }
+        return nameList;
     }
     
+
+    public List<Card> getAllPlayerCards(){
+        List<Card> allPlayedCards = new ArrayList<>();
+        players.stream().forEach(player -> allPlayedCards.addAll(player.getPlayedCards()));
+        return allPlayedCards;
+    }
+
 }

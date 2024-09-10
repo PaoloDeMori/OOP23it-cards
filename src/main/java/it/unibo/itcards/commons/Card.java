@@ -1,5 +1,6 @@
 package it.unibo.itcards.commons;
 
+import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 
 /**
@@ -37,4 +38,11 @@ public abstract class Card {
      * @return the Suit of the card.
      */
     public abstract Suit getSuit();
+
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof Card 
+                && ((Card) obj).getValue() == this.getValue()
+                && ((Card) obj).getSuit() == this.getSuit();
+    }
 }

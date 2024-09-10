@@ -141,4 +141,5 @@ public abstract class Model implements Observable {
     public abstract List<Integer> getPlayersPoints();
 
     public abstract List<String> getPlayersNames();
+
 }
