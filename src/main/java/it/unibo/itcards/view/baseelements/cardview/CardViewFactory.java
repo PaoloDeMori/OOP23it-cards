@@ -10,14 +10,28 @@ import javax.swing.JPanel;
 
 import it.unibo.itcards.commons.Card;
 
+/**
+ * this class allow to create a card view.
+ */
 public class CardViewFactory {
 
     private Map<Card, BufferedImage> imagesCache;
 
+    /**
+     * this method create a card view like an hashmap.
+     */
     public CardViewFactory() {
         this.imagesCache = new HashMap<>();
     }
 
+    /**
+     * Builds a CardButton instance for the given Card, ActionListener and Dimension.
+     *
+     * @param card  the Card to be associated with the button
+     * @param al    the ActionListener to be added to the button
+     * @param d     the Dimension of the button
+     * @return      the CardButton instance
+     */
     public CardButton buildButton(final Card card, final ActionListener al, final Dimension d) {
         BufferedImage image;
         CardButton cp;
@@ -38,6 +52,13 @@ public class CardViewFactory {
         return cp;
     }
 
+    /**
+     * Builds a JPanel representing a card view.
+     *
+     * @param card  the card to be represented in the panel
+     * @param d     the dimension of the panel
+     * @return      a JPanel representing the card view
+     */
     public JPanel buildPanel(final Card card, final Dimension d) {
         BufferedImage image;
         JPanel cp;

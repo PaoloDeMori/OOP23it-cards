@@ -8,9 +8,19 @@ import it.unibo.itcards.model.briscola.DifficultBriscolaAIPlayer;
 import it.unibo.itcards.view.baseelements.Dim;
 import it.unibo.itcards.view.briscola.BriscolaView;
 
+/**
+ * The main class which starts the game and the view. It is the entry point of
+ * the application.
+ */
 public final class Main {
-    private Main(){}
+    private Main() {
+    }
 
+    /**
+     * The main entry point of the Java application.
+     *
+     * @param args an array of command line arguments
+     */
     public static void main(final String[] args) {
         Controller controller = new ControllerImpl();
         BriscolaView briscolaView = new BriscolaView(Dim.MEDIUM, controller);

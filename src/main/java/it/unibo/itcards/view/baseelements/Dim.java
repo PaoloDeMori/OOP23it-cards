@@ -26,6 +26,11 @@ public enum Dim {
         this.d = d;
     }
 
+    /**
+     * Returns the dimension associated with the current Dim instance.
+     *
+     * @return the dimension
+     */
     public Dimension getDimension() {
         return this.d;
     }

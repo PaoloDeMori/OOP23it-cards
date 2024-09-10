@@ -7,6 +7,9 @@ import it.unibo.itcards.model.Model;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 
+/**
+ * The controller of this application.
+ */
 public interface Controller {
 
     /**
@@ -62,15 +65,41 @@ public interface Controller {
      */
     int deckNumberOfCards();
 
+    /**
+     * Return the players of the game.
+     * 
+     * @return the players of the game
+     */
     List<Player> getPlayers();
 
+    /**
+     * Start the audio of the game.
+     */
     void startAudio();
 
+    /**
+     * Stop the audio of the game.
+     */
     void stopAudio();
 
+    /**
+     * Return the current player of the game.
+     * 
+     * @return the current player
+     */
     Player getCurrentPlayer();
 
+    /**
+     * Return the points of the players of the game.
+     * 
+     * @return the points of the players
+     */
     List<Integer> getPlayerPoints();
 
+    /**
+     * Return the names of the players of the game.
+     * 
+     * @return the names of the players
+     */
     List<String> getPlayerNames();
 }

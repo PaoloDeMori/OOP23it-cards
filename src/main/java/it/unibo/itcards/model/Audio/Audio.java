@@ -8,10 +8,17 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * This class represents an audio clip.
+ */
 public class Audio {
     private Clip clip;
 
-    // Costruttore che carica il file audio
+    /**
+     * This constructor initializes the audio clip.
+     * 
+     * @throws UnsupportedAudioFileException if the audio file is not supported
+     */
     public Audio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         String path = "/Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(this.getClass().getResource(path));
@@ -35,14 +42,23 @@ public class Audio {
         }
     }
 
+    /**
+     * Stops playing the audio clip.
+     */
     public void stop() {
         this.clip.stop();
     }
 
+    /**
+     * Resets the position of the audio clip to the beginning.
+     */
     public void reset() {
         clip.setFramePosition(0);
     }
 
+    /**
+     * Closes the audio clip.
+     */
     public void close() {
         clip.close();
     }

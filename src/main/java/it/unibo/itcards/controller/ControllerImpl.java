@@ -172,7 +172,9 @@ public class ControllerImpl implements Controller {
      * method of the model
      * using the playCard method of the Player interface, to play in the model the
      * card the player decided to play.
-     * @param card the card the player wants to play, or null if it is called by a bot
+     * 
+     * @param card the card the player wants to play, or null if it is called by a
+     *             bot
      */
     private void play(final Card card) {
         try {
@@ -183,29 +185,57 @@ public class ControllerImpl implements Controller {
         }
     }
 
+    /**
+     * Returns the list of players in the game.
+     *
+     * @return the list of players
+     */
     @Override
     public List<Player> getPlayers() {
         return this.model.getPlayers();
     }
 
+    /**
+     * Start the audio of the game.
+     */
     @Override
     public void startAudio() {
         this.model.startAudio();
     }
 
+    /**
+     * Stop the audio of the game.
+     */
     @Override
     public void stopAudio() {
         this.model.stopAudio();
     }
 
+    /**
+     * Returns the current player of the game.
+     *
+     * @return the current player
+     */
+    @Override
     public Player getCurrentPlayer() {
         return this.model.getCurrentPlayer();
     }
 
+    /**
+     * Return the points of the players of the game.
+     * 
+     * @return the points of the players
+     */
     public List<Integer> getPlayerPoints() {
         return this.model.getPlayersPoints();
     }
 
+    /**
+     * Return the names of the players of the game.
+     * 
+     * @return the names of the players
+     */
+    @Override
     public List<String> getPlayerNames() {
         return this.model.getPlayersNames();
     }

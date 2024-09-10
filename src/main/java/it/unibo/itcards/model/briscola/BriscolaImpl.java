@@ -13,6 +13,9 @@ import it.unibo.itcards.model.PlayerIterator;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 
+/**
+ * This class implements the Briscola game.
+ */
 public class BriscolaImpl extends Model {
 
     private static final int NUMBER_OF_PLAYERS = 2;
@@ -56,6 +59,11 @@ public class BriscolaImpl extends Model {
         return cardsOnTable;
     }
 
+    /**
+     * Return true if the game is over, false otherwise.
+     * 
+     * @return true if the game is over, false otherwise.
+     */
     @Override
     public boolean isGameOver() {
         if (this.getDeck().numberOfCards() > 0) {
@@ -255,6 +263,7 @@ public class BriscolaImpl extends Model {
 
     /**
      * Sets the Briscola card for the game.
+     * 
      * @param briscolaCard the card to be set as the Briscola.
      */
     public void setBriscola(final Card briscolaCard) {
@@ -263,6 +272,7 @@ public class BriscolaImpl extends Model {
 
     /**
      * Returns the Briscola card of the game.
+     * 
      * @return the card used as Briscola
      */
     public Card getBriscola() {
@@ -324,6 +334,12 @@ public class BriscolaImpl extends Model {
         this.iterator = iterator;
     }
 
+    /**
+     * Returns the points of players in the game.
+     *
+     * @return the points of players
+     */
+    @Override
     public List<Integer> getPlayersPoints() {
         List<Player> players = new ArrayList<>();
         players.addAll(this.getPlayers());
@@ -342,6 +358,11 @@ public class BriscolaImpl extends Model {
 
     }
 
+    /**
+     * Returns the names of the players in the game.
+     *
+     * @return the names of the players
+     */
     @Override
     public List<String> getPlayersNames() {
         List<Player> players = new ArrayList<>();

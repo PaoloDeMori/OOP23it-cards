@@ -23,10 +23,20 @@ public class PlayerImpl implements Player {
     private Card selectedCard = null;
     private int points = 0;
 
+    /**
+     * Sets the points of the player.
+     *
+     * @param points the points to set
+     */
     public void setPoints(final int points) {
         this.points = points;
     }
 
+    /**
+     * Returns the points of the player.
+     *
+     * @return the points of the player
+     */
     public int getPoints() {
         return points;
     }
@@ -171,6 +181,11 @@ public class PlayerImpl implements Player {
         this.playedCards.add(card);
     }
 
+    /**
+     * Returns a string representation of the player's name.
+     *
+     * @return  the name of the player
+     */
     @Override
     public String toString() {
         return this.name;
@@ -187,15 +202,32 @@ public class PlayerImpl implements Player {
         }
     }
 
+    /**
+     * Returns true if the player is an AI, false otherwise.
+     * 
+     * @return true if the player is an AI, false otherwise
+     */
     @Override
     public boolean isAi() {
         return false;
     }
 
+    /**
+     * Selects a card for the player.
+     *
+     * @param card the card to select
+     */
     public void selectCard(final Card card) {
         this.selectedCard = card;
     }
 
+    /**
+     * Returns the card selected by the player.
+     *
+     * @return the card selected by the player
+     * @throws InvalidOperationException if no card has been selected
+     */
+    @Override
     public Card chooseCard() throws InvalidOperationException {
         return this.playCard(selectedCard);
     }

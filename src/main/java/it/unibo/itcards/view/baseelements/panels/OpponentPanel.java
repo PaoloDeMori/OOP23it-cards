@@ -4,10 +4,23 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+/**
+ * this class represent the opponent panel.
+ */
 public abstract class OpponentPanel extends JPanel {
 
+    /**
+     * initialize the panel.
+     * 
+     * @param d dimension
+     */
     public abstract void init(Dimension d);
 
+    /**
+     * set the opponent cards.
+     * 
+     * @param n number of cards
+     */
     public abstract void setOpponentCards(int n);
 
 }
