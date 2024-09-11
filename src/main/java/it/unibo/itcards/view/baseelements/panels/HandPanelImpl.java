@@ -1,4 +1,4 @@
-package it.unibo.itcards.view.briscola;
+package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
@@ -7,21 +7,20 @@ import java.util.List;
 
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
-import it.unibo.itcards.view.baseelements.panels.HandPanel;
 
 /**
  * A custom panel for displaying a player's hand in the Briscola game. 
  * This panel uses a FlowLayout to arrange the card buttons horizontally and can be dynamically updated
  * based on the cards in the player's hand.
  */
-public class HandPanelBriscola extends HandPanel {
+public class HandPanelImpl extends HandPanel {
     private final FlowLayout layout;
 
     /**
      * Constructor that initializes the panel with a FlowLayout aligned in the center.
      * The panel background is set to be invisible to match the rest of the UI.
      */
-    public HandPanelBriscola() {
+    public HandPanelImpl() {
         layout = new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP);
         this.setBackground(View.INVISIBLE_COLOR);
     }

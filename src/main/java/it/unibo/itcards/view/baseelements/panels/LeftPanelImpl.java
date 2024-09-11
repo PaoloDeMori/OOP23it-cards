@@ -1,4 +1,4 @@
-package it.unibo.itcards.view.briscola;
+package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -7,19 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import it.unibo.itcards.view.View;
-import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 
 /**
  * A panel that represents the left side of the Briscola game view. 
  * It displays the player and bot names, and provides a placeholder for future functionalities.
  * This class extends the {@link LateralPanel} class and customizes it for the Briscola game.
  */
-public class LeftPanelBriscola extends LateralPanel {
+public class LeftPanelImpl extends LateralPanel {
 
     /**
      * Constructor that initializes the panel with default settings inherited from LateralPanel.
      */
-    public LeftPanelBriscola() {
+    public LeftPanelImpl() {
         super();
     }
 

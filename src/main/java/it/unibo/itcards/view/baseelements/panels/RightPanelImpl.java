@@ -1,4 +1,4 @@
-package it.unibo.itcards.view.briscola;
+package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -7,19 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import it.unibo.itcards.view.View;
-import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 
 /**
  * RightPanelImpl.
  */
-public class RightPanelBriscola extends LateralPanel {
+public class RightPanelImpl extends LateralPanel {
     private JLabel bot = new JLabel();
     private JLabel player = new JLabel();
 
     /**
      * RightPanelImpl.
      */
-    public RightPanelBriscola() {
+    public RightPanelImpl() {
         super();
     }
 

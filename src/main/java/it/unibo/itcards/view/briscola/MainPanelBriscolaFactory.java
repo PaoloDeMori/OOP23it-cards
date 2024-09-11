@@ -2,6 +2,11 @@ package it.unibo.itcards.view.briscola;
 
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanel;
 import it.unibo.itcards.view.baseelements.mainpanel.MainPanelBuilder;
+import it.unibo.itcards.view.baseelements.panels.HandPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.LeftPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.OpponentPanelImpl;
+import it.unibo.itcards.view.baseelements.panels.RightPanelImpl;
+
 import java.awt.Dimension;
 
 /**
@@ -22,10 +27,10 @@ public final class MainPanelBriscolaFactory {
      */
     public static MainPanel build(final Dimension d) {
         return new MainPanelBuilder(d)
-                .addHandPanel(new HandPanelBriscola())
-                .addOpponentPanel(new OpponentPanelBriscola())
-                .addLeftPanel(new LeftPanelBriscola())
-                .addRightPanel(new RightPanelBriscola())
+                .addHandPanel(new HandPanelImpl())
+                .addOpponentPanel(new OpponentPanelImpl())
+                .addLeftPanel(new LeftPanelImpl())
+                .addRightPanel(new RightPanelImpl())
                 .addCentralPanel(new CentralPanelBriscola())
                 .build();
     }

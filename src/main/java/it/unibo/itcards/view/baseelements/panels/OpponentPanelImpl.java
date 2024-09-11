@@ -1,10 +1,9 @@
-package it.unibo.itcards.view.briscola;
+package it.unibo.itcards.view.baseelements.panels;
 
 import java.awt.FlowLayout;
 
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.cardview.StaticCardFactory;
-import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
 
 import java.awt.Dimension;
 
@@ -13,14 +12,14 @@ import java.awt.Dimension;
  * This panel uses a FlowLayout to arrange the back of the opponent's cards in a visually centered manner.
  * It dynamically updates based on the number of cards the opponent has.
  */
-public class OpponentPanelBriscola extends OpponentPanel {
+public class OpponentPanelImpl extends OpponentPanel {
     private FlowLayout layout;
 
     /**
      * Constructor that initializes the layout and appearance of the opponent's panel.
      * The panel uses a centered FlowLayout and has an invisible background.
      */
-    public OpponentPanelBriscola() {
+    public OpponentPanelImpl() {
         layout = new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP);
         this.setBackground(View.INVISIBLE_COLOR);
     }
