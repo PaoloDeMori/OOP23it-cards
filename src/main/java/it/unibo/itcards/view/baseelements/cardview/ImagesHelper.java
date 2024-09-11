@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import it.unibo.itcards.commons.Card;
 
 import java.io.IOException;
+import java.net.URL;
 
 public final class ImagesHelper {
 
@@ -15,14 +16,16 @@ public final class ImagesHelper {
     }
 
     public static BufferedImage loadImage(final Card card) throws IOException {
-        String path = "/CardsImages/" + card.toString() + ".jpeg";
-        BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
+        String path = "CardsImages/" + card.toString() + ".jpeg";
+        final URL imgURL = ClassLoader.getSystemResource(path);
+        BufferedImage image = ImageIO.read(imgURL);
         return image;
     }
 
     public static BufferedImage loadImage(final String string) throws IOException {
-        String path = "/CardsImages/" + string + ".jpeg";
-        BufferedImage image = ImageIO.read(ImagesHelper.class.getResource(path));
+        String path = "CardsImages/" + string + ".jpeg";
+        final URL imgURL = ClassLoader.getSystemResource(path);
+        BufferedImage image = ImageIO.read(imgURL);
         return image;
     }
 

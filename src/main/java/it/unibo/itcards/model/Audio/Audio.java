@@ -1,6 +1,7 @@
 package it.unibo.itcards.model.Audio;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -13,8 +14,9 @@ public class Audio {
 
     // Costruttore che carica il file audio
     public Audio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        String path = "/Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(this.getClass().getResource(path));
+        String path = "Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
+        final URL imgURL = ClassLoader.getSystemResource(path);
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(imgURL);
         this.clip = AudioSystem.getClip();
         this.clip.open(audioStream);
     }
