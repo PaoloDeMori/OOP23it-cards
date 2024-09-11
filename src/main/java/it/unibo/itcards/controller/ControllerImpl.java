@@ -100,6 +100,7 @@ public class ControllerImpl implements Controller {
      * execution of this program.
      */
     private void error() {
+        this.stopAudio();
         System.exit(0);
     }
 
@@ -165,6 +166,7 @@ public class ControllerImpl implements Controller {
      */
     private void end() {
         this.view.stop();
+        this.stopAudio();
     }
 
     /**

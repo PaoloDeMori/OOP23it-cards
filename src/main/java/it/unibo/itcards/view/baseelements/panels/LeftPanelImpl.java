@@ -11,7 +11,7 @@ import it.unibo.itcards.view.View;
 /**
  * A panel that represents the left side of the Briscola game view. 
  * It displays the player and bot names, and provides a placeholder for future functionalities.
- * This class extends the {@link LateralPanel} class and customizes it for the Briscola game.
+ * This class extends the LateralPanel class and customizes it for the Briscola game.
  */
 public class LeftPanelImpl extends LateralPanel {
 
@@ -24,7 +24,7 @@ public class LeftPanelImpl extends LateralPanel {
 
     /**
      * Sets the given panel to be displayed in the center of the layout. This method 
-     * places the provided panel in the center region of the {@link BorderLayout}.
+     * places the provided panel in the center region of the BorderLayout.
      * 
      * @param panel The JPanel to be added in the center of the layout.
      */
@@ -35,7 +35,7 @@ public class LeftPanelImpl extends LateralPanel {
 
     /**
      * An unimplemented method meant to set the points for the bot and player. 
-     * This method currently throws an {@link UnsupportedOperationException} as setting points is not supported in this panel.
+     * This method currently throws an  UnsupportedOperationExceptio as setting points is not supported in this panel.
      * 
      * @param botPoints The points of the bot.
      * @param playerPoint The points of the player.

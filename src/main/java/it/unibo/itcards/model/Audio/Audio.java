@@ -49,6 +49,7 @@ public class Audio {
      */
     public void stop() {
         this.clip.stop();
+        this.clip.close();
     }
 
     /**
