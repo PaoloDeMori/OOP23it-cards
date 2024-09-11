@@ -13,6 +13,9 @@ import it.unibo.itcards.model.PlayerIterator;
 import it.unibo.itcards.model.baseelements.player.AIPlayer;
 import it.unibo.itcards.model.baseelements.player.Player;
 
+/**
+ * This class implements the Briscola game.
+ */
 public class BriscolaImpl extends Model {
 
     private static final int NUMBER_OF_PLAYERS = 2;
@@ -50,19 +53,24 @@ public class BriscolaImpl extends Model {
     public List<Card> getCardsOnTable() {
         final List<Card> cardsOnTable = new ArrayList<>();
         cardsOnTable.add(0, briscola);
-        for (var card : playedCards) {
+        for (final var card : playedCards) {
             cardsOnTable.add(card);
         }
         return cardsOnTable;
     }
 
+    /**
+     * Return true if the game is over, false otherwise.
+     * 
+     * @return true if the game is over, false otherwise.
+     */
     @Override
     public boolean isGameOver() {
         if (this.getDeck().numberOfCards() > 0) {
             return false;
         }
 
-        for (var player : this.getPlayers()) {
+        for (final var player : this.getPlayers()) {
             if (player.getCards().size() > 0) {
                 return false;
             }
@@ -112,7 +120,7 @@ public class BriscolaImpl extends Model {
         } else {
             playedCards.add(card);
             player.addPlayedCard(card);
-            Player wonPlayer = winner(this.playedCards);
+            final Player wonPlayer = winner(this.playedCards);
             wonPlayer.addWonCards(new HashSet<Card>(playedCards));
             this.setCurrentPlayer(wonPlayer);
             iterator.setWinnerPlayer(wonPlayer);
@@ -137,9 +145,9 @@ public class BriscolaImpl extends Model {
      */
     @Override
     public int points(final Player player) {
-        Set<Card> cards = player.getWonCards();
+        final Set<Card> cards = player.getWonCards();
         int points = 0;
-        for (Card card : cards) {
+        for (final Card card : cards) {
             points += BriscolaHelper.getCardValue(card);
         }
         return points;
@@ -153,7 +161,7 @@ public class BriscolaImpl extends Model {
 
     @Override
     public void start() {
-        Optional<Card> card = this.getDeck().drawCard();
+        final Optional<Card> card = this.getDeck().drawCard();
         this.getPlayers().stream().filter(player -> player instanceof AIPlayer).map(player -> (AIPlayer) player)
                 .forEach(player -> player.setGame(this));
         if (card.isPresent()) {
@@ -181,14 +189,14 @@ public class BriscolaImpl extends Model {
             throw new InGameException("Not enough cards played");
         }
         if (BriscolaHelper.isWinner(playedCards.get(0), playedCards.get(1), briscola)) {
-            for (var player : this.getPlayers()) {
+            for (final var player : this.getPlayers()) {
                 if (player.getPlayedCards().contains(playedCards.get(0))) {
                     return player;
 
                 }
             }
         }
-        for (var player : this.getPlayers()) {
+        for (final var player : this.getPlayers()) {
             if (player.getPlayedCards().contains(playedCards.get(1))) {
                 return player;
             }
@@ -224,7 +232,7 @@ public class BriscolaImpl extends Model {
         if ((this.getDeck().numberOfCards() + 1) % NUMBER_OF_PLAYERS != 0) {
             throw new InGameException("Not enough cards to give");
         }
-        for (var player : this.getPlayers()) {
+        for (final var player : this.getPlayers()) {
             card = this.getDeck().drawCard();
             if (!card.isPresent()) {
                 throw new InGameException("Invalid card in the deck");
@@ -241,7 +249,7 @@ public class BriscolaImpl extends Model {
      */
     public Player winnePlayer() {
         Player winner = null;
-        for (var player : this.getPlayers()) {
+        for (final var player : this.getPlayers()) {
             if (winner == null) {
                 winner = player;
             } else {
@@ -255,6 +263,7 @@ public class BriscolaImpl extends Model {
 
     /**
      * Sets the Briscola card for the game.
+     * 
      * @param briscolaCard the card to be set as the Briscola.
      */
     public void setBriscola(final Card briscolaCard) {
@@ -263,6 +272,7 @@ public class BriscolaImpl extends Model {
 
     /**
      * Returns the Briscola card of the game.
+     * 
      * @return the card used as Briscola
      */
     public Card getBriscola() {
@@ -324,17 +334,23 @@ public class BriscolaImpl extends Model {
         this.iterator = iterator;
     }
 
+    /**
+     * Returns the points of players in the game.
+     *
+     * @return the points of players
+     */
+    @Override
     public List<Integer> getPlayersPoints() {
-        List<Player> players = new ArrayList<>();
+        final List<Player> players = new ArrayList<>();
         players.addAll(this.getPlayers());
-        List<Integer> points = new ArrayList<>();
+        final List<Integer> points = new ArrayList<>();
 
-        Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
-        Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
+        final Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
+        final Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
 
         if (bot.isPresent() && player.isPresent()) {
-            int botPoints = bot.get().getPoints();
-            int playerPoints = player.get().getPoints();
+            final int botPoints = bot.get().getPoints();
+            final int playerPoints = player.get().getPoints();
             points.add(playerPoints);
             points.add(botPoints);
         }
@@ -342,18 +358,23 @@ public class BriscolaImpl extends Model {
 
     }
 
+    /**
+     * Returns the names of the players in the game.
+     *
+     * @return the names of the players
+     */
     @Override
     public List<String> getPlayersNames() {
-        List<Player> players = new ArrayList<>();
+        final List<Player> players = new ArrayList<>();
         players.addAll(this.getPlayers());
-        List<String> names = new ArrayList<>();
+        final List<String> names = new ArrayList<>();
 
-        Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
-        Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
+        final Optional<Player> bot = players.stream().filter(Player::isAi).findFirst();
+        final Optional<Player> player = players.stream().filter(p -> !p.isAi()).findFirst();
 
         if (bot.isPresent() && player.isPresent()) {
-            String botPoints = bot.get().getName();
-            String playerPoints = player.get().getName();
+            final String botPoints = bot.get().getName();
+            final String playerPoints = player.get().getName();
             names.add(playerPoints);
             names.add(botPoints);
         }

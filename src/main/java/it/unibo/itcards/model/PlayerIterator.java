@@ -16,8 +16,8 @@ import it.unibo.itcards.model.baseelements.player.Player;
 
 public class PlayerIterator implements Iterator<Player> {
 
-    private List<Player> players;
-    private int current = 0;
+    private final List<Player> players;
+    private int current;
     private Player winnerPlayer;
 
     /**

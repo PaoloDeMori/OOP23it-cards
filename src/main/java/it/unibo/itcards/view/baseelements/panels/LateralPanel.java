@@ -7,6 +7,9 @@ import it.unibo.itcards.view.View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+/**
+ * this class represent the lateral panel.
+ */
 public abstract class LateralPanel extends JPanel {
 
     private BorderLayout layout;

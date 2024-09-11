@@ -78,13 +78,13 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * @return the calculated power of the card
      */
     private int getCardPower(final Card card) {
-        List<Card> totalPlayedCards = new ArrayList<>();
-        for (var player : game.getPlayers()) {
+        final List<Card> totalPlayedCards = new ArrayList<>();
+        for (final var player : game.getPlayers()) {
             totalPlayedCards.addAll(player.getPlayedCards());
         }
         totalPlayedCards.addAll(this.getCards());
         int value = 0;
-        for (Card playedCard : totalPlayedCards) {
+        for (final Card playedCard : totalPlayedCards) {
             if (BriscolaHelper.isWinner(playedCard, card, this.game.getBriscola())) {
                 value++;
             }
@@ -277,7 +277,7 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      */
     @Override
     public Card chooseCard() throws InvalidOperationException {
-        List<Card> hand = getCards();
+        final List<Card> hand = getCards();
         Card cardToPlay;
         if (this.game.playedCards().size() == 0) {
             if (hand.stream().anyMatch((card) -> card.getSuit() == this.game.getBriscola().getSuit())) {

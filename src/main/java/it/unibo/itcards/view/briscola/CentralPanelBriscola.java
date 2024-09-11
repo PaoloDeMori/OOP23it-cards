@@ -15,6 +15,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+/**
+ * A custom panel for the Briscola game that handles the display of cards, the
+ * player's turn, and the deck status. This panel is divided into left and
+ * right sections: the left for cards on the table, and the right for the deck
+ * and the number of cards remaining. It also dynamically updates based on
+ * player turns and game progress.
+ */
 public class CentralPanelBriscola extends CentralPanel {
 
     private BorderLayout layout;
@@ -32,6 +39,11 @@ public class CentralPanelBriscola extends CentralPanel {
     private static final int RIGHT_PANEL_WIDTH_RATIO = 5;
     private static final double DECK_PANEL_HEIGHT_RATIO = 1.2;
 
+    /**
+     * Constructor that initializes the layout and basic components of the panel.
+     * The panel includes a left section for cards and a right section for the deck
+     * and card count.
+     */
     public CentralPanelBriscola() {
         layout = new BorderLayout();
         this.setBackground(View.INVISIBLE_COLOR);
@@ -43,6 +55,15 @@ public class CentralPanelBriscola extends CentralPanel {
         numberOfCards.setForeground(View.PLAYER_COLOR);
     }
 
+    /**
+     * Updates the display of the cards currently on the table. This method removes
+     * any previously displayed cards and adds the new set of cards provided in the
+     * list. The first card in the list is treated as the Briscola card, which is
+     * displayed separately in the deck panel.
+     * 
+     * @param cards A list of JPanels representing the cards to be displayed on the
+     *              table.
+     */
     @Override
     public void setCardsOnTable(final List<JPanel> cards) {
         cardsPanel.removeAll();
@@ -58,6 +79,13 @@ public class CentralPanelBriscola extends CentralPanel {
         this.repaint();
     }
 
+    /**
+     * Updates the deck's display based on the number of cards remaining. If the
+     * deck is empty, it removes the deck panel. Otherwise, it adds or maintains
+     * the deck card's back image.
+     * 
+     * @param deckNumberOfCards The number of cards remaining in the deck.
+     */
     @Override
     public void setDeck(final int deckNumberOfCards) {
         this.numberOfCards.setText("Carte rimanenti " + Integer.toString(deckNumberOfCards));
@@ -75,6 +103,13 @@ public class CentralPanelBriscola extends CentralPanel {
         }
     }
 
+    /**
+     * Initializes the entire panel by setting its size, layout, and organizing the
+     * left and right sections. The left section displays the cards on the table,
+     * while the right section handles the deck and card count.
+     * 
+     * @param d The dimension of the panel.
+     */
     @Override
     public void init(final Dimension d) {
         this.setLayout(layout);
@@ -90,6 +125,11 @@ public class CentralPanelBriscola extends CentralPanel {
         this.repaint();
     }
 
+    /**
+     * Configures the left panel, which is responsible for displaying the cards on
+     * the table and notifying the user whose turn it is. The left panel contains
+     * the card panel and the player's turn indicator.
+     */
     private void setLeftPanel() {
 
         this.leftPanel.setLayout(new BorderLayout());
@@ -106,6 +146,14 @@ public class CentralPanelBriscola extends CentralPanel {
 
     }
 
+    /**
+     * Configures the right panel, which displays the deck and the number of
+     * remaining cards. This panel is resized dynamically based on the dimension
+     * provided, and it contains the deck's visual representation and the card
+     * counter.
+     * 
+     * @param d The dimension of the panel.
+     */
     private void setRightPanel(final Dimension d) {
         this.deckPanel = new JPanel(new FlowLayout());
         this.deckPanel.setBackground(View.INVISIBLE_COLOR);
@@ -123,6 +171,14 @@ public class CentralPanelBriscola extends CentralPanel {
 
     }
 
+    /**
+     * Updates the panel to reflect which player's turn it currently is. If the
+     * current player is an AI, the player's turn indicator is hidden; otherwise,
+     * it is shown.
+     * 
+     * @param player The current player, used to determine if the player is an AI or
+     *               a human.
+     */
     @Override
     public void updateCurrentPlayer(final Player player) {
         if (player.isAi()) {

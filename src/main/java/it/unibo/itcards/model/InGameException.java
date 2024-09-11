@@ -1,5 +1,8 @@
 package it.unibo.itcards.model;
 
+/**
+ * An exception that is thrown if the game is not in a valid state.
+ */
 public class InGameException extends RuntimeException {
     private static final long serialVersionUID = 3L;
 

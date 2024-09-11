@@ -46,8 +46,18 @@ public interface Deck {
      */
     int numberOfCards();
 
+    /**
+     * Return a string representation of the deck.
+     * 
+     * @return a string representation of the deck
+     */
     @Override
     String toString();
 
+    /**
+     * Returns a list of the cards in the deck.
+     * 
+     * @return a list of the cards in the deck
+     */
     List<Card> listOf();
 }

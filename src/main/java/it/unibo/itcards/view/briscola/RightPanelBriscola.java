@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import it.unibo.itcards.view.View;
 import it.unibo.itcards.view.baseelements.panels.LateralPanel;
 
+/**
+ * RightPanelImpl.
+ */
 public class RightPanelBriscola extends LateralPanel {
     private JLabel bot = new JLabel();
     private JLabel player = new JLabel();
@@ -20,13 +23,10 @@ public class RightPanelBriscola extends LateralPanel {
         super();
     }
 
-    @Override
     /**
      * set the points of the player in the right panel and the bot.
-     * 
-     * @param Botpoints
-     * @param Playerpoints
      */
+    @Override
     public void setPoints(final int botPoints, final int playerPoints) {
         JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP));
@@ -55,6 +55,11 @@ public class RightPanelBriscola extends LateralPanel {
         return;
     }
 
+    /**
+     * Sets the given panel to be displayed in the center of the layout.
+     * 
+     * @param panel The JPanel to be added in the center of the layout.
+     */
     @Override
     public void setCenter(final JPanel panel) {
 
