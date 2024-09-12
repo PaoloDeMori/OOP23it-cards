@@ -14,6 +14,7 @@ import it.unibo.itcards.view.baseelements.cardview.CardButton;
  * based on the cards in the player's hand.
  */
 public class HandPanelImpl extends HandPanel {
+    private static final long serialVersionUID = 3L;
     private final FlowLayout layout;
 
     /**
@@ -47,7 +48,7 @@ public class HandPanelImpl extends HandPanel {
     @Override
     public void setCards(final List<CardButton> cards) {
         this.removeAll();
-        for (CardButton cp : cards) {
+        for (final CardButton cp : cards) {
             this.add(cp);
         }
         revalidate();

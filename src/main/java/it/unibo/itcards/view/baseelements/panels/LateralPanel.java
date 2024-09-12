@@ -11,8 +11,8 @@ import java.awt.Dimension;
  * this class represent the lateral panel.
  */
 public abstract class LateralPanel extends JPanel {
-
-    private BorderLayout layout;
+    private static final long serialVersionUID = 3L;
+    private final BorderLayout layout;
 
     /**
      * Creates new form LateralPanel.

@@ -21,9 +21,9 @@ public class Audio {
      * @throws UnsupportedAudioFileException if the audio file is not supported
      */
     public Audio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        String path = "Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
+        final String path = "Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
         final URL imgURL = ClassLoader.getSystemResource(path);
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(imgURL);
+        final AudioInputStream audioStream = AudioSystem.getAudioInputStream(imgURL);
         this.clip = AudioSystem.getClip();
         this.clip.open(audioStream);
     }

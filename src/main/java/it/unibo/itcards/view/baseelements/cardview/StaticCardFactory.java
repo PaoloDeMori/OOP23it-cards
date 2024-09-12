@@ -28,8 +28,8 @@ public final class StaticCardFactory {
      * @return a JPanel representing the card view
      */
     public static JPanel build(final Card card, final Dimension dimension) {
-        BufferedImage image = null;
-        Dimension d = null;
+        BufferedImage image;
+        Dimension d;
         try {
             image = ImagesHelper.loadImage(card.toString());
         } catch (IOException e) {
@@ -55,8 +55,8 @@ public final class StaticCardFactory {
      * @return a JPanel representing the card
      */
     public static JPanel build(final String name, final Dimension dimension) {
-        BufferedImage image = null;
-        Dimension d = null;
+        BufferedImage image;
+        Dimension d;
         try {
             image = ImagesHelper.loadImage(name);
         } catch (IOException e) {

@@ -12,11 +12,13 @@ import it.unibo.itcards.view.View;
  * RightPanelImpl.
  */
 public class RightPanelImpl extends LateralPanel {
-    private JLabel bot = new JLabel();
-    private JLabel player = new JLabel();
+    private static final long serialVersionUID = 3L;
+    private final JLabel bot = new JLabel();
+    private final JLabel player = new JLabel();
 
     /**
-     * RightPanelImpl.
+     * RightPanelImpl's constructor that initializes the panel.
+     * it's the same of the LateralPanel
      */
     public RightPanelImpl() {
         super();
@@ -27,7 +29,7 @@ public class RightPanelImpl extends LateralPanel {
      */
     @Override
     public void setPoints(final int botPoints, final int playerPoints) {
-        JPanel botJPanel = new JPanel();
+        final JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP));
         botJPanel.setBackground(View.INVISIBLE_COLOR);
         bot.removeAll();
@@ -38,7 +40,7 @@ public class RightPanelImpl extends LateralPanel {
         bot.setOpaque(false);
         botJPanel.add(bot);
         this.add(botJPanel, BorderLayout.NORTH);
-        JPanel playerJPanel = new JPanel();
+        final JPanel playerJPanel = new JPanel();
         playerJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, View.STANDARD_HGAP, View.STANDARD_VGAP));
         playerJPanel.setBackground(View.INVISIBLE_COLOR);
         player.removeAll();
@@ -51,7 +53,6 @@ public class RightPanelImpl extends LateralPanel {
         this.add(playerJPanel, BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
-        return;
     }
 
     /**
@@ -65,7 +66,7 @@ public class RightPanelImpl extends LateralPanel {
     }
 
     /**
-     * unimplemented methods.
+     * Unsupported method.
      * 
      * @param botName
      * @param playerName

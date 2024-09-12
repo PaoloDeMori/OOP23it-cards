@@ -15,6 +15,7 @@ import it.unibo.itcards.view.View;
  */
 public class LeftPanelImpl extends LateralPanel {
 
+    private static final long serialVersionUID = 3L;
     /**
      * Constructor that initializes the panel with default settings inherited from LateralPanel.
      */
@@ -56,10 +57,10 @@ public class LeftPanelImpl extends LateralPanel {
     @Override
     public void setNames(final String botName, final String playerName) {
         // Bot name panel
-        JPanel botJPanel = new JPanel();
+        final JPanel botJPanel = new JPanel();
         botJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, View.STANDARD_HGAP, View.STANDARD_VGAP));
         botJPanel.setBackground(View.INVISIBLE_COLOR);
-        JLabel bot = new JLabel();
+        final JLabel bot = new JLabel();
         bot.setFont(View.STANDARD_FONT);
         bot.setBackground(View.INVISIBLE_COLOR);
         bot.setForeground(View.OPPONENT_COLOR);
@@ -69,10 +70,10 @@ public class LeftPanelImpl extends LateralPanel {
         this.add(botJPanel, BorderLayout.NORTH);
 
         // Player name panel
-        JPanel playerJPanel = new JPanel();
+        final JPanel playerJPanel = new JPanel();
         playerJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, View.STANDARD_HGAP, View.STANDARD_VGAP));
         playerJPanel.setBackground(View.INVISIBLE_COLOR);
-        JLabel player = new JLabel();
+        final JLabel player = new JLabel();
         player.setFont(View.STANDARD_FONT);
         player.setOpaque(false);
         player.setText(playerName);

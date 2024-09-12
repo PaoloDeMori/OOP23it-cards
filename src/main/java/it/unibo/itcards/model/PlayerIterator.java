@@ -15,7 +15,6 @@ import it.unibo.itcards.model.baseelements.player.Player;
  */
 
 public class PlayerIterator implements Iterator<Player> {
-
     private final List<Player> players;
     private int current;
     private Player winnerPlayer;
@@ -82,7 +81,7 @@ public class PlayerIterator implements Iterator<Player> {
      * beyond the available players in the current round.
      */
     public class ExcessiveIterationException extends RuntimeException {
-
+        private static final long serialVersionUID = 3L;
         /**
          * Constructs a new ExcessiveIterationException with the specified detail
          * message.

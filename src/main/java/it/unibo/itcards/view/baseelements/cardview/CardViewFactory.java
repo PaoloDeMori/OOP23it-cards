@@ -15,7 +15,7 @@ import it.unibo.itcards.commons.Card;
  */
 public class CardViewFactory {
 
-    private Map<Card, BufferedImage> imagesCache;
+    private final Map<Card, BufferedImage> imagesCache;
 
     /**
      * this method create a card view like an hashmap.
