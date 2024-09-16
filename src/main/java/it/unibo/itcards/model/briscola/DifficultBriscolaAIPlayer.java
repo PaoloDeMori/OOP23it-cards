@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * 
  */
 public class DifficultBriscolaAIPlayer extends AIPlayer {
-    private BriscolaImpl game;
+    protected BriscolaImpl game;
     /**
      * If the value of each card with a value greater than 3 is subtracted from this
      * number,

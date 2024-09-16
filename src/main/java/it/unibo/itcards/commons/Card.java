@@ -1,6 +1,5 @@
 package it.unibo.itcards.commons;
 
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
 import it.unibo.itcards.model.baseelements.cards.Suit;
 
 /**
