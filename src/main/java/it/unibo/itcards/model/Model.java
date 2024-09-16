@@ -1,12 +1,16 @@
 package it.unibo.itcards.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.commons.Observable;
 import it.unibo.itcards.commons.Observer;
-import it.unibo.itcards.model.Audio.Audio;
+import it.unibo.itcards.model.audio.Audio;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.Player;
@@ -28,13 +32,13 @@ public abstract class Model implements Observable {
     public Model() {
         this.deck = ShuffledDeckFactoryImpl.buildDeck();
         this.players = new ArrayList<>();
-        try {
-            this.audio = new Audio();
-            this.audio.start();
-        } catch (Exception e) {
-            audio = null;
-            e.printStackTrace();
-        }
+  
+            try {
+                this.audio = new Audio();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                audio = null;
+            }
+  
     }
 
     /**
@@ -204,7 +208,13 @@ public abstract class Model implements Observable {
      */
     public void startAudio() {
         if (this.audio != null) {
-            this.audio.start();
+            try {
+                this.audio.start();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package it.unibo.itcards.controller;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
+import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 
@@ -35,7 +36,7 @@ public class ControllerImpl implements Controller {
     public void start() {
         model.start();
         if (this.model.getCurrentPlayer().isAi()) {
-            this.play(null);
+            this.play();
         }
     }
 
@@ -57,14 +58,14 @@ public class ControllerImpl implements Controller {
             do {
                 if (!model.getCurrentPlayer().isAi()) {
                     this.view.aiCanPlay();
-                    play(card);
+                    play();
                     if (model.isGameOver()) {
                         model.notifyObserver();
                         end();
                     }
                 }
                 if (model.getCurrentPlayer().isAi()) {
-                    play(null);
+                    play();
                     if (model.isGameOver()) {
                         model.notifyObserver();
                         end();
@@ -176,13 +177,11 @@ public class ControllerImpl implements Controller {
      * using the playCard method of the Player interface, to play in the model the
      * card the player decided to play.
      * 
-     * @param card the card the player wants to play, or null if it is called by a
-     *             bot
      */
-    private void play(final Card card) {
+    private void play() {
         try {
             model.playTurn(this.model.getCurrentPlayer().chooseCard(), this.model.getCurrentPlayer());
-        } catch (Exception e) {
+        } catch (InvalidOperationException e) {
             this.error();
             return;
         }

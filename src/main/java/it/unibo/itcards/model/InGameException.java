@@ -11,6 +11,16 @@ public class InGameException extends RuntimeException {
      * 
      * @param message the reason of the exception
      */
+    public InGameException(final Exception e) {
+        super(e.getMessage());
+    }
+
+        /**
+     * Creates an instance of this exception using a string.
+     * 
+     * @param message the reason of the exception
+     */
+
     public InGameException(final String message) {
         super(message);
     }

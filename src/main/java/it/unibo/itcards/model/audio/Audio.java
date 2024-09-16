@@ -1,4 +1,4 @@
-package it.unibo.itcards.model.Audio;
+package it.unibo.itcards.model.audio;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,27 +14,34 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Audio {
     private final Clip clip;
+    final AudioInputStream audioStream;
 
     /**
      * This constructor initializes the audio clip.
      * 
      * @throws UnsupportedAudioFileException if the audio file is not supported
+     * @throws IOException 
+     * @throws LineUnavailableException 
      */
-    public Audio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        String path = "Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
+    public Audio() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+        final String path = "Audio/" + "two-grands-piano-bar-music-jazz-3945.wav";
         final URL imgURL = ClassLoader.getSystemResource(path);
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(imgURL);
+        audioStream = AudioSystem.getAudioInputStream(imgURL);
         this.clip = AudioSystem.getClip();
-        this.clip.open(audioStream);
     }
 
     /**
      * Starts playing the audio clip from the beginning, looping continuously.
      *
      * If the clip is already running, it is stopped before starting again.
+     * @throws IOException 
+     * @throws LineUnavailableException 
      *
      */
-    public void start() {
+    public void start() throws LineUnavailableException, IOException {
+        if(!this.clip.isOpen()&&this.clip!=null){
+            this.clip.open(audioStream);
+        }
         if (this.clip.isRunning()) {
             this.clip.stop();
         } else {
@@ -63,7 +70,9 @@ public class Audio {
      * Closes the audio clip.
      */
     public void close() {
+        if(this.clip.isOpen()){
         clip.close();
+        }
     }
 
 }

@@ -91,17 +91,17 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
         }
         switch (card.getValue()) {
             case 1:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? ACE_POWER_CONSTANT - value : 0);
+                return card.getSuit() != this.game.getBriscola().getSuit() ? ACE_POWER_CONSTANT - value : 0;
             case 2:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? TWO_POWER_CONSTANT - value
-                        : (TWO_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - value);
+                return card.getSuit() != this.game.getBriscola().getSuit() ? TWO_POWER_CONSTANT - value
+                        : (TWO_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - value;
             case 3:
-                return (card.getSuit() != this.game.getBriscola().getSuit() ? THREE_POWER_CONSTANT - value
-                        : (THREE_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - value);
+                return card.getSuit() != this.game.getBriscola().getSuit() ? THREE_POWER_CONSTANT - value
+                        : (THREE_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - value;
             default:
-                return (card.getSuit() != this.game.getBriscola().getSuit()
+                return card.getSuit() != this.game.getBriscola().getSuit()
                         ? (CARD_POWER_CONSTANT - card.getValue()) - value
-                        : ((CARD_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - card.getValue()) - value);
+                        : ((CARD_POWER_CONSTANT - NUMBER_OF_BRISCOLE) - card.getValue()) - value;
         }
     }
 
@@ -116,18 +116,17 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * @return the chosen card to play
      */
     private Card chooseCardToPlayWithoutBriscola(final List<Card> hand) {
-        Card cardToPlay = null;
         if (hand.stream().anyMatch((card) -> BriscolaHelper.getCardValue(card) == 0)) {
-            cardToPlay = hand.stream().filter((card) -> BriscolaHelper.getCardValue(card) == 0)
+            Card cardToPlay = hand.stream().filter((card) -> BriscolaHelper.getCardValue(card) == 0)
                     .min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
             return cardToPlay;
         } else if (hand.stream().anyMatch((card) -> BriscolaHelper.getCardValue(card) <= 4)) {
-            cardToPlay = hand.stream().filter((card) -> BriscolaHelper.getCardValue(card) <= 4)
+            Card cardToPlay = hand.stream().filter((card) -> BriscolaHelper.getCardValue(card) <= 4)
                     .min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
             return cardToPlay;
 
         } else {
-            cardToPlay = hand.stream().min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
+            Card cardToPlay = hand.stream().min((c1, c2) -> getCardPower(c1) - getCardPower(c2)).get();
             return cardToPlay;
         }
     }

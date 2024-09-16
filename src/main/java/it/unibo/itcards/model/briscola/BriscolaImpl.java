@@ -103,10 +103,10 @@ public class BriscolaImpl extends Model {
      */
     @Override
     public void playTurn(final Card card, final Player player) {
-        if (player != this.getCurrentPlayer()) {
-            throw new IllegalStateException("It's not your turn");
+        if (!player.equals(this.getCurrentPlayer())) {
+            return;
         }
-        if (playedCards.size() < 1) {
+        if (playedCards.isEmpty()) {
             playedCards.add(card);
             this.getCurrentPlayer().addPlayedCard(card);
             this.setCurrentPlayer(iterator.next());
@@ -215,30 +215,32 @@ public class BriscolaImpl extends Model {
     @Override
     public boolean giveCards() {
 
-        Optional<Card> card;
-
         if (this.getDeck().isVoid()) {
             return false;
         }
+
         if (this.getDeck().numberOfCards() == 1) {
-            card = this.getDeck().drawCard();
-            if (!card.isPresent()) {
+            final Optional<Card> card = this.getDeck().drawCard();
+            if (card.isEmpty()) {
                 throw new InGameException("Invalid card in the deck");
             }
             this.getPlayers().get(0).drawCard(card.get());
             this.getPlayers().get(1).drawCard(briscola);
             return true;
         }
+
         if ((this.getDeck().numberOfCards() + 1) % NUMBER_OF_PLAYERS != 0) {
             throw new InGameException("Not enough cards to give");
         }
+
         for (final var player : this.getPlayers()) {
-            card = this.getDeck().drawCard();
-            if (!card.isPresent()) {
+            final Optional<Card> card = this.getDeck().drawCard();
+            if (card.isEmpty()) {
                 throw new InGameException("Invalid card in the deck");
             }
             player.drawCard(card.get());
         }
+
         return true;
     }
 

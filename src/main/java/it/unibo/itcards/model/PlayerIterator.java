@@ -15,10 +15,11 @@ import it.unibo.itcards.model.baseelements.player.Player;
  */
 
 public class PlayerIterator implements Iterator<Player> {
-
+    private static final long serialVersionUID = 1L;
     private final List<Player> players;
     private int current;
     private Player winnerPlayer;
+   
 
     /**
      * Construct a PlayerIterator with a list of players.

@@ -59,7 +59,7 @@ public class EasyBriscolaAIPlayer extends AIPlayer {
             try {
                 this.playCard(tempCard);
             } catch (InvalidOperationException e) {
-                throw new InGameException(e.getMessage());
+                throw new InGameException(e);
             }
             return tempCard;
         } else {
