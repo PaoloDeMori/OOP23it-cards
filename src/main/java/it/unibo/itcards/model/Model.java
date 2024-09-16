@@ -20,10 +20,10 @@ import it.unibo.itcards.model.baseelements.player.Player;
  */
 public abstract class Model implements Observable {
 
-    private Deck deck;
-    private List<Player> players;
-    private Player currentPlayer;
-    private List<Observer> observers = new ArrayList<>();
+    protected Deck deck;
+    protected List<Player> players;
+    protected Player currentPlayer;
+    protected List<Observer> observers = new ArrayList<>();
     private Audio audio;
 
     /**
@@ -241,4 +241,5 @@ public abstract class Model implements Observable {
      * @return the list of players names
      */
     public abstract List<String> getPlayersNames();
+
 }

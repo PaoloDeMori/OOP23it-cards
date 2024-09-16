@@ -6,7 +6,7 @@ import it.unibo.itcards.commons.Card;
  * Implementation of the abstract class Card.
  * 
  */
-class CardImpl extends Card {
+public class CardImpl extends Card {
     private final Suit suit;
     private final int value;
 
@@ -16,7 +16,7 @@ class CardImpl extends Card {
      * @param suit  represent the suit of the card
      * @param value represent the numerical value of the card
      */
-    protected CardImpl(final Suit suit, final int value) {
+    public CardImpl(final Suit suit, final int value) {
         this.suit = suit;
         this.value = value;
     }

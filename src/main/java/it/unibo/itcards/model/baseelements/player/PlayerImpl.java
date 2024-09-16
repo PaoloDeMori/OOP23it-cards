@@ -56,6 +56,7 @@ public class PlayerImpl implements Player {
         this.maxNumberOfCards = maxNumberOfCards;
         cards = new Hand(this.maxNumberOfCards);
         this.playedCards = new ArrayList<>();
+        this.points = 0; 
     }
 
     /**

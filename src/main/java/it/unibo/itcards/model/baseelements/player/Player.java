@@ -124,10 +124,6 @@ public interface Player {
      */
     void setPoints(int points);
 
-    /**
-     * Returns the points of the player.
-     * 
-     * @return the points of the player
-     */
-    int getPoints();
+    public int getPoints();
+
 }
