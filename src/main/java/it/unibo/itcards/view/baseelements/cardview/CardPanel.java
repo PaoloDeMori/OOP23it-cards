@@ -11,6 +11,7 @@ import java.awt.Graphics;
  * this class represent a card like a panel.
  */
 public class CardPanel extends JPanel {
+    private static final long serialVersionUID = 3L;
     private Image resizedImage;
     private int width;
 

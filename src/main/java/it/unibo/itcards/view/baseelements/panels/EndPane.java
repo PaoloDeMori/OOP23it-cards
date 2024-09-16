@@ -7,13 +7,14 @@ import it.unibo.itcards.controller.Controller;
  * This class represents the end pane of the game.
  */
 public class EndPane extends JOptionPane {
-
-    private Controller controller;
-    private String result;
+    private static final long serialVersionUID = 3L;
+    private final Controller controller;
+    private final String result;
 
     /**
-     * Constructor. 
-     * Creates a new EndPane. 
+     * Constructor.
+     * Creates a new EndPane.
+     * 
      * @param controller the controller
      * @param result     the result
      */
@@ -28,14 +29,15 @@ public class EndPane extends JOptionPane {
     }
 
     /**
-     *    Displays a dialog with two commands: "Nuova partita" (New game) and "Esci" (Exit).
-     *    The dialog shows the result of the game and waits for the user's choice.
-     *    If the user chooses "Nuova partita", the newGame method is called.
-     *    If the user chooses "Esci", the end method is called.
+     * Displays a dialog with two commands: "Nuova partita" (New game) and "Esci"
+     * (Exit).
+     * The dialog shows the result of the game and waits for the user's choice.
+     * If the user chooses "Nuova partita", the newGame method is called.
+     * If the user chooses "Esci", the end method is called.
      */
     public void showTwoCommandsDialog() {
-        String[] options = { "Nuova partita", "Esci" };
-        int result = JOptionPane.showOptionDialog(
+        final String[] options = { "Nuova partita", "Esci" };
+        final int result = JOptionPane.showOptionDialog(
                 null,
                 this.result,
                 "Fine",

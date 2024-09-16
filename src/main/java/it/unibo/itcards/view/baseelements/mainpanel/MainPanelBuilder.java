@@ -12,7 +12,7 @@ import it.unibo.itcards.view.baseelements.panels.OpponentPanel;
  * this class builds the main panel.
  */
 public class MainPanelBuilder {
-    private Dimension dimension;
+    private final Dimension dimension;
     private HandPanel handPanel;
     private OpponentPanel opponentPanel;
     private CentralPanel centralPanel;
@@ -87,7 +87,7 @@ public class MainPanelBuilder {
      * @return the constructed MainPanel instance
      */
     public MainPanel build() {
-        MainPanel mainPanel = new MainPanel(dimension);
+        final MainPanel mainPanel = new MainPanel(dimension);
         if (this.handPanel != null) {
             mainPanel.setHandPanel(handPanel);
         }

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
  * this class represent the opponent panel.
  */
 public abstract class OpponentPanel extends JPanel {
-
+    private static final long serialVersionUID = 3L;
     /**
      * initialize the panel.
      * 

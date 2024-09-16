@@ -11,7 +11,7 @@ import java.util.List;
  * this class represent the central panel.
  */
 public abstract class CentralPanel extends JPanel {
-
+    private static final long serialVersionUID = 3L;
     /**
      * set the cards on the table.
      *

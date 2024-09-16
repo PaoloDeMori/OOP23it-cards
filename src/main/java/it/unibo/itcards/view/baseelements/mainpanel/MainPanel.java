@@ -28,6 +28,7 @@ import java.awt.FlowLayout;
  * this class represent the main panel.
  */
 public class MainPanel extends JPanel {
+    private static final long serialVersionUID = 3L;
     private final Dimension handPanelDimension;
     private final Dimension lateralPanelDimension;
     private final Dimension upPanelDimension;
@@ -109,11 +110,11 @@ public class MainPanel extends JPanel {
      *                                  or 'right'
      */
     public void setLateralPanel(final LateralPanel lateralPanel, final String borderLayoutPosition) {
-        if (borderLayoutPosition.equals(BorderLayout.WEST)) {
+        if (BorderLayout.WEST.equals(borderLayoutPosition)) {
             this.leftPanel = lateralPanel;
             this.leftPanel.init(lateralPanelDimension);
             this.add(leftPanel, BorderLayout.WEST);
-        } else if (borderLayoutPosition.equals(BorderLayout.EAST)) {
+        } else if (BorderLayout.EAST.equals(borderLayoutPosition)) {
             this.rightPanel = lateralPanel;
             this.rightPanel.init(lateralPanelDimension);
             this.add(rightPanel, BorderLayout.EAST);
@@ -128,7 +129,7 @@ public class MainPanel extends JPanel {
      * @param jbutton the JButton to be used as the music button
      */
     public void setMusicButtons(final JButton jbutton) {
-        JPanel jpanel = new JPanel();
+        final JPanel jpanel = new JPanel();
         jpanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10,
                 (int) this.lateralPanelDimension.getHeight() / MUSIC_BUTTON_VGAP_RATIO));
         jpanel.setBackground(View.INVISIBLE_COLOR);
@@ -190,7 +191,7 @@ public class MainPanel extends JPanel {
      */
     public void setCardsOnTable(final List<Card> cards) {
 
-        List<JPanel> panels = new ArrayList<>();
+        final List<JPanel> panels = new ArrayList<>();
         panels.add(
                 StaticCardFactory.build(cards.get(0),
                         new Dimension((int) (this.centralPanelDImension.getWidth() / CARDS_ON_TABLE_RATIO),
@@ -219,6 +220,7 @@ public class MainPanel extends JPanel {
      *
      * @param g the graphics context to use for painting
      */
+    @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         if (backgroundImage != null) {

@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class BriscolaView extends JFrame implements View {
 
+    private static final long serialVersionUID = 3L;
     private final MainPanel mainpanel;
     private final CardViewFactory cardViewFactory;
     private final Controller controller;
@@ -60,7 +61,7 @@ public class BriscolaView extends JFrame implements View {
      * @param cards a list of cards to be displayed in the hand
      */
     public void setHand(final List<Card> cards) {
-        List<CardButton> panels = createCardButtons(cards);
+        final List<CardButton> panels = createCardButtons(cards);
         mainpanel.setHand(panels);
     }
 
@@ -73,7 +74,7 @@ public class BriscolaView extends JFrame implements View {
      * The button is then added to the mainpanel.
      */
     public void setMusic() {
-        JButton button = new JButton("Start/Stop music");
+        final JButton button = new JButton("Start/Stop music");
         button.addActionListener(e -> {
             this.controller.startAudio();
         });
@@ -87,13 +88,13 @@ public class BriscolaView extends JFrame implements View {
      * @return a list of CardButton objects
      */
     private List<CardButton> createCardButtons(final List<Card> cards) {
-        List<CardButton> buttons = new ArrayList<>();
-        for (Card card : cards) {
-            ActionListener al = e -> {
+        final List<CardButton> buttons = new ArrayList<>();
+        for (final Card card : cards) {
+            final ActionListener al = e -> {
                 controller.playturn(card);
                 System.out.println("Card played: " + card);
             };
-            CardButton button = this.cardViewFactory.buildButton(card, al, this.mainpanel.getHandPanelDimension());
+            final CardButton button = this.cardViewFactory.buildButton(card, al, this.mainpanel.getHandPanelDimension());
             if (!canPlayerPlay) {
                 button.setEnabled(false);
                 button.setOpaque(false);
@@ -151,7 +152,7 @@ public class BriscolaView extends JFrame implements View {
      * and refreshing the UI.
      */
     private void updateHand() {
-        List<Card> hand = controller.getHand();
+        final List<Card> hand = controller.getHand();
         if (hand != null) {
             setHand(hand);
         }
@@ -162,7 +163,7 @@ public class BriscolaView extends JFrame implements View {
      * Updates the number of opponent cards in the game.
      */
     private void updateOpponentCards() {
-        int opponentCardCount = controller.getOpponentHand();
+        final int opponentCardCount = controller.getOpponentHand();
         setNumberOpponentCards(opponentCardCount);
     }
 
@@ -170,7 +171,7 @@ public class BriscolaView extends JFrame implements View {
      * Updates the cards currently on the table in the game view.
      */
     private void updateCardsOnTable() {
-        List<Card> cardsOnTable = controller.getCardsOnTable();
+        final List<Card> cardsOnTable = controller.getCardsOnTable();
         if (cardsOnTable != null) {
             setCardsOnTable(cardsOnTable);
         }
@@ -180,7 +181,7 @@ public class BriscolaView extends JFrame implements View {
      * Updates the points for the bot and the player in the game view.
      */
     private void updatePoints() {
-        List<Integer> points = this.controller.getPlayerPoints();
+        final List<Integer> points = this.controller.getPlayerPoints();
         this.botPoints = points.get(1);
         this.playerPoints = points.get(0);
 
@@ -192,7 +193,7 @@ public class BriscolaView extends JFrame implements View {
      * the deck from the controller and updating the main panel.
      */
     private void updateDeckStatus() {
-        int deckNumberOfCards = controller.deckNumberOfCards();
+        final int deckNumberOfCards = controller.deckNumberOfCards();
         mainpanel.setDeck(deckNumberOfCards);
     }
 
@@ -219,7 +220,7 @@ public class BriscolaView extends JFrame implements View {
         } else {
             winner = "pareggio";
         }
-        EndPane endPane = new EndPane(controller, winner);
+        final EndPane endPane = new EndPane(controller, winner);
         endPane.showTwoCommandsDialog();
     }
 
@@ -242,7 +243,7 @@ public class BriscolaView extends JFrame implements View {
      */
     private void setNames() {
 
-        List<String> names = this.controller.getPlayerNames();
+        final List<String> names = this.controller.getPlayerNames();
         botName = names.get(1);
         playerName = names.get(0);
         this.mainpanel.setNames(botName, playerName);

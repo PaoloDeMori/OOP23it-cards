@@ -10,7 +10,7 @@ import it.unibo.itcards.view.baseelements.cardview.CardButton;
  * this class represent the hand panel.
  */
 public abstract class HandPanel extends JPanel {
-
+    private static final long serialVersionUID = 3L;
     /**
      * initialize the panel.
      * 

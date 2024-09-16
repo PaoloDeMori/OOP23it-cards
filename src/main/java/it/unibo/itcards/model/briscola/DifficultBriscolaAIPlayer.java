@@ -142,7 +142,7 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * @return the chosen card to play
      */
     private Card chooseCardToPlayWithBriscola(final List<Card> hand) {
-        Card cardToPlay = null;
+        Card cardToPlay;
         if (hand.stream().anyMatch((card) -> BriscolaHelper.getCardValue(card) == 0
                 && card.getSuit() != this.game.getBriscola().getSuit())) {
             cardToPlay = hand.stream().filter((card) -> BriscolaHelper.getCardValue(card) == 0)
@@ -188,7 +188,7 @@ public class DifficultBriscolaAIPlayer extends AIPlayer {
      * @return the best card to play against the opponent's card
      */
     private Card chooseCardToPlayAgainst(final List<Card> hand, final Card opponentCard) {
-        Card cardToPlay = null;
+        Card cardToPlay;
         if (hand.stream().anyMatch((card) -> card.getSuit() == opponentCard.getSuit()
                 && BriscolaHelper.isWinner(card, opponentCard, this.game.getBriscola()))) {
             cardToPlay = hand.stream()

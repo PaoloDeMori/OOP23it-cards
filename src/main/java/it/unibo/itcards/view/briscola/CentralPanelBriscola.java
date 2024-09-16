@@ -24,16 +24,17 @@ import java.awt.Font;
  */
 public class CentralPanelBriscola extends CentralPanel {
 
-    private BorderLayout layout;
-    private JPanel leftPanel;
-    private JPanel rightPanel;
+    private static final long serialVersionUID = 3L;
+    private final BorderLayout layout;
+    private final JPanel leftPanel;
+    private final JPanel rightPanel;
     private JPanel deck;
-    private JPanel briscola = null;
+    private JPanel briscola;
     private final JLabel turn = new JLabel("Il tuo turno");
-    private JPanel cardsPanel = null;
+    private JPanel cardsPanel;
     private JPanel playerTurnPanel;
     private JPanel deckPanel;
-    private JLabel numberOfCards;
+    private final JLabel numberOfCards;
     private static final int NUMBER_OF_CARDS_FONT_SIZE = 20;
     private static final int NOTIFY_TURN_FONT_SIZE = 15;
     private static final int RIGHT_PANEL_WIDTH_RATIO = 5;
@@ -72,7 +73,7 @@ public class CentralPanelBriscola extends CentralPanel {
             this.deckPanel.add(briscola);
         }
         cards.remove(0);
-        for (var jPanel : cards) {
+        for (final var jPanel : cards) {
             this.cardsPanel.add(jPanel);
         }
         this.revalidate();

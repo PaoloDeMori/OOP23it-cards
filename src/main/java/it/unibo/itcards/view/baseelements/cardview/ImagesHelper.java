@@ -29,10 +29,9 @@ public final class ImagesHelper {
      * @throws IOException if an I/O error occurs while reading the image
      */
     public static BufferedImage loadImage(final Card card) throws IOException {
-        String path = "CardsImages/" + card.toString() + ".jpeg";
+        final String path = "CardsImages/" + card.toString() + ".jpeg";
         final URL imgURL = ClassLoader.getSystemResource(path);
-        BufferedImage image = ImageIO.read(imgURL);
-        return image;
+        return ImageIO.read(imgURL);
     }
 
     /**
@@ -42,10 +41,9 @@ public final class ImagesHelper {
      * @return the loaded card image
      */
     public static BufferedImage loadImage(final String string) throws IOException {
-        String path = "CardsImages/" + string + ".jpeg";
+        final String path = "CardsImages/" + string + ".jpeg";
         final URL imgURL = ClassLoader.getSystemResource(path);
-        BufferedImage image = ImageIO.read(imgURL);
-        return image;
+        return ImageIO.read(imgURL);
     }
 
     /**
@@ -55,8 +53,7 @@ public final class ImagesHelper {
      * @return the ratio of the width to the height of the image
      */
     public static double getImageRatio(final BufferedImage image) {
-        final double ratio = ((double) image.getWidth() / image.getHeight());
-        return ratio;
+        return (double) image.getWidth() / image.getHeight();
     }
 
     /**

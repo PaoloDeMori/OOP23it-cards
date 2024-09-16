@@ -13,7 +13,8 @@ import java.awt.Dimension;
  * It dynamically updates based on the number of cards the opponent has.
  */
 public class OpponentPanelImpl extends OpponentPanel {
-    private FlowLayout layout;
+    private static final long serialVersionUID = 3L;
+    private final FlowLayout layout;
 
     /**
      * Constructor that initializes the layout and appearance of the opponent's panel.

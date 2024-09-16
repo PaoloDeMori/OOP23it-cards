@@ -12,6 +12,7 @@ import java.awt.Image;
  * this class represent a card like a button.
  */
 public class CardButton extends JButton {
+    private static final long serialVersionUID = 3L;
     private final int height;
     private int width;
     private Image resizedImg;
