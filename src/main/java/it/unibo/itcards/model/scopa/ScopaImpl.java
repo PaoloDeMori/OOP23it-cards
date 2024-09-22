@@ -161,8 +161,8 @@ public class ScopaImpl extends Model {
         playersScore.put(winPlayer, playersScore.getOrDefault(winPlayer,0 )+INCREMENT));
     }
 
-
-    public Player winner(){
+    /* Giustificare l'attributo DANDO LA COLPA A CHI LAVORA SUL MAIN */
+    public Player winner(List<Card> playedCards){
         ScopaScoreImpl score = new ScopaScoreImpl(populateAllPlayedCardsMap());
         playersScore = new HashMap<>();
         
@@ -183,7 +183,6 @@ public class ScopaImpl extends Model {
         return scope.get(player);
     }
 
-    
     @Override
     public List<Integer> getPlayersPoints() {
         // TODO Auto-generated method stub
