@@ -95,13 +95,34 @@ public interface Player {
      */
     void addPlayedCard(Card card);
 
+    /**
+     * Checks if the player is an AI.
+     * 
+     * @return true if the player is an AI, false otherwise
+     */
     boolean isAi();
 
-    Card chooseCard()  throws InvalidOperationException;
+    /**
+     * Returns the card selected by the player.
+     *
+     * @return the card selected by the player
+     * @throws InvalidOperationException if no card has been selected
+     */
+    Card chooseCard() throws InvalidOperationException;
 
-    public void selectCard(Card card);
+    /**
+     * Selects a card for the player.
+     *
+     * @param card the card to select
+     */
+    void selectCard(Card card);
 
-    public void setPoints(int points);
+    /**
+     * Sets the points of the player.
+     * 
+     * @param points the points to set
+     */
+    void setPoints(int points);
 
     public int getPoints();
 

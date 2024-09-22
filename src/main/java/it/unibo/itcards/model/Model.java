@@ -1,16 +1,23 @@
 package it.unibo.itcards.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.commons.Observable;
 import it.unibo.itcards.commons.Observer;
-import it.unibo.itcards.model.Audio.Audio;
+import it.unibo.itcards.model.audio.Audio;
 import it.unibo.itcards.model.baseelements.deck.Deck;
 import it.unibo.itcards.model.baseelements.deck.ShuffledDeckFactoryImpl;
 import it.unibo.itcards.model.baseelements.player.Player;
 
+/**
+ * Represents the model of the game.
+ */
 public abstract class Model implements Observable {
 
     protected Deck deck;
@@ -25,25 +32,44 @@ public abstract class Model implements Observable {
     public Model() {
         this.deck = ShuffledDeckFactoryImpl.buildDeck();
         this.players = new ArrayList<>();
-        try {
-            audio = new Audio();
-            audio.start();
-        } catch (Exception e) {
-            audio = null;
-            e.printStackTrace();
-        }
+  
+            try {
+                this.audio = new Audio();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                audio = null;
+            }
+  
     }
 
+    /**
+     * represent the turn og the game.
+     * 
+     * @param card   the card to play
+     * @param player the player
+     */
     public abstract void playTurn(Card card, Player player);
 
+    /**
+     * return the cards on the table in the turn which is called.
+     * 
+     * @return the cards on the table
+     */
     public abstract List<Card> getCardsOnTable();
 
+    /**
+     * Start the game.
+     */
     public abstract void start();
 
+    /**
+     * Checks if the game is over.
+     * 
+     * @return true if the game is over, false otherwise
+     */
     public abstract boolean isGameOver();
 
     /**
-     * Checks if the deck is ended
+     * Checks if the deck is ended.
      * 
      * @return true if the deck is empty, false if it is not
      */
@@ -52,7 +78,7 @@ public abstract class Model implements Observable {
     }
 
     /**
-     * Returns the current player
+     * Returns the current player.
      * 
      * @return the current player
      */
@@ -61,7 +87,7 @@ public abstract class Model implements Observable {
     }
 
     /**
-     * Returns the list of players
+     * Returns the list of players.
      * 
      * @return the list of players
      */
@@ -70,14 +96,14 @@ public abstract class Model implements Observable {
     }
 
     /**
-     * Gives the cards to the players
+     * Gives the cards to the players.
      * 
      * @return true if cards were successfully dealt, false otherwise
      */
     public abstract boolean giveCards();
 
     /**
-     * Returns the deck
+     * Returns the deck.
      * 
      * @return the deck
      */
@@ -85,61 +111,135 @@ public abstract class Model implements Observable {
         return this.deck;
     }
 
+    /**
+     * Returns the points of the player.
+     * 
+     * @param player the player
+     * @return the points of the player
+     */
     public abstract int points(Player player);
 
+    /**
+     * Returns the winner of the game.
+     * 
+     * @param playedCards the cards played
+     * @return the winner
+     */
+    public abstract Player winner(List<Card> playedCards);
 
+    /**
+     * Adds an observer to the list of observers.
+     *
+     * @param observer the observer to be added
+     */
     @Override
-    public void addObserver(Observer observer) {
+    public void addObserver(final Observer observer) {
         this.observers.add(observer);
     }
 
+    /**
+     * Removes a registered observer from the list of observers.
+     *
+     * @param observer the observer to be removed
+     */
     @Override
-    public void deleteObserver(Observer observer) {
+    public void deleteObserver(final Observer observer) {
         this.observers.remove(observer);
     }
 
+    /**
+     * Notifies all observers by calling their update method.
+     */
     @Override
     public void notifyObserver() {
-        for (var observer : observers) {
+        for (final var observer : observers) {
             observer.update();
         }
 
     }
 
-    public void setDeck(Deck deck) {
+    /**
+     * Sets the deck for the game.
+     *
+     * @param deck the deck to be set
+     */
+    public void setDeck(final Deck deck) {
         this.deck = deck;
     }
 
-    public void setPlayers(List<Player> players) {
+    /**
+     * Sets the list of players in the game.
+     *
+     * @param players the list of players to be set
+     */
+    public void setPlayers(final List<Player> players) {
         this.players = players;
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
+    /**
+     * Sets the current player in the game.
+     *
+     * @param currentPlayer the player to be set as the current player
+     */
+    public void setCurrentPlayer(final Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     * Returns a list of all registered observers.
+     *
+     * @return a list of observers
+     */
     public List<Observer> getObservers() {
         return observers;
     }
 
-    public void setObservers(List<Observer> observers) {
+    /**
+     * Sets the list of observers for this object.
+     *
+     * @param observers the list of observers to be set
+     */
+    public void setObservers(final List<Observer> observers) {
         this.observers = observers;
     }
 
+    /**
+     * Starts the audio playback if it is available.
+     */
     public void startAudio() {
-        if (audio != null) {
-            audio.start();
+        if (this.audio != null) {
+            try {
+                this.audio.start();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    /**
+     * Stops the audio playback if it is currently playing.
+     */
     public void stopAudio() {
-        if (audio != null) {
-            audio.stop();
+        if (this.audio != null) {
+            this.audio.stop();
         }
     }
+
+    /**
+     * returns the list of players points.
+     * 
+     * @return the list of players points
+     */
 
     public abstract List<Integer> getPlayersPoints();
 
+    /**
+     * Returns the list of players names.
+     * 
+     * @return the list of players names
+     */
     public abstract List<String> getPlayersNames();
 
 }

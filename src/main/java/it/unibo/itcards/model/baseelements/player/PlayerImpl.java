@@ -20,13 +20,25 @@ public class PlayerImpl implements Player {
     private final Hand cards;
     private final int maxNumberOfCards;
     private final List<Card> playedCards;
-    private Card selectedCard = null;
-    private int points=0;
+    private Card selectedCard;
+    private int points;
 
-    public void setPoints(int points) {
+    /**
+     * Sets the points of the player.
+     *
+     * @param points the points to set
+     */
+    @Override
+    public void setPoints(final int points) {
         this.points = points;
     }
 
+    /**
+     * Returns the points of the player.
+     *
+     * @return the points of the player
+     */
+    @Override
     public int getPoints() {
         return points;
     }
@@ -48,7 +60,8 @@ public class PlayerImpl implements Player {
     }
 
     /**
-     * This method checks if the specified card is playable by the player and if so, returns it.
+     * This method checks if the specified card is playable by the player and if so,
+     * returns it.
      * 
      * @param card is the card to remove
      * @throws InvalidOperationException if the specified card is not playable
@@ -158,7 +171,7 @@ public class PlayerImpl implements Player {
      */
     @Override
     public List<Card> getPlayedCards() {
-       return this.playedCards;
+        return this.playedCards;
     }
 
     /**
@@ -167,34 +180,59 @@ public class PlayerImpl implements Player {
      * @param card the card to add
      */
     @Override
-    public void addPlayedCard(Card card) {
+    public void addPlayedCard(final Card card) {
         this.playedCards.add(card);
     }
 
+    /**
+     * Returns a string representation of the player's name.
+     *
+     * @return  the name of the player
+     */
     @Override
     public String toString() {
         return this.name;
     }
+
     /**
-     * Sets the hand of the player
+     * Sets the hand of the player.
+     * 
      * @param hand
      */
-    public void setHand(List<Card> hand){
-        for(Card card : hand){
+    public void setHand(final List<Card> hand) {
+        for (final Card card : hand) {
             cards.add(card);
         }
     }
 
+    /**
+     * Returns true if the player is an AI, false otherwise.
+     * 
+     * @return true if the player is an AI, false otherwise
+     */
     @Override
     public boolean isAi() {
-       return false;
+        return false;
     }
 
-    public void selectCard(Card card){
-        this.selectedCard=card;
+    /**
+     * Selects a card for the player.
+     *
+     * @param card the card to select
+     */
+    @Override
+    public void selectCard(final Card card) {
+        this.selectedCard = card;
     }
 
-    public Card chooseCard() throws InvalidOperationException{
-       return this.playCard(selectedCard);
+    /**
+     * Returns the card selected by the player.
+     *
+     * @return the card selected by the player
+     * @throws InvalidOperationException if no card has been selected
+     */
+    @Override
+    public Card chooseCard() throws InvalidOperationException {
+        return this.playCard(selectedCard);
     }
 }

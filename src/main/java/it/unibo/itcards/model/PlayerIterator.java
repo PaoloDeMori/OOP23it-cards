@@ -15,18 +15,17 @@ import it.unibo.itcards.model.baseelements.player.Player;
  */
 
 public class PlayerIterator implements Iterator<Player> {
-
-    List<Player> players;
-    int current = 0;
-    Player winnerPlayer;
-    boolean hasplayed = false;
+    private final List<Player> players;
+    private int current;
+    private Player winnerPlayer;
+   
 
     /**
      * Construct a PlayerIterator with a list of players.
      * 
      * @param players the list of players that the iterator will cycle through.
      */
-    public PlayerIterator(List<Player> players) {
+    public PlayerIterator(final List<Player> players) {
         this.players = players;
     }
 
@@ -35,12 +34,12 @@ public class PlayerIterator implements Iterator<Player> {
      * round.
      * cause the winner does not have the next one.
      * 
-     * @return {@code true} if the current player has not yet reached the winner,
-     *         {@code false} otherwise
+     * @return true if the current player has not yet reached the winner,
+     *         false otherwise
      */
     @Override
     public boolean hasNext() {
-        return current+1!=players.indexOf(winnerPlayer);
+        return current + 1 != players.indexOf(winnerPlayer);
     }
 
     /**
@@ -55,10 +54,10 @@ public class PlayerIterator implements Iterator<Player> {
      */
     @Override
     public Player next() {
-        if(!hasNext()){
+        if (!hasNext()) {
             throw new ExcessiveIterationException("No next player");
         }
-        if (current+1 == players.size()) {
+        if (current + 1 == players.size()) {
             current = 0;
         } else {
             current++;
@@ -73,24 +72,24 @@ public class PlayerIterator implements Iterator<Player> {
      * 
      * @param winnerPlayer the player who won the last round
      */
-    public void setWinnerPlayer(Player winnerPlayer) {
+    public void setWinnerPlayer(final Player winnerPlayer) {
         this.winnerPlayer = winnerPlayer;
         current = players.indexOf(winnerPlayer);
     }
 
     /**
      * Exception thrown when the iterator tries to move
-     * beyond the available players in the current round
+     * beyond the available players in the current round.
      */
     public class ExcessiveIterationException extends RuntimeException {
-
+        private static final long serialVersionUID = 3L;
         /**
          * Constructs a new ExcessiveIterationException with the specified detail
-         * message
+         * message.
          * 
          * @param message the detail message
          */
-        public ExcessiveIterationException(String message) {
+        public ExcessiveIterationException(final String message) {
             super(message);
         }
     }

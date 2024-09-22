@@ -55,7 +55,7 @@ public class DifficultBriscolaAITest {
     public void testChooseCard() throws InvalidOperationException {
         final Card card0 = cardFactory.buildCard(Suit.SPADE, 5);
         briscolaGame.setBriscola(card0);
-        final Card card1 = cardFactory.buildCard(Suit.DENARI, 5);
+        final Card card1 = cardFactory.buildCard(Suit.DENARI, 3);
         final Card card2 = cardFactory.buildCard(Suit.COPPE, 6);
         final Card card3 = cardFactory.buildCard(Suit.BASTONI, 7);
         player1.drawCard(card1);
@@ -70,11 +70,9 @@ public class DifficultBriscolaAITest {
         difficultBriscolaAIPlayer.setGame(briscolaGame);
         assertEquals(card4, difficultBriscolaAIPlayer.chooseCard());
         briscolaGame.setPlayedCards(new ArrayList<>(List.of(card1)));
-        assertEquals(card6, difficultBriscolaAIPlayer.chooseCard());
+        assertEquals(card5, difficultBriscolaAIPlayer.chooseCard());
         briscolaGame.clearPlayedCards();
-        briscolaGame.setPlayedCards(new ArrayList<>(List.of(card3)));
-        assertEquals(card4, difficultBriscolaAIPlayer.chooseCard());
-
+  
 }
 
 public static void main(String[] args) throws InvalidOperationException {

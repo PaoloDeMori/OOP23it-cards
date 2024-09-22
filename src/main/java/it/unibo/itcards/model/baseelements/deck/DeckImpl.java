@@ -93,6 +93,11 @@ public class DeckImpl implements Deck {
         return numberOfCards + cards;
     }
 
+    /**
+     * Returns a list of the cards in the deck.
+     * 
+     * @return a list of the cards in the deck
+     */
     @Override
     public List<Card> listOf() {
         return Collections.unmodifiableList(deckList);

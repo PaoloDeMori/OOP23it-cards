@@ -3,6 +3,7 @@ package it.unibo.itcards.controller;
 import it.unibo.itcards.commons.Card;
 import it.unibo.itcards.model.InGameException;
 import it.unibo.itcards.model.Model;
+import it.unibo.itcards.model.baseelements.player.InvalidOperationException;
 import it.unibo.itcards.model.baseelements.player.Player;
 import it.unibo.itcards.view.View;
 
@@ -22,7 +23,7 @@ public class ControllerImpl implements Controller {
      * @param view  the graphical interface
      */
     @Override
-    public void init(Model model, View view) {
+    public void init(final Model model, final View view) {
         this.setModel(model);
         this.setView(view);
         this.model.addObserver(this.view);
@@ -35,38 +36,45 @@ public class ControllerImpl implements Controller {
     public void start() {
         model.start();
         if (this.model.getCurrentPlayer().isAi()) {
-            this.play(null);
+            this.play();
         }
     }
 
     /**
      * This method is called by action listeners, it accepts a card as a parameter
      * that represents the card to play.
-     * This method select the card for the player to playe and while the current player is an ai it keeps asking them to play.
+     * This method select the card for the player to playe and while the current
+     * player is an ai it keeps asking them to play.
      * it called the play method.
      * If the game ended this method will handle that situation by calling the end
      * method.
      * 
      * @param card the card to play, when this method is called by a user.
      */
-    public void playturn(Card card) {
+    @Override
+    public void playturn(final Card card) {
         new Thread(() -> {
             model.getCurrentPlayer().selectCard(card);
-            do{
+            do {
                 if (!model.getCurrentPlayer().isAi()) {
                     this.view.aiCanPlay();
-                    play(card);
-                } 
-                if (model.getCurrentPlayer().isAi()) {
-                    play(null);
+                    play();
+                    if (model.isGameOver()) {
+                        model.notifyObserver();
+                        end();
+                    }
                 }
-                if (model.isGameOver()) {
-                    model.notifyObserver();
-                    end();
-                }     
-            } while(this.model.getCurrentPlayer().isAi());
+                if (model.getCurrentPlayer().isAi()) {
+                    play();
+                    if (model.isGameOver()) {
+                        model.notifyObserver();
+                        end();
+                    }
+                }
+
+            } while (this.model.getCurrentPlayer().isAi());
             this.view.playerCanPlay();
-            model.notifyObserver();   
+            model.notifyObserver();
         }).start();
     }
 
@@ -75,7 +83,7 @@ public class ControllerImpl implements Controller {
      * 
      * @param model the game choose by the user
      */
-    private void setModel(Model model) {
+    private void setModel(final Model model) {
         this.model = model;
     }
 
@@ -84,7 +92,7 @@ public class ControllerImpl implements Controller {
      * 
      * @param view the gui implemantation to run this application.
      */
-    private void setView(View view) {
+    private void setView(final View view) {
         this.view = view;
     }
 
@@ -93,6 +101,7 @@ public class ControllerImpl implements Controller {
      * execution of this program.
      */
     private void error() {
+        this.stopAudio();
         System.exit(0);
     }
 
@@ -103,7 +112,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public List<Card> getHand() {
-        List<Player> players = this.model.getPlayers();
+        final List<Player> players = this.model.getPlayers();
         int pos = 0;
         Player p = players.get(pos);
         while (p.isAi()) {
@@ -123,7 +132,7 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public int getOpponentHand() {
-        List<Player> players = this.model.getPlayers();
+        final List<Player> players = this.model.getPlayers();
         int pos = 0;
         Player p = players.get(pos);
         while (!(p.isAi())) {
@@ -145,6 +154,7 @@ public class ControllerImpl implements Controller {
 
     /**
      * Return the number of cards in the deck.
+     * 
      * @return the number of cards in the deck.
      */
     @Override
@@ -157,6 +167,7 @@ public class ControllerImpl implements Controller {
      */
     private void end() {
         this.view.stop();
+        this.stopAudio();
     }
 
     /**
@@ -165,42 +176,71 @@ public class ControllerImpl implements Controller {
      * method of the model
      * using the playCard method of the Player interface, to play in the model the
      * card the player decided to play.
+     * 
      */
-    private void play(Card card) {
+    private void play() {
         try {
             model.playTurn(this.model.getCurrentPlayer().chooseCard(), this.model.getCurrentPlayer());
-        } catch (Exception e) {
+        } catch (InvalidOperationException e) {
             this.error();
             return;
         }
     }
 
+    /**
+     * Returns the list of players in the game.
+     *
+     * @return the list of players
+     */
     @Override
     public List<Player> getPlayers() {
         return this.model.getPlayers();
     }
 
+    /**
+     * Start the audio of the game.
+     */
     @Override
     public void startAudio() {
         this.model.startAudio();
     }
 
+    /**
+     * Stop the audio of the game.
+     */
     @Override
     public void stopAudio() {
         this.model.stopAudio();
     }
 
-    public Player getCurrentPlayer(){
+    /**
+     * Returns the current player of the game.
+     *
+     * @return the current player
+     */
+    @Override
+    public Player getCurrentPlayer() {
         return this.model.getCurrentPlayer();
     }
 
-    public List<Integer> getPlayerPoints(){
+    /**
+     * Return the points of the players of the game.
+     * 
+     * @return the points of the players
+     */
+    @Override
+    public List<Integer> getPlayerPoints() {
         return this.model.getPlayersPoints();
     }
 
-    public List<String> getPlayerNames(){
+    /**
+     * Return the names of the players of the game.
+     * 
+     * @return the names of the players
+     */
+    @Override
+    public List<String> getPlayerNames() {
         return this.model.getPlayersNames();
     }
 
-    
 }

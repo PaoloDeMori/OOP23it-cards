@@ -6,10 +6,23 @@ import javax.swing.JPanel;
 
 import it.unibo.itcards.view.baseelements.cardview.CardButton;
 
-public abstract class HandPanel extends JPanel{
-    public List<CardButton> cards;
+/**
+ * this class represent the hand panel.
+ */
+public abstract class HandPanel extends JPanel {
+    private static final long serialVersionUID = 3L;
+    /**
+     * initialize the panel.
+     * 
+     * @param d dimension
+     */
     public abstract void init(Dimension d);
 
+    /**
+     * set the cards on the panel.
+     * 
+     * @param cards
+     */
     public abstract void setCards(List<CardButton> cards);
 
 }
