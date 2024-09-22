@@ -28,11 +28,27 @@ public class ScopaImpl extends Model {
         this.scope = new HashMap<>(); 
     }
 
-    //ludo
+
     @Override
     public void playTurn(Card card, Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'playTurn'");
+        if (player != this.getCurrentPlayer()) {
+            throw new IllegalStateException("It's not your turn");
+        }
+
+        List<List<Card>> takingPossibility = getShortestSubsets(card.getValue());
+        
+        if (takingPossibility.isEmpty()){
+            this.cardsOnTable.add(card);
+        } else {
+            this.cardsOnTable.removeAll(takingPossibility.getFirst());
+            player.addWonCards(takingPossibility.getFirst().stream().collect(toSet()));
+            player.addPlayedCard(card);
+        }
+
+        if (this.cardsOnTable.isEmpty()){
+            this.scope.put(player, scope.getOrDefault(player, 0)+1);
+        }
+        this.notifyObserver();
     }
 
     @Override
@@ -53,11 +69,19 @@ public class ScopaImpl extends Model {
         
     }
 
-    //ludo
     @Override
     public boolean isGameOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isGameOver'");
+        if (this.getDeck().numberOfCards() > 0) {
+            return false;
+        }
+
+        for (final var player : this.getPlayers()) {
+            if (player.getCards().size() > 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
@@ -118,26 +142,6 @@ public class ScopaImpl extends Model {
         return shortestSubsets;
     }
 
-    public void playRound(Card playedCard){
-        Player player = getCurrentPlayer();
-        List<List<Card>> takingPossibility = getShortestSubsets(playedCard.getValue());
-        
-        if (takingPossibility.isEmpty()){
-            this.cardsOnTable.add(playedCard);
-        } else {
-
-            //idk
-            this.cardsOnTable.removeAll(takingPossibility.getFirst());
-            player.addWonCards(takingPossibility.getFirst().stream().collect(toSet()));
-            player.addPlayedCard(playedCard);
-        }
-
-        if (this.cardsOnTable.isEmpty()){
-            this.scope.put(player, scope.getOrDefault(player, 0)+1);
-        }
-
-    }
-
 
 
     private Map<Player, List<Card>> populateAllPlayedCardsMap(){
@@ -173,11 +177,13 @@ public class ScopaImpl extends Model {
         return playersScore.entrySet().stream().max(Comparator.comparingInt(entry -> entry.getValue())).map(entry -> entry.getKey()).get();
     }
     
+
     @Override
     public int points(Player player) {
-        return playersScore.get(player);
+        return scope.get(player);
     }
 
+    
     @Override
     public List<Integer> getPlayersPoints() {
         // TODO Auto-generated method stub
@@ -186,11 +192,7 @@ public class ScopaImpl extends Model {
 
     @Override
     public List<String> getPlayersNames() {
-        List<String> nameList = new ArrayList<>();
-        for (Player player : players) {
-            nameList.add(player.getName());
-        }
-        return nameList;
+        return new ArrayList<>(players.stream().map(player -> player.getName()).toList());
     }
     
 
